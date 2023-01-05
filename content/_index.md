@@ -1,27 +1,9 @@
 ---
-title: 🪴 Quartz 3.
+title: ⌘
 enableToc: false
 ---
 
-Host your second brain and [digital garden](https://jzhao.xyz/posts/networked-thought) for free. Quartz features
-
-1. Extremely fast natural-language [[notes/search]]
-2. Customizable and hackable design based on [Hugo](https://gohugo.io/)
-3. Automatically generated backlinks, link previews, and local graph
-4. Built-in [[notes/CJK + Latex Support (测试) | CJK + Latex Support]] and [[notes/callouts | Admonition-style callouts]]
-5. Support for both Markdown Links and Wikilinks
-
-Check out some of the [amazing gardens that community members](notes/showcase.md) have published with Quartz or read about [why I made Quartz](notes/philosophy.md) to begin with.
-
-## Get Started
-> 📚 Step 1: [Setup your own digital garden using Quartz](notes/setup.md)
-
-Returning user? Figure out how to [[notes/updating|update]] your existing Quartz garden.
-
-If you prefer browsing the contents of this site through a list instead of a graph, you see a list of all [setup-related notes](/tags/setup).
-
-### Troubleshooting
-- 🚧 [Troubleshooting and FAQ](notes/troubleshooting.md)
-- 🐛 [Submit an Issue](https://github.com/jackyzha0/quartz/issues)
-- 👀 [Discord Community](https://discord.gg/cRFFHYye7t)
-
+<div style="-webkit-column-count: 2; -moz-column-count: 2; column-count: 2; -webkit-column-rule: 0px dotted #e0e0e0; -moz-column-rule: 0px dotted #e0e0e0; column-rule: 0px dotted #e0e0e0;">
+<img src="https://raw.githubusercontent.com/mel10c/image/main/obsidian/peep.png" width="250"/>
+ <br>  <br>  <br>  <br>  <p style="font-size:30px; color:#81A1C1; font-family:'fira code'">Hello, I'm Melaney!</p> <p style="font-size:16px; color:#C8D0E0; font-family:'fira code'"> I am a student at University of Toronto. <br>   <br> Currently studying cognitive science, psychology, and computer science.</p>
+</div>
