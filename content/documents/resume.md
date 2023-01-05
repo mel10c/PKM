@@ -4,7 +4,7 @@ enableToc: false
 tags: []
 ---
 
-| About Me | <img src="../image/profile.jpg" width="300"> |
+| About Me | <img src="../image/profile.jpg" width="100"> |
 |----------|----------------------------------------------|
 | Name     | Melaney (Yuanyuan) Zhu                       |
 | Email    | mel.zhu@mail.utoronto.ca                     |
