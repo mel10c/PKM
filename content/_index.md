@@ -11,7 +11,6 @@ enableRecentNotes: true
 
 
 - [My Thought Corners](/tags/English) | [我的思维角落](/tags/中文)
-- [My Resume](https://github.com/mel10c/mel.zhu/blob/hugo/content/documents/Resume.pdf)
 
 Hey, I'm Melaney! I'm a cognitive science student at UofT. Welcome to my cozy "mind palace" of thought on the web for my ideas, photography, programs, and anything else I want to show.  嘿，我是Melaney! 一名多大认知科学的学生。欢迎来到我在网络上的小小思维世界，在这里有我会尽力分享我学到的东西，有趣的想法、我的摄影作品、小项目，以及其他一些我想展示给世界的东西！
 
