@@ -1,0 +1,39 @@
+---
+title: Attachment - From Infant to Adulthood
+tags: [Blog, English, Psych]
+date: 2023-01-30
+---
+
+### Process of Attachment Formation
+
+Attachment is a strong, meaningful, emotional bond one forms with another to establish secure bases in this infinite, chaotic, and cold universe. Research have suggested that infants has a biological bias to form such a bond with its primary caregivers (Bowlby, 1969)[^1]. Throughout evolutionary periods, such bias was proven successful for increasing the infant's likelihood to survive. However, in the modern era with time as a scarce resource, child-caring is not the only task for many caregivers, thus many parents has neglected the opportunity to form such bond with its child. Like trees without a secure root, children without such bonding would be especially vulnerable in any relationships going into adulthood. Some of this vulnerability might suggest inability or low desire to form any intimate relationships, others might suggest inappropriate behaviors that might harm themselves or their potential partners. This article will discuss the formation of such problematic attachments and some strategies both for parents and for insecure adults to improve.
+
+When an infant start to interact with another person in this world, an inborn, unconscious program starts to operate to help the child understand and interpret such interactions, this is called an Attachment Behavioral System, or *ABS* for short (Cassidy, 2013)[^2]. At first, the *ABS*  tries to actively seek intimacy with their attachment figures as its primary strategy to form bonds. This intimacy seeking behaviour can manifest in an infant as crying or shouting for attention when they needed it. After such active behaviour, the system starts to unconsciously monitor the feedback/presence from its attachment figures. If their active behaviour had resulted in wanted attention/solution, the *ABS* would learn such [[association]] and stored it in an Internal Working Model (`IWM`s)[^3]. The `IWM`s are like the primary bookshelf in everyone's cognition, each schema is like an instruction book on the bookshelf. Relationship schemas is one of those instruction books, each represents some expectations of others and senses of oneself. Importantly, these "instruction books" will remain and being carried into one's adulthood. This would suggest that every interaction, good or bad,  between infants and its attachment figures will leave a small but noticeable trace in the books on the bookshelf. 
+
+### Attachment Types
+
+`ABS ---[Feedback]--> IMW ---[Repetition]--> Attachment Type`
+
+With this concept in mind, lets examine the cognition process from the *ABS*  to the `IWM`s  and consistent activation between them forms different attachment types that people are familiar with. 
+
+For example, when an infant first start to use the preset primary strategy to seek intimacy with their attachment figure, consistent positive feedback would indicate success for this strategy. Thus, this would lead to an unconscious sense of security in the `IWM`s, which further result in the **secure attachment types**. In this case, the "instruction" books have suggested expecting positive feedback from others with a positive, secure, and consistent sense of self.
+
+So, what if the infant did not get the attention/solution they wanted by using the primary intimacy seeking strategy? Research have suggested two alternative ways in the *ABS* [^2]. One of such way is to start acting hyperactively. Meaning, the infant would try to cry louder to seek attention and intimacy. Reasonably, some parent would start to react to them. However, this means that the infants would always try to cry harder and hope that in some occasion the parents would finally react to their needs. This inconsistent feedback from the attachment figures would result in  a sense of insecurity and inconsistency in the `IWM`s. Repeated activation of hyper-activation and insecurity would gradually result in an **anxious attachment type** in the child. This would suggest the child has an anxious/unsure expectation for other's response, thus leading to an insecure and inconsistent sense of self.
+
+On the other hand, another strategy the infant could adapt when the primary strategy failed is to decrease their action for intimacy seeking. Meaning, the infant would stop to cry to seek attention/intimacy. Instead, they tried to unconsciously suppress their need to belong to justify the absence of feedback from their attachment figures. Long term suppression would then be stored in the "instruction books" in the `IWM`s with low expectation for feedback and insecure sense of self. Repeated long term use of the of deactivation strategy and consistent low feedback would then lead to the **avoidant attachment type** in the child. 
+
+Lastly, there also exist an extreme case where all of the above strategy did not work for the infant. This often correlates with some form of childhood trauma, resulting in a complete break-down of the child's `IWM`s. Leading to a **fearful attachment type**. However, for simplicity of this article, this case will not be discussed in depth. Further readings can be found in the reference.
+
+### Leading to Adulthood
+
+As mentioned before, these schemas ("instruction books") in the `IWM`s would be carried into adulthood, as expectations for romantic partners and sense of self as an individual. Evidence from empirical research suggested the correlation between the three childhood attachment types with the three romantic relationship models: autonomous, dismissing, and preoccupied (Main et al, 1985) [^4]. The autonomous attachment model has a consistent, positive expectation for their partners, and a secure sense of self, correlating with the secure attachment type in child; the dismissing model suggest a consistent, but negative/inattentive expectation for their partners, and an insecure sense of self, correlating with the avoidant attachment types in child; lastly the preoccupied model would suggest an inconsistent expectation for their partners and an insecure sense of self, correlating with the anxious attachment type in child.
+
+Nonetheless, it is important to note that these correlation does not suggest a causation relationship between childhood attachment and adulthood romantic attachments. Research have suggested that auld attachment is more variable and changeable with experience (Bartholomew,1990) [^5]. In other words, adult attachments are much more complex and rely less on the biological bases than the childhood attachments. This suggestion implied the possibility to change the adult attachment types by dismissing negative or re-establishing a positive sense of self in the `IWM`s with strategies such as CBT (Cognitive Behaviour Therapy). CBT could also help to adjust negative expectations toward potential partners and work toward a more long-lasting relationship.
+
+# Reference
+
+[^1]: Bowlby, J., 1969. Attachment and loss. *New York: Basic Book*s.
+[^2]: Cassidy J, Jones JD, Shaver PR (November 2013). "Contributions of attachment theory and research: a framework for future research, translation, and policy". *Development and Psychopathology*. 25 (4 Pt 2): 1415–34. doi:10.1017/s0954579413000692. PMC 4085672. PMID 24342848
+[^3]: Bretherton I. Updating the ‘internal working model’ construct: Some reflections. Attachment & Human Development. Published online December 1999:343-357. doi:10.1080/14616739900134191
+[^4]: George, C., Kaplan, N., & Main, M. (1985). Adult Attachment Interview. Unpublished manuscript, *Berkeley, CA: University of California.*
+[^5]: Shevlin, M., Boyda, D., Elklit, A., & Murphy, S. (2014). Adult attachment styles and the psychological response to infant bereavement. _European journal of psychotraumatology_, _5_, 10.3402/ejpt.v5.23295. https://doi.org/10.3402/ejpt.v5.23295
