@@ -1,5 +1,17 @@
 baseURL = "https://mel10c.github.io/mel.zhu/"
 languageCode = "en-us"
+defaultContentLanguage = 'en'
+[languages]
+    [languages.en]
+        # contentDir = 'content/blogs/ENG'
+        # languageName = 'English'
+        title = "MEL.ZHU.ENG"
+        weight = 1
+    [languages.zh]
+        # contentDir = 'content/blogs/ZH'
+        # languageName = '中文'
+        title = "MEL.ZHU.ZH"
+        weight = 2
 googleAnalytics = "G-XYFD95KB4J"
 relativeURLs = false
 disablePathToLower = true
