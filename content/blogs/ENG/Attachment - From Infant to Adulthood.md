@@ -30,8 +30,6 @@ As mentioned before, these schemas ("instruction books") in the `IWM`s would be 
 
 Nonetheless, it is important to note that these correlation does not suggest a causation relationship between childhood attachment and adulthood romantic attachments. Research have suggested that auld attachment is more variable and changeable with experience (Bartholomew,1990) [^5]. In other words, adult attachments are much more complex and rely less on the biological bases than the childhood attachments. This suggestion implied the possibility to change the adult attachment types by dismissing negative or re-establishing a positive sense of self in the `IWM`s with strategies such as CBT (Cognitive Behaviour Therapy). CBT could also help to adjust negative expectations toward potential partners and work toward a more long-lasting relationship.
 
-# Reference
-
 [^1]: Bowlby, J., 1969. Attachment and loss. *New York: Basic Book*s.
 [^2]: Cassidy J, Jones JD, Shaver PR (November 2013). "Contributions of attachment theory and research: a framework for future research, translation, and policy". *Development and Psychopathology*. 25 (4 Pt 2): 1415–34. doi:10.1017/s0954579413000692. PMC 4085672. PMID 24342848
 [^3]: Bretherton I. Updating the ‘internal working model’ construct: Some reflections. Attachment & Human Development. Published online December 1999:343-357. doi:10.1080/14616739900134191
