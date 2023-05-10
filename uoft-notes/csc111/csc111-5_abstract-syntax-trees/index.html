@@ -1,0 +1,312 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=description content="Abstract Syntax Trees  Strings have a linear (a sequence of characters) Programs have a naturally recursive structure. Most data types have the potential to be nested, which mega the program recursive First step Python interpreter takes is to create Abstract Syntax Tree (AST) to represent the program  The Expr class  Expression - a piece of code which is meant to be evaluated, returning the value of an expression  Every expression would use a different attribute, so not attribute in abstract class    1 2 3 4 5 6 7 8 9  class Expr: &#34;&#34;&#34;An abstract class representting a Python expression&#34;&#34;&#34; def evaluate(self) -> Any: &#34;&#34;&#34;Return the *value* of this expression The returned value should be the result of hwo this expression would be evaluated by the Python interpreter &#34;&#34;&#34; raise NotImplementedError   Num numerical literals  Literals are the bases cases of leaves, of an AST  1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20  class Num(Expr): &#34;&#34;&#34;A numeric literal."><title>CSC111: 5_Abstract Syntax Trees</title><meta name=viewport content="width=device-width,initial-scale=1"><link rel="shortcut icon" type=image/png href=https://mel10c.github.io/mel.zhu//icon.png><link href=https://mel10c.github.io/mel.zhu/styles.9a8661985b360a1d97e0e538e164abef.min.css rel=stylesheet><link href=https://mel10c.github.io/mel.zhu/styles/_light_syntax.86a48a52faebeaaf42158b72922b1c90.min.css rel=stylesheet id=theme-link><script src=https://mel10c.github.io/mel.zhu/js/darkmode.905e4d2da56a9111aff695a0a4b69900.min.js></script>
+<script src=https://mel10c.github.io/mel.zhu/js/util.6f22941e242efae60fd84e7c32e874fa.min.js></script>
+<link rel=preload href=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css as=style onload='this.onload=null,this.rel="stylesheet"' integrity=sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js integrity=sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx crossorigin=anonymous></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin=anonymous></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/contrib/copy-tex.min.js integrity=sha384-ww/583aHhxWkz5DEVn6OKtNiIaLi2iBRNZXfJRiY1Ai7tnJ9UXpEsyvOITVpTl4A crossorigin=anonymous></script>
+<script async src=https://unpkg.com/@floating-ui/core@0.7.3></script>
+<script async src=https://unpkg.com/@floating-ui/dom@0.5.4></script>
+<script async src=https://mel10c.github.io/mel.zhu/js/popover.f03552ccb84d99ca615d1cfb9abde59e.min.js></script>
+<script defer src=https://mel10c.github.io/mel.zhu/js/code-title.ce4a43f09239a9efb48fee342e8ef2df.min.js></script>
+<script defer src=https://mel10c.github.io/mel.zhu/js/clipboard.2913da76d3cb21c5deaa4bae7da38c9f.min.js></script>
+<script defer src=https://mel10c.github.io/mel.zhu/js/callouts.7723cac461d613d118ee8bb8216b9838.min.js></script>
+<script>const SEARCH_ENABLED=!1,LATEX_ENABLED=!0,PRODUCTION=!0,BASE_URL="https://mel10c.github.io/mel.zhu/",fetchData=Promise.all([fetch("https://mel10c.github.io/mel.zhu/indices/linkIndex.4ecd462b2a0cc7b8f254e52a69d96e3c.min.json").then(e=>e.json()).then(e=>({index:e.index,links:e.links})),fetch("https://mel10c.github.io/mel.zhu/indices/contentIndex.6acfc2f415caa35851b6b3067c8415cf.min.json").then(e=>e.json())]).then(([{index:e,links:t},n])=>({index:e,links:t,content:n})),render=()=>{const e=new URL(BASE_URL),t=e.pathname,n=window.location.pathname,s=t==n;addCopyButtons(),addTitleToCodeBlocks(),addCollapsibleCallouts(),initPopover("https://mel10c.github.io/mel.zhu",!0);const o=document.getElementById("footer");if(o){const e=document.getElementById("graph-container");if(!e)return requestAnimationFrame(render);e.textContent="";const t=s&&!1;drawGraph("https://mel10c.github.io/mel.zhu",t,[{"/moc":"#4388cc"}],t?{centerForce:1,depth:-1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.5,linkDistance:1,opacityScale:3,repelForce:1,scale:1.4}:{centerForce:1,depth:1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.6,linkDistance:1,opacityScale:3,repelForce:2,scale:1.2})}var i=document.getElementsByClassName("mermaid");i.length>0&&import("https://unpkg.com/mermaid@9/dist/mermaid.esm.min.mjs").then(e=>{e.default.init()})},init=(e=document)=>{addCopyButtons(),addTitleToCodeBlocks(),renderMathInElement(e.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}],macros:{'’':"'"},throwOnError:!1})}</script><script type=module>
+    import { attachSPARouting } from "https:\/\/mel10c.github.io\/mel.zhu\/js\/router.9d4974281069e9ebb189f642ae1e3ca2.min.js"
+    attachSPARouting(init, render)
+  </script></head><body><div id=search-container><div id=search-space><input autocomplete=off id=search-bar name=search type=text aria-label=Search placeholder="Search for something..."><div id=results-container></div></div></div><script src=https://cdn.jsdelivr.net/npm/flexsearch@0.7.21/dist/flexsearch.bundle.js integrity="sha256-i3A0NZGkhsKjVMzFxv3ksk0DZh3aXqu0l49Bbh0MdjE=" crossorigin=anonymous defer></script>
+<script defer src=https://mel10c.github.io/mel.zhu/js/full-text-search.e6e2e0c213187ca0c703d6e2c7a77fcd.min.js></script><div class=singlePage><header><h1 id=page-title><a href=https://mel10c.github.io/mel.zhu/>MEL.ZHU</a></h1><div class=spacer></div><div id=search-icon><p>Search</p><svg tabindex="0" aria-labelledby="title desc" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title id="title">Search Icon</title><desc id="desc">Icon to open search</desc><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"/><circle cx="8" cy="8" r="7"/></g></svg></div><div class=darkmode><input class=toggle id=darkmode-toggle type=checkbox tabindex=-1>
+<label id=toggle-label-light for=darkmode-toggle tabindex=-1><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="dayIcon" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35"><title>Light Mode</title><path d="M6 17.5C6 16.672 5.328 16 4.5 16h-3C.672 16 0 16.672.0 17.5S.672 19 1.5 19h3C5.328 19 6 18.328 6 17.5zM7.5 26c-.414.0-.789.168-1.061.439l-2 2C4.168 28.711 4 29.086 4 29.5 4 30.328 4.671 31 5.5 31c.414.0.789-.168 1.06-.44l2-2C8.832 28.289 9 27.914 9 27.5 9 26.672 8.329 26 7.5 26zm10-20C18.329 6 19 5.328 19 4.5v-3C19 .672 18.329.0 17.5.0S16 .672 16 1.5v3C16 5.328 16.671 6 17.5 6zm10 3c.414.0.789-.168 1.06-.439l2-2C30.832 6.289 31 5.914 31 5.5 31 4.672 30.329 4 29.5 4c-.414.0-.789.168-1.061.44l-2 2C26.168 6.711 26 7.086 26 7.5 26 8.328 26.671 9 27.5 9zM6.439 8.561C6.711 8.832 7.086 9 7.5 9 8.328 9 9 8.328 9 7.5c0-.414-.168-.789-.439-1.061l-2-2C6.289 4.168 5.914 4 5.5 4 4.672 4 4 4.672 4 5.5c0 .414.168.789.439 1.06l2 2.001zM33.5 16h-3c-.828.0-1.5.672-1.5 1.5s.672 1.5 1.5 1.5h3c.828.0 1.5-.672 1.5-1.5S34.328 16 33.5 16zM28.561 26.439C28.289 26.168 27.914 26 27.5 26c-.828.0-1.5.672-1.5 1.5.0.414.168.789.439 1.06l2 2C28.711 30.832 29.086 31 29.5 31c.828.0 1.5-.672 1.5-1.5.0-.414-.168-.789-.439-1.061l-2-2zM17.5 29c-.829.0-1.5.672-1.5 1.5v3c0 .828.671 1.5 1.5 1.5s1.5-.672 1.5-1.5v-3C19 29.672 18.329 29 17.5 29zm0-22C11.71 7 7 11.71 7 17.5S11.71 28 17.5 28 28 23.29 28 17.5 23.29 7 17.5 7zm0 18c-4.136.0-7.5-3.364-7.5-7.5s3.364-7.5 7.5-7.5 7.5 3.364 7.5 7.5S21.636 25 17.5 25z"/></svg></label><label id=toggle-label-dark for=darkmode-toggle tabindex=-1><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="nightIcon" viewBox="0 0 100 100" style="enable-background='new 0 0 100 100'"><title>Dark Mode</title><path d="M96.76 66.458c-.853-.852-2.15-1.064-3.23-.534-6.063 2.991-12.858 4.571-19.655 4.571C62.022 70.495 50.88 65.88 42.5 57.5 29.043 44.043 25.658 23.536 34.076 6.47c.532-1.08.318-2.379-.534-3.23-.851-.852-2.15-1.064-3.23-.534-4.918 2.427-9.375 5.619-13.246 9.491-9.447 9.447-14.65 22.008-14.65 35.369.0 13.36 5.203 25.921 14.65 35.368s22.008 14.65 35.368 14.65c13.361.0 25.921-5.203 35.369-14.65 3.872-3.871 7.064-8.328 9.491-13.246C97.826 68.608 97.611 67.309 96.76 66.458z"/></svg></label></div></header><article><h1>CSC111: 5_Abstract Syntax Trees</h1><p class=meta>Last updated
+Unknown</p><ul class=tags><li><a href=https://mel10c.github.io/mel.zhu/tags/note/>Note</a></li></ul><aside class=mainTOC><details><summary>Table of Contents</summary><nav id=TableOfContents><ol><li><a href=#the-expr-class>The <code>Expr</code> class</a><ol><li><a href=#num-numerical-literals><code>Num</code> numerical literals</a></li><li><a href=#binop--arithmetic-operations><code>BinOp</code>: arithmetic operations</a></li><li><a href=#variables-and-the-name-class>Variables and the <code>Name</code> class</a></li></ol></li><li><a href=#the-statement-abstract-class>The Statement abstract class</a><ol><li><a href=#assign-an-assignment-statement><code>Assign</code>: an assignment statement</a></li></ol></li></ol></nav></details></aside><a href=#abstract-syntax-trees><h1 id=abstract-syntax-trees><span class=hanchor arialabel=Anchor># </span>Abstract Syntax Trees</h1></a><ul><li>Strings have a <em><strong>linear</strong></em> (a sequence of characters)</li><li>Programs have a naturally <em><strong>recursive</strong></em> structure. Most data types have the potential to be nested, which mega the program recursive</li><li>First step Python interpreter takes is to create <u>Abstract Syntax Tree (AST)</u> to represent the program</li></ul><a href=#the-expr-class><h2 id=the-expr-class><span class=hanchor arialabel=Anchor># </span>The <code>Expr</code> class</h2></a><ul><li><u>Expression</u> - a piece of code which is meant to be evaluated, returning the value of an expression<ul><li>Every expression would use a different attribute, so not attribute in abstract class</li></ul></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>class</span> <span class=nc>Expr</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;An abstract class representting a Python expression&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>evaluate</span><span class=p>(</span><span class=bp>self</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=n>Any</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34;Return the *value* of this expression
+</span></span></span><span class=line><span class=cl><span class=s2>        
+</span></span></span><span class=line><span class=cl><span class=s2>        The returned value should be the result of hwo this expression
+</span></span></span><span class=line><span class=cl><span class=s2>        would be evaluated by the Python interpreter
+</span></span></span><span class=line><span class=cl><span class=s2>        &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=k>raise</span> <span class=ne>NotImplementedError</span>
+</span></span></code></pre></td></tr></table></div></div><a href=#num-numerical-literals><h3 id=num-numerical-literals><span class=hanchor arialabel=Anchor># </span><code>Num</code> numerical literals</h3></a><ul><li>Literals are the bases cases of leaves, of an AST</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>class</span> <span class=nc>Num</span><span class=p>(</span><span class=n>Expr</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;A numeric literal.
+</span></span></span><span class=line><span class=cl><span class=s2>    
+</span></span></span><span class=line><span class=cl><span class=s2>    Instance Attributes:
+</span></span></span><span class=line><span class=cl><span class=s2>    	- n: the value of the literal
+</span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=n>n</span><span class=p>:</span> <span class=n>Union</span><span class=p>[</span><span class=nb>int</span><span class=p>,</span> <span class=nb>float</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>        
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>number</span><span class=p>:</span> <span class=n>Union</span><span class=p>[</span><span class=nb>int</span><span class=p>,</span> <span class=nb>float</span><span class=p>])</span> <span class=o>-&gt;</span> <span class=kc>None</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34;Initialize a new numerical literal.&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>n</span> <span class=o>=</span> <span class=n>number</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>evaluate</span><span class=p>(</span><span class=bp>self</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=n>Any</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34;Return ... (same as abstract class Expr)
+</span></span></span><span class=line><span class=cl><span class=s2>        
+</span></span></span><span class=line><span class=cl><span class=s2>        &gt;&gt;&gt; expr = Num(10.5)
+</span></span></span><span class=line><span class=cl><span class=s2>        &gt;&gt;&gt; expr.evaluate()
+</span></span></span><span class=line><span class=cl><span class=s2>        10.5
+</span></span></span><span class=line><span class=cl><span class=s2>        &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=bp>self</span><span class=o>.</span><span class=n>n</span>  <span class=c1># literal, so simply return value itself</span>
+</span></span></code></pre></td></tr></table></div></div><a href=#binop--arithmetic-operations><h3 id=binop--arithmetic-operations><span class=hanchor arialabel=Anchor># </span><code>BinOp</code>: arithmetic operations</h3></a><ul><li><p><u>Arithmetic operation</u> - expression that consists of 3 parts: a left and right subexpression</p><ul><li>The 2 operands of the expression and the operator itself</li></ul></li><li><p><code>BinOP</code> is basically a binary tree.</p><ul><li>&ldquo;root&rdquo; - operator name; left and right &ldquo;subtrees&rdquo; reps the 2 operand subexpressions</li><li>Its &ldquo;subtrees&rdquo; are <code>Expr</code>, which can make the data type recursive</li></ul><blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>BinOp</span><span class=p>(</span><span class=n>Num</span><span class=p>(</span><span class=mi>3</span><span class=p>),</span> <span class=s1>&#39;+&#39;</span><span class=p>,</span> <span class=n>Num</span><span class=p>(</span><span class=mf>5.5</span><span class=p>))</span>  <span class=c1># 3 + 5.5</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># ((3 + 5.5) * (0.5 + (15.2 * -13.3)))</span>
+</span></span><span class=line><span class=cl><span class=n>BinOP</span><span class=p>(</span><span class=n>BinOp</span><span class=p>(</span><span class=n>Num</span><span class=p>(</span><span class=mi>3</span><span class=p>),</span> <span class=s1>&#39;+&#39;</span><span class=p>,</span> <span class=n>Num</span><span class=p>(</span><span class=mf>5.5</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>      <span class=s2>&#34;*&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=n>BinOp</span><span class=p>(</span><span class=n>Num</span><span class=p>(</span><span class=mf>0.5</span><span class=p>),</span> <span class=s2>&#34;+&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=n>BinOp</span><span class=p>(</span><span class=n>Num</span><span class=p>(</span><span class=mf>15.2</span><span class=p>),</span> <span class=s1>&#39;*&#39;</span><span class=p>,</span> <span class=n>Num</span><span class=p>(</span><span class=o>-</span><span class=mf>13.3</span><span class=p>)))</span>
+</span></span></code></pre></td></tr></table></div></div></blockquote></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>class</span> <span class=nc>BinOp</span><span class=p>(</span><span class=n>Expr</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;An arithmetic binary operation
+</span></span></span><span class=line><span class=cl><span class=s2>    
+</span></span></span><span class=line><span class=cl><span class=s2>    Instance Attributes:
+</span></span></span><span class=line><span class=cl><span class=s2>    	- left: the left operand
+</span></span></span><span class=line><span class=cl><span class=s2>    	- op: the name of the operator
+</span></span></span><span class=line><span class=cl><span class=s2>    	- right: the right operand
+</span></span></span><span class=line><span class=cl><span class=s2>    	
+</span></span></span><span class=line><span class=cl><span class=s2>  	Representation Invariants:
+</span></span></span><span class=line><span class=cl><span class=s2>  		- self.op in {&#39;+&#39;, &#34;*&#34;}
+</span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=n>left</span><span class=p>:</span> <span class=n>Expr</span>
+</span></span><span class=line><span class=cl>    <span class=n>op</span><span class=p>:</span> <span class=nb>str</span>
+</span></span><span class=line><span class=cl>    <span class=n>right</span><span class=p>:</span> <span class=n>Expr</span>
+</span></span><span class=line><span class=cl>        
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>left</span><span class=p>:</span> <span class=n>Expr</span><span class=p>,</span> <span class=n>op</span><span class=p>:</span> <span class=nb>str</span><span class=p>,</span> <span class=n>right</span><span class=p>:</span><span class=n>Expr</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=kc>None</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34;Initialize a new binary operation expression.
+</span></span></span><span class=line><span class=cl><span class=s2>        
+</span></span></span><span class=line><span class=cl><span class=s2>        Preconditions:
+</span></span></span><span class=line><span class=cl><span class=s2>        	- op in {&#39;+&#39;, &#34;*&#34;}
+</span></span></span><span class=line><span class=cl><span class=s2>        &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>left</span> <span class=o>=</span> <span class=n>left</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>op</span> <span class=o>=</span> <span class=n>op</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>right</span> <span class=o>=</span> <span class=n>right</span>
+</span></span></code></pre></td></tr></table></div></div><a href=#evaluating-binop><h4 id=evaluating-binop><span class=hanchor arialabel=Anchor># </span>Evaluating <code>BinOp</code></h4></a><ul><li><p>Base case for <code>evaluate</code></p><blockquote><p>When <code>self.left.evluate()</code> is called, it would refer to <code>BinOp.evaluate</code> OR <code>Num.evaluate</code>, depending on the types of <code>self.left</code> and <code>self.right</code></p></blockquote><ul><li>While since <code>Num</code> is a literal, the <code>evaluate</code> function does not make any change, it just returns the object&rsquo;s <code>n</code> attribute, this is the <strong>base case</strong> of the <code>evaluate</code> function.</li></ul></li><li><p>Recursive step is the assignment statement <code>self.left.evaluate()</code> & <code>self.right.evaluate()</code></p></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>class</span> <span class=nc>BinOp</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>evaluate</span><span class=p>(</span><span class=n>selfe</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=n>Any</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34;Return ... (same as abstract class Expr)
+</span></span></span><span class=line><span class=cl><span class=s2>        
+</span></span></span><span class=line><span class=cl><span class=s2>        &gt;&gt;&gt; expr = BinOp(Num(10.5), &#39;+&#39;, Num(30))
+</span></span></span><span class=line><span class=cl><span class=s2>        &gt;&gt;&gt; expr.evaluate()
+</span></span></span><span class=line><span class=cl><span class=s2>        40.5
+</span></span></span><span class=line><span class=cl><span class=s2>        &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=n>left_val</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>left</span><span class=o>.</span><span class=n>evaluate</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        <span class=n>right_val</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>right</span><span class=o>.</span><span class=n>evaluate</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>        
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=bp>self</span><span class=o>.</span><span class=n>op</span> <span class=o>==</span> <span class=s1>&#39;+&#39;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=n>left_val</span> <span class=o>+</span> <span class=n>right_val</span>
+</span></span><span class=line><span class=cl>        <span class=k>elif</span> <span class=bp>self</span><span class=o>.</span><span class=n>op</span> <span class=o>==</span> <span class=s1>&#39;*&#39;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=n>left_val</span> <span class=o>*</span> <span class=n>right_val</span>
+</span></span><span class=line><span class=cl>        <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=c1># We shouldn&#39;t reach this branch due of our representation invariant</span>
+</span></span><span class=line><span class=cl>            <span class=k>raise</span> <span class=ne>ValueError</span><span class=p>(</span><span class=sa>f</span><span class=s1>&#39;Invalid operator </span><span class=si>{</span><span class=bp>self</span><span class=o>.</span><span class=n>op</span><span class=si>}</span><span class=s1>&#39;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><a href=#variables-and-the-name-class><h3 id=variables-and-the-name-class><span class=hanchor arialabel=Anchor># </span>Variables and the <code>Name</code> class</h3></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>class</span> <span class=nc>Name</span><span class=p>(</span><span class=n>Expr</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;A variable expression.
+</span></span></span><span class=line><span class=cl><span class=s2>    
+</span></span></span><span class=line><span class=cl><span class=s2>    Instance Attributes:
+</span></span></span><span class=line><span class=cl><span class=s2>    	- id: The variable name
+</span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=nb>id</span><span class=p>:</span> <span class=nb>str</span>
+</span></span><span class=line><span class=cl>        
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>id_</span><span class=p>:</span> <span class=nb>str</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=kc>None</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34;Initialize a new variable epxression.&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>id</span> <span class=o>=</span> <span class=n>id_</span>
+</span></span></code></pre></td></tr></table></div></div><a href=#evaluating-variables-by-dictionary-lookup><h4 id=evaluating-variables-by-dictionary-lookup><span class=hanchor arialabel=Anchor># </span>Evaluating variables by dictionary lookup</h4></a><blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>x</span> <span class=o>+</span> <span class=mf>5.5</span>
+</span></span></code></pre></td></tr></table></div></div></blockquote><ul><li><p>Ways the Python interpreter compute the value of the expression</p><ol><li>If <code>x</code> has not been defined yet, get a <code>NameError</code></li><li>Looks up a variables current value to evaluate it (requires <strong>mapping</strong>, use <code>dic</code>)</li></ol></li><li><p>If the variable has a value, it&rsquo;s variable name is been <em>mapped</em> to the its value using a dictionary</p><ul><li>Call it <u>variable environment</u>, call each key-value pair in the environment a <u>binding</u> between the variable and its current value</li></ul></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>class</span> <span class=nc>Name</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>evaluate</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>env</span><span class=p>:</span> <span class=n>dic</span><span class=p>[</span><span class=nb>str</span><span class=p>,</span> <span class=n>Any</span><span class=p>])</span> <span class=o>-&gt;</span> <span class=n>Any</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34; Return ... (same as abstract class Expr)
+</span></span></span><span class=line><span class=cl><span class=s2>        
+</span></span></span><span class=line><span class=cl><span class=s2>        The name should be looked up in the `env` argument to 
+</span></span></span><span class=line><span class=cl><span class=s2>        Raise a NameError if the name is not found
+</span></span></span><span class=line><span class=cl><span class=s2>        
+</span></span></span><span class=line><span class=cl><span class=s2>        &gt;&gt;&gt; expr = Name(&#39;x&#39;)
+</span></span></span><span class=line><span class=cl><span class=s2>        &gt;&gt;&gt; expr.evaluate({&#39;x&#39;: 10})
+</span></span></span><span class=line><span class=cl><span class=s2>        10
+</span></span></span><span class=line><span class=cl><span class=s2>        &gt;&gt;&gt; binop = BinOp(expr, &#39;+&#39;, Num(5.5))
+</span></span></span><span class=line><span class=cl><span class=s2>        &gt;&gt;&gt; binop.evaluate({&#39;x&#39;: 100})
+</span></span></span><span class=line><span class=cl><span class=s2>        105.5
+</span></span></span><span class=line><span class=cl><span class=s2>        &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=bp>self</span><span class=o>.</span><span class=n>id</span> <span class=ow>in</span> <span class=n>env</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=n>env</span><span class=p>[</span><span class=bp>self</span><span class=o>.</span><span class=n>id</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>        <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>raise</span> <span class=ne>NameError</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;name &#39;</span><span class=si>{</span><span class=bp>self</span><span class=o>.</span><span class=n>id</span><span class=si>}</span><span class=s2>&#39; is not defined&#34;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><a href=#the-statement-abstract-class><h2 id=the-statement-abstract-class><span class=hanchor arialabel=Anchor># </span>The Statement abstract class</h2></a><ul><li>All expressions are statement, but not all statement are expressions</li><li>Create a new abstract class <code>Statement</code>, as a parent of <code>Expr</code><ul><li><code>Statement</code> may have many different subclasses beyond <code>Expr</code></li></ul></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>class</span> <span class=nc>Statement</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;An abstract class representing a Python statement
+</span></span></span><span class=line><span class=cl><span class=s2>    
+</span></span></span><span class=line><span class=cl><span class=s2>    Think of a python statement as being a more general code than a 
+</span></span></span><span class=line><span class=cl><span class=s2>    single expression, and can have some kind of &#34;effect&#34;.
+</span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>evaluate</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>env</span><span class=p>:</span> <span class=n>dic</span><span class=p>[</span><span class=nb>str</span><span class=p>,</span> <span class=n>Any</span><span class=p>])</span> <span class=o>-&gt;</span> <span class=n>Optional</span><span class=p>[</span><span class=n>Any</span><span class=p>]:</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34;Evaluate this statement with the given environment.
+</span></span></span><span class=line><span class=cl><span class=s2>        
+</span></span></span><span class=line><span class=cl><span class=s2>        Should have the same effect as evaluating the statement by the real
+</span></span></span><span class=line><span class=cl><span class=s2>        Python interpreter.
+</span></span></span><span class=line><span class=cl><span class=s2>        
+</span></span></span><span class=line><span class=cl><span class=s2>        Note that the return stype here is Optional[Any]
+</span></span></span><span class=line><span class=cl><span class=s2>        evaluating could produce a value (this is true for all expressions), 
+</span></span></span><span class=line><span class=cl><span class=s2>        but it might only have a *side effect* (no value produced), like mutating
+</span></span></span><span class=line><span class=cl><span class=s2>        `env` or printing something
+</span></span></span><span class=line><span class=cl><span class=s2>        &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=k>raise</span> <span class=ne>NotImplementedError</span>
+</span></span><span class=line><span class=cl>        
+</span></span><span class=line><span class=cl><span class=c1># Modified this class to be a subclass of Statement.</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>Expr</span><span class=p>(</span><span class=n>Statement</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;An abstract class representing a Python expression.&#34;&#34;&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><a href=#assign-an-assignment-statement><h3 id=assign-an-assignment-statement><span class=hanchor arialabel=Anchor># </span><code>Assign</code>: an assignment statement</h3></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>class</span> <span class=nc>Assign</span><span class=p>(</span><span class=n>Statement</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;An assignment statement (with a single target).
+</span></span></span><span class=line><span class=cl><span class=s2>    
+</span></span></span><span class=line><span class=cl><span class=s2>    Instance Attributes:
+</span></span></span><span class=line><span class=cl><span class=s2>    	- target: the variable name on the left-ahnd side of the equals sign
+</span></span></span><span class=line><span class=cl><span class=s2>    	- value: the expression on the right-hand sdie of the equals sign
+</span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=n>target</span><span class=p>:</span> <span class=nb>str</span>
+</span></span><span class=line><span class=cl>    <span class=n>value</span><span class=p>:</span> <span class=n>Expr</span>
+</span></span><span class=line><span class=cl>        
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>target</span><span class=p>:</span> <span class=nb>str</span><span class=p>,</span> <span class=n>value</span><span class=p>:</span> <span class=n>Expr</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=kc>None</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34;Initialize a new Assign node.&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>target</span> <span class=o>=</span> <span class=n>target</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>value</span> <span class=o>=</span> <span class=n>value</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>evaluate</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>env</span><span class=p>:</span> <span class=n>dic</span><span class=p>[</span><span class=nb>str</span><span class=p>,</span> <span class=n>Any</span><span class=p>])</span> <span class=o>-&gt;</span> <span class=o>...</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34;Evaluate this statement with the given environment&#34;&#34;&#34;</span>
+</span></span></code></pre></td></tr></table></div></div></article><hr><div class=page-end id=footer><div class=backlinks-container><h3>Backlinks</h3><ul class=backlinks><li>No backlinks found</li></ul></div><div><script async src=https://cdn.jsdelivr.net/npm/d3@6.7.0/dist/d3.min.js integrity="sha256-+7jaYCp29O1JusNWHaYtgUn6EhuP0VaFuswhNV06MyI=" crossorigin=anonymous></script><h3>Interactive Graph</h3><div id=graph-container></div><style>:root{--g-node:var(--secondary);--g-node-active:var(--primary);--g-node-inactive:var(--visited);--g-link:var(--outlinegray);--g-link-active:#5a7282}</style><script src=https://mel10c.github.io/mel.zhu/js/graph.2d9e48dbe7ea47c0ef1c58296ce14448.js></script></div></div><div id=contact_buttons><footer><p>Made by Melaney Zhu using <a href=https://github.com/jackyzha0/quartz>Quartz</a>, © 2023</p><ul><li><a href=https://mel10c.github.io/mel.zhu/>Home</a></li><li><a href=https://www.instagram.com/melaney_dxl/>Instagram</a></li><li><a href=https://github.com/mel10c>GitHub</a></li><li><a href=https://linkedin.com/in/melzyy>LinkedIn</a></li><li><a href=https://github.com/mel10c/mel.zhu/blob/hugo/content/documents/Resume.pdf>Resume</a></li></ul></footer></div></div></body></html>

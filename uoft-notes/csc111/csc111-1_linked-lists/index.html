@@ -1,0 +1,306 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=description content="Linked Lists Building Blocks of Linked Lists   Python use array-based list implementations (elements are stored in consecutive locations)
+  Indexing fast $\Theta(1)$, while inserting/deleting slow worst-case running time $\Theta(n)$
+ The python interpreter need find a memory space enough to store the consecutive datas    Linked List - has the same public itnerface as a list, but have a different private implementation that do not have the long running time as lists."><title>CSC111: 1_Linked Lists</title><meta name=viewport content="width=device-width,initial-scale=1"><link rel="shortcut icon" type=image/png href=https://mel10c.github.io/mel.zhu//icon.png><link href=https://mel10c.github.io/mel.zhu/styles.9a8661985b360a1d97e0e538e164abef.min.css rel=stylesheet><link href=https://mel10c.github.io/mel.zhu/styles/_light_syntax.86a48a52faebeaaf42158b72922b1c90.min.css rel=stylesheet id=theme-link><script src=https://mel10c.github.io/mel.zhu/js/darkmode.905e4d2da56a9111aff695a0a4b69900.min.js></script>
+<script src=https://mel10c.github.io/mel.zhu/js/util.6f22941e242efae60fd84e7c32e874fa.min.js></script>
+<link rel=preload href=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css as=style onload='this.onload=null,this.rel="stylesheet"' integrity=sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js integrity=sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx crossorigin=anonymous></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin=anonymous></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/contrib/copy-tex.min.js integrity=sha384-ww/583aHhxWkz5DEVn6OKtNiIaLi2iBRNZXfJRiY1Ai7tnJ9UXpEsyvOITVpTl4A crossorigin=anonymous></script>
+<script async src=https://unpkg.com/@floating-ui/core@0.7.3></script>
+<script async src=https://unpkg.com/@floating-ui/dom@0.5.4></script>
+<script async src=https://mel10c.github.io/mel.zhu/js/popover.f03552ccb84d99ca615d1cfb9abde59e.min.js></script>
+<script defer src=https://mel10c.github.io/mel.zhu/js/code-title.ce4a43f09239a9efb48fee342e8ef2df.min.js></script>
+<script defer src=https://mel10c.github.io/mel.zhu/js/clipboard.2913da76d3cb21c5deaa4bae7da38c9f.min.js></script>
+<script defer src=https://mel10c.github.io/mel.zhu/js/callouts.7723cac461d613d118ee8bb8216b9838.min.js></script>
+<script>const SEARCH_ENABLED=!1,LATEX_ENABLED=!0,PRODUCTION=!0,BASE_URL="https://mel10c.github.io/mel.zhu/",fetchData=Promise.all([fetch("https://mel10c.github.io/mel.zhu/indices/linkIndex.4ecd462b2a0cc7b8f254e52a69d96e3c.min.json").then(e=>e.json()).then(e=>({index:e.index,links:e.links})),fetch("https://mel10c.github.io/mel.zhu/indices/contentIndex.6acfc2f415caa35851b6b3067c8415cf.min.json").then(e=>e.json())]).then(([{index:e,links:t},n])=>({index:e,links:t,content:n})),render=()=>{const e=new URL(BASE_URL),t=e.pathname,n=window.location.pathname,s=t==n;addCopyButtons(),addTitleToCodeBlocks(),addCollapsibleCallouts(),initPopover("https://mel10c.github.io/mel.zhu",!0);const o=document.getElementById("footer");if(o){const e=document.getElementById("graph-container");if(!e)return requestAnimationFrame(render);e.textContent="";const t=s&&!1;drawGraph("https://mel10c.github.io/mel.zhu",t,[{"/moc":"#4388cc"}],t?{centerForce:1,depth:-1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.5,linkDistance:1,opacityScale:3,repelForce:1,scale:1.4}:{centerForce:1,depth:1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.6,linkDistance:1,opacityScale:3,repelForce:2,scale:1.2})}var i=document.getElementsByClassName("mermaid");i.length>0&&import("https://unpkg.com/mermaid@9/dist/mermaid.esm.min.mjs").then(e=>{e.default.init()})},init=(e=document)=>{addCopyButtons(),addTitleToCodeBlocks(),renderMathInElement(e.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}],macros:{'’':"'"},throwOnError:!1})}</script><script type=module>
+    import { attachSPARouting } from "https:\/\/mel10c.github.io\/mel.zhu\/js\/router.9d4974281069e9ebb189f642ae1e3ca2.min.js"
+    attachSPARouting(init, render)
+  </script></head><body><div id=search-container><div id=search-space><input autocomplete=off id=search-bar name=search type=text aria-label=Search placeholder="Search for something..."><div id=results-container></div></div></div><script src=https://cdn.jsdelivr.net/npm/flexsearch@0.7.21/dist/flexsearch.bundle.js integrity="sha256-i3A0NZGkhsKjVMzFxv3ksk0DZh3aXqu0l49Bbh0MdjE=" crossorigin=anonymous defer></script>
+<script defer src=https://mel10c.github.io/mel.zhu/js/full-text-search.e6e2e0c213187ca0c703d6e2c7a77fcd.min.js></script><div class=singlePage><header><h1 id=page-title><a href=https://mel10c.github.io/mel.zhu/>MEL.ZHU</a></h1><div class=spacer></div><div id=search-icon><p>Search</p><svg tabindex="0" aria-labelledby="title desc" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title id="title">Search Icon</title><desc id="desc">Icon to open search</desc><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"/><circle cx="8" cy="8" r="7"/></g></svg></div><div class=darkmode><input class=toggle id=darkmode-toggle type=checkbox tabindex=-1>
+<label id=toggle-label-light for=darkmode-toggle tabindex=-1><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="dayIcon" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35"><title>Light Mode</title><path d="M6 17.5C6 16.672 5.328 16 4.5 16h-3C.672 16 0 16.672.0 17.5S.672 19 1.5 19h3C5.328 19 6 18.328 6 17.5zM7.5 26c-.414.0-.789.168-1.061.439l-2 2C4.168 28.711 4 29.086 4 29.5 4 30.328 4.671 31 5.5 31c.414.0.789-.168 1.06-.44l2-2C8.832 28.289 9 27.914 9 27.5 9 26.672 8.329 26 7.5 26zm10-20C18.329 6 19 5.328 19 4.5v-3C19 .672 18.329.0 17.5.0S16 .672 16 1.5v3C16 5.328 16.671 6 17.5 6zm10 3c.414.0.789-.168 1.06-.439l2-2C30.832 6.289 31 5.914 31 5.5 31 4.672 30.329 4 29.5 4c-.414.0-.789.168-1.061.44l-2 2C26.168 6.711 26 7.086 26 7.5 26 8.328 26.671 9 27.5 9zM6.439 8.561C6.711 8.832 7.086 9 7.5 9 8.328 9 9 8.328 9 7.5c0-.414-.168-.789-.439-1.061l-2-2C6.289 4.168 5.914 4 5.5 4 4.672 4 4 4.672 4 5.5c0 .414.168.789.439 1.06l2 2.001zM33.5 16h-3c-.828.0-1.5.672-1.5 1.5s.672 1.5 1.5 1.5h3c.828.0 1.5-.672 1.5-1.5S34.328 16 33.5 16zM28.561 26.439C28.289 26.168 27.914 26 27.5 26c-.828.0-1.5.672-1.5 1.5.0.414.168.789.439 1.06l2 2C28.711 30.832 29.086 31 29.5 31c.828.0 1.5-.672 1.5-1.5.0-.414-.168-.789-.439-1.061l-2-2zM17.5 29c-.829.0-1.5.672-1.5 1.5v3c0 .828.671 1.5 1.5 1.5s1.5-.672 1.5-1.5v-3C19 29.672 18.329 29 17.5 29zm0-22C11.71 7 7 11.71 7 17.5S11.71 28 17.5 28 28 23.29 28 17.5 23.29 7 17.5 7zm0 18c-4.136.0-7.5-3.364-7.5-7.5s3.364-7.5 7.5-7.5 7.5 3.364 7.5 7.5S21.636 25 17.5 25z"/></svg></label><label id=toggle-label-dark for=darkmode-toggle tabindex=-1><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="nightIcon" viewBox="0 0 100 100" style="enable-background='new 0 0 100 100'"><title>Dark Mode</title><path d="M96.76 66.458c-.853-.852-2.15-1.064-3.23-.534-6.063 2.991-12.858 4.571-19.655 4.571C62.022 70.495 50.88 65.88 42.5 57.5 29.043 44.043 25.658 23.536 34.076 6.47c.532-1.08.318-2.379-.534-3.23-.851-.852-2.15-1.064-3.23-.534-4.918 2.427-9.375 5.619-13.246 9.491-9.447 9.447-14.65 22.008-14.65 35.369.0 13.36 5.203 25.921 14.65 35.368s22.008 14.65 35.368 14.65c13.361.0 25.921-5.203 35.369-14.65 3.872-3.871 7.064-8.328 9.491-13.246C97.826 68.608 97.611 67.309 96.76 66.458z"/></svg></label></div></header><article><h1>CSC111: 1_Linked Lists</h1><p class=meta>Last updated
+Unknown</p><ul class=tags><li><a href=https://mel10c.github.io/mel.zhu/tags/note/>Note</a></li></ul><aside class=mainTOC><details><summary>Table of Contents</summary><nav id=TableOfContents><ol><li><a href=#building-blocks-of-linked-lists>Building Blocks of Linked Lists</a><ol><li><a href=#building-links-manually>Building links manually</a></li></ol></li><li><a href=#traversing-linked-lists>Traversing Linked Lists</a><ol><li></li></ol></li><li><a href=#index-based-mutation>Index-Based Mutation</a></li><li><a href=#running-time-analysis>Running-Time Analysis</a><ol><li><a href=#comparing-linkedlist-and-list-running-times>Comparing <code>LinkedList</code> and <code>list</code> running times</a></li></ol></li></ol></nav></details></aside><a href=#linked-lists><h1 id=linked-lists><span class=hanchor arialabel=Anchor># </span>Linked Lists</h1></a><a href=#building-blocks-of-linked-lists><h2 id=building-blocks-of-linked-lists><span class=hanchor arialabel=Anchor># </span>Building Blocks of Linked Lists</h2></a><ul><li><p>Python use <strong>array-based</strong> list implementations (elements are stored in consecutive locations)</p></li><li><p><strong>Indexing fast</strong> $\Theta(1)$, while inserting/deleting slow <em>worst-case running time</em> $\Theta(n)$</p><ul><li>The python interpreter need find a memory space enough to store the consecutive datas</li></ul></li><li><p><u>Linked List</u> - has the same <em>public itnerface</em> as a <code>list</code>, but have a different private implementation that do not have the long running time as lists. (Using nodes)</p><ul><li>Indexing slow with <em>worst-case running time</em> $\Theta(n)$, but inserting/deleting fast.$\Theta(1)$</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># Set up</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>__future__</span> <span class=kn>import</span> <span class=n>annotations</span>  <span class=c1># Allow to write _Node annotation within the _Node class	</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>dataclasses</span> <span class=kn>import</span> <span class=n>dataclass</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>typing</span> <span class=kn>import</span> <span class=n>Any</span><span class=p>,</span> <span class=n>Optional</span>
+</span></span></code></pre></td></tr></table></div></div></li><li><p><strong>Node</strong> new class that does not need to store in a specific location. Instead, it stores a referene to the <strong>next</strong> element in the list</p><ul><li>Represents a single element of the list</li><li>Note: <code>_Node</code> and<code>_Node.item</code> is <strong>different</strong>, one refers to an object while the other is a value</li><li><code>_Node.next</code> is the <em>alias</em> of the next node object</li></ul><blockquote><p><code>LinkedList</code> is the simplest application of nodes</p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=nd>@dataclass</span> 
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>_Node</span><span class=p>:</span>      
+</span></span><span class=line><span class=cl> 	<span class=s2>&#34;&#34;&#34;A node in a linked list.
+</span></span></span><span class=line><span class=cl><span class=s2>	Instance Attributes:       
+</span></span></span><span class=line><span class=cl><span class=s2>		- item: The data stored in this node. 
+</span></span></span><span class=line><span class=cl><span class=s2>		- next: The next node in the list, if any. 
+</span></span></span><span class=line><span class=cl><span class=s2>	&#34;&#34;&#34;</span>      
+</span></span><span class=line><span class=cl>	<span class=n>item</span><span class=p>:</span> <span class=n>Any</span>     
+</span></span><span class=line><span class=cl>	<span class=c1># By default, this node does not link to any other node</span>
+</span></span><span class=line><span class=cl>	<span class=nb>next</span><span class=p>:</span> <span class=n>Optional</span><span class=p>[</span><span class=n>_Node</span><span class=p>]</span> <span class=o>=</span> <span class=kc>None</span>  
+</span></span></code></pre></td></tr></table></div></div></li><li><p><code>LinkedList</code> - a new class that represent the list itself</p></li><li><p>Contents a private attribute that <strong>refers to the first node</strong> in the list</p></li><li><p><code>LinkedList._first</code> is an <em>alias</em> of the first node</p></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>class</span> <span class=nc>LinkedList</span><span class=p>:</span>      
+</span></span><span class=line><span class=cl>	<span class=s2>&#34;&#34;&#34;A linked list implementation of the List ADT.&#34;&#34;&#34;</span>      
+</span></span><span class=line><span class=cl>	<span class=c1># Private Instance Attributes:      </span>
+</span></span><span class=line><span class=cl>	<span class=c1>#   - _first: The first node in this linked list, </span>
+</span></span><span class=line><span class=cl>	<span class=c1># 						or None if this list is empty.</span>
+</span></span><span class=line><span class=cl>	<span class=n>_first</span><span class=p>:</span> <span class=n>Optional</span><span class=p>[</span><span class=n>_Node</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>	<span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=kc>None</span><span class=p>:</span>          
+</span></span><span class=line><span class=cl>		<span class=s2>&#34;&#34;&#34;Initialize an empty linked list.&#34;&#34;&#34;</span>          
+</span></span><span class=line><span class=cl>		<span class=bp>self</span><span class=o>.</span><span class=n>_first</span> <span class=o>=</span> <span class=kc>None</span>
+</span></span></code></pre></td></tr></table></div></div><a href=#building-links-manually><h3 id=building-links-manually><span class=hanchor arialabel=Anchor># </span>Building links manually</h3></a><ul><li><p>By manually assigning private attributes to the new classes</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># linky is an empty linked list</span>
+</span></span><span class=line><span class=cl><span class=n>linky</span> <span class=o>=</span> <span class=n>LinkedList</span><span class=p>()</span> 
+</span></span><span class=line><span class=cl><span class=c1># New nodes with items</span>
+</span></span><span class=line><span class=cl><span class=n>node1</span> <span class=o>=</span> <span class=n>_Node</span><span class=p>(</span><span class=mi>2</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>node2</span> <span class=o>=</span> <span class=n>_Node</span><span class=p>(</span><span class=mi>5</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>node3</span> <span class=o>=</span> <span class=n>_Node</span><span class=p>(</span><span class=mi>7</span><span class=p>)</span> 
+</span></span><span class=line><span class=cl><span class=c1># Linking nodes</span>
+</span></span><span class=line><span class=cl><span class=n>node1</span><span class=o>.</span><span class=n>next</span> <span class=o>=</span> <span class=n>node2</span>
+</span></span><span class=line><span class=cl><span class=n>node2</span><span class=o>.</span><span class=n>next</span> <span class=o>=</span> <span class=n>node3</span>
+</span></span><span class=line><span class=cl><span class=c1># Connect node to linked list</span>
+</span></span><span class=line><span class=cl><span class=n>linky</span><span class=o>.</span><span class=n>_first</span> <span class=o>=</span> <span class=n>node1</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Check list</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>node1</span>
+</span></span><span class=line><span class=cl><span class=n>_Node</span><span class=p>(</span><span class=n>item</span><span class=o>=</span><span class=mi>2</span><span class=p>,</span> <span class=nb>next</span><span class=o>=</span><span class=n>_Node</span><span class=p>(</span><span class=n>item</span><span class=o>=</span><span class=mi>5</span><span class=p>,</span> <span class=nb>next</span><span class=o>=</span><span class=n>_Node</span><span class=p>(</span><span class=n>item</span><span class=o>=</span><span class=mi>7</span><span class=p>,</span> <span class=nb>next</span><span class=o>=</span><span class=kc>None</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>linky</span><span class=o>.</span><span class=n>_first</span><span class=o>.</span><span class=n>item</span>
+</span></span><span class=line><span class=cl><span class=mi>2</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>linky</span><span class=o>.</span><span class=n>_first</span><span class=o>.</span><span class=n>next</span><span class=o>.</span><span class=n>next</span><span class=o>.</span><span class=n>next</span>  <span class=c1># return None(nothing)</span>
+</span></span></code></pre></td></tr></table></div></div></li></ul><a href=#traversing-linked-lists><h2 id=traversing-linked-lists><span class=hanchor arialabel=Anchor># </span>Traversing Linked Lists</h2></a><ul><li><p>Aggregate over the different values</p></li><li><p>Since the list size is unknown, a <strong>while loop</strong> would be a better choice than for loops.</p><ol><li><p>An initialized loop variable: that refers to the first node of the list (<strong>node as loop variable</strong>)</p></li><li><p>Check if reached the end of the list or not with the <strong>loop condition</strong></p></li><li><p>Perform action on the visited node</p><ul><li>The loop variable refers to the <code>_Node</code> object, <strong>needs to refer to its attribute</strong> (<code>_Node.item</code>) to asses value</li></ul></li><li><p>Increment by <strong>referring to the next node object</strong></p></li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>curr</span> <span class=o>=</span> <span class=n>my_linked_list</span><span class=o>.</span><span class=n>_first</span>  <span class=c1># NODE loop variable</span>
+</span></span><span class=line><span class=cl><span class=k>while</span> <span class=n>curr</span> <span class=ow>is</span> <span class=ow>not</span> <span class=kc>None</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>	<span class=c1># perform action with curr.item</span>
+</span></span><span class=line><span class=cl>	<span class=n>curr</span> <span class=o>=</span> <span class=n>curr</span><span class=o>.</span><span class=n>next</span>  
+</span></span></code></pre></td></tr></table></div></div><blockquote><a href=#application-of-traversing-indexing-into-a-linked-list><h5 id=application-of-traversing-indexing-into-a-linked-list><span class=hanchor arialabel=Anchor># </span>Application of traversing (indexing into a linked list)</h5></a><p>Goal: get the value of the node with the index. Implicating as the <code>LinkedList</code> class function. (Using compound loop condition)</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>def</span> <span class=fm>__getitem__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>i</span><span class=p>:</span> <span class=nb>int</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=n>Any</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>  	<span class=s2>&#34;&#34;&#34;Return node value of the given index&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>  	<span class=n>curr</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>_first</span>
+</span></span><span class=line><span class=cl>  	<span class=n>index_so_far</span> <span class=o>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>  	<span class=k>while</span> <span class=ow>not</span> <span class=p>(</span><span class=n>curr</span> <span class=ow>is</span> <span class=kc>None</span> <span class=ow>or</span> <span class=n>index_so_far</span> <span class=o>==</span> <span class=n>i</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>   		<span class=n>curr</span> <span class=o>=</span> <span class=n>curr</span><span class=o>.</span><span class=n>next</span>
+</span></span><span class=line><span class=cl>   		<span class=n>index_so_far</span> <span class=o>+=</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>  	<span class=c1># The loop with stop with 2 condition: (i ut of bound) or (reached i)</span>
+</span></span><span class=line><span class=cl>  	<span class=k>assert</span> <span class=n>curr</span> <span class=ow>is</span> <span class=kc>None</span> <span class=ow>or</span> <span class=n>index_so_far</span> <span class=o>==</span> <span class=n>i</span>
+</span></span><span class=line><span class=cl>  	<span class=k>if</span> <span class=n>curr</span> <span class=ow>is</span> <span class=kc>None</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>   		<span class=k>raise</span> <span class=ne>IndexError</span>  <span class=c1># index out of buound</span>
+</span></span><span class=line><span class=cl>  	<span class=c1># else:  (perform actions if needed)</span>
+</span></span><span class=line><span class=cl>   	<span class=k>return</span> <span class=n>curr</span><span class=o>.</span><span class=n>item</span>
+</span></span></code></pre></td></tr></table></div></div><ul><li>Since <code>__getitem__</code> is a special method in python. Therefore this LinkedList function could be assessed using the same indexing method as other lists</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl> <span class=o>&gt;&gt;&gt;</span> <span class=n>linky</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span>  <span class=c1># Equivalent ot linky.__getitem__(0)</span>
+</span></span><span class=line><span class=cl> <span class=mi>2</span>
+</span></span><span class=line><span class=cl> <span class=o>&gt;&gt;&gt;</span> <span class=n>linky</span><span class=p>[</span><span class=mi>1</span><span class=p>]</span> <span class=o>+</span> <span class=n>linky</span><span class=p>[</span><span class=mi>2</span><span class=p>]</span>
+</span></span><span class=line><span class=cl> <span class=mi>12</span>
+</span></span></code></pre></td></tr></table></div></div></blockquote></li></ul><blockquote><p>Appending item to LinkedLists and modification of LinkedList initializer (view &ldquo;prep2.py&rdquo;)</p></blockquote><a href=#index-based-mutation><h2 id=index-based-mutation><span class=hanchor arialabel=Anchor># </span>Index-Based Mutation</h2></a><ol><li>Starting with linked list diagrams (representing the <code>linky</code> linked list)</li></ol><img src=https://tva1.sinaimg.cn/large/008eGmZEly1gnarcbrfzqj30o206odgk.jpg alt="Screen Shot 2021-01-31 at 23.44.09" style=zoom:50%><ol start=2><li>Goal: insert item <code>300</code> at index 2 in this list. First create a new node, by default, linked to <code>None</code></li></ol><img src=https://tva1.sinaimg.cn/large/008eGmZEly1gnarca8mn4j30nw03kdga.jpg alt="Screen Shot 2021-01-31 at 23.44.15" style=zoom:50%><ol start=3><li>Modify <code>linky</code>, let he current node at index 1 to link to it</li></ol><img src=https://tva1.sinaimg.cn/large/008eGmZEly1gnarcao9btj30nk05kgmb.jpg alt="Screen Shot 2021-01-31 at 23.44.21" style=zoom:50%><ol start=4><li><p>Lastly, modify the (index - 1) node&rsquo;s link, connect to the new node</p><img src=https://tva1.sinaimg.cn/large/008eGmZEly1gnarcb5tg6j30na05wt9h.jpg alt="Screen Shot 2021-01-31 at 23.44.26" style=zoom:50%></li></ol><ul><li><p>Using <strong>parallel assignments</strong> to avoid losing variables&rsquo; values</p><blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>curr</span><span class=o>.</span><span class=n>next</span><span class=p>,</span> <span class=n>new_node</span><span class=o>.</span><span class=n>next</span> <span class=o>=</span> <span class=n>new_node</span><span class=p>,</span> <span class=n>curr</span><span class=o>.</span><span class=n>next</span>
+</span></span></code></pre></td></tr></table></div></div></blockquote></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>def</span> <span class=nf>insert</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>i</span><span class=p>:</span> <span class=nb>int</span><span class=p>,</span> <span class=n>item</span><span class=p>:</span> <span class=n>Any</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=kc>None</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34;...&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=n>new_node</span> <span class=o>=</span> <span class=n>_Node</span><span class=p>(</span><span class=n>item</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>i</span> <span class=o>==</span> <span class=mi>0</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=n>slef</span><span class=o>.</span><span class=n>_first</span><span class=p>,</span> <span class=n>new_node</span><span class=o>.</span><span class=n>next</span> <span class=o>=</span> <span class=n>new_node</span><span class=p>,</span> <span class=bp>self</span><span class=o>.</span><span class=n>first</span>
+</span></span><span class=line><span class=cl>        <span class=k>else</span><span class=p>:</span> 
+</span></span><span class=line><span class=cl>        	<span class=n>curr</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>_first</span>
+</span></span><span class=line><span class=cl>            <span class=n>curr_index</span> <span class=o>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        	<span class=k>while</span> <span class=ow>not</span> <span class=p>(</span><span class=n>curr</span> <span class=ow>is</span> <span class=kc>None</span> <span class=ow>or</span> <span class=n>curr_index</span> <span class=o>==</span> <span class=n>i</span> <span class=o>-</span> <span class=mi>1</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>            	<span class=n>curr</span> <span class=o>=</span> <span class=n>curr</span><span class=o>.</span><span class=n>next</span>
+</span></span><span class=line><span class=cl>            	<span class=n>curr_index</span> <span class=o>=</span> <span class=n>curr_index</span> <span class=o>+</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        	<span class=c1># After the loop is over, either we&#39;ve reached the end of the list</span>
+</span></span><span class=line><span class=cl>        	<span class=c1># or curr is the (i - 1)-th node in the list.</span>
+</span></span><span class=line><span class=cl>        	<span class=k>assert</span> <span class=n>curr</span> <span class=ow>is</span> <span class=kc>None</span> <span class=ow>or</span> <span class=n>curr_index</span> <span class=o>==</span> <span class=n>i</span> <span class=o>-</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        	<span class=k>if</span> <span class=n>curr</span> <span class=ow>is</span> <span class=kc>None</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            	<span class=k>raise</span> <span class=ne>IndexError</span>  <span class=c1># i-1 is out of bound</span>
+</span></span><span class=line><span class=cl>        	<span class=k>else</span><span class=p>:</span> <span class=c1># curr_index == i - 1</span>
+</span></span><span class=line><span class=cl>                <span class=n>curr</span><span class=o>.</span><span class=n>next</span><span class=p>,</span> <span class=n>new_node</span><span class=o>.</span><span class=n>next</span> <span class=o>=</span> <span class=n>new_node</span><span class=p>,</span> <span class=n>curr</span><span class=o>.</span><span class=n>next</span>
+</span></span></code></pre></td></tr></table></div></div><ul><li>Always check if the operations is working on <code>Node</code> or is it performing in <code>None</code><ul><li>Add if statements to check when ever working with <code>curr.next</code> (never know if next exists)</li></ul></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>def</span> <span class=nf>pop</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>i</span><span class=p>:</span> <span class=nb>int</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=n>Any</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;Remove and return item at index i.
+</span></span></span><span class=line><span class=cl><span class=s2>    Preconditions:
+</span></span></span><span class=line><span class=cl><span class=s2>        - i &gt;= 0
+</span></span></span><span class=line><span class=cl><span class=s2>
+</span></span></span><span class=line><span class=cl><span class=s2>    Raise IndexError if i &gt;= the length of self.
+</span></span></span><span class=line><span class=cl><span class=s2>
+</span></span></span><span class=line><span class=cl><span class=s2>    &gt;&gt;&gt; lst = LinkedList([1, 2, 10, 200])
+</span></span></span><span class=line><span class=cl><span class=s2>    &gt;&gt;&gt; lst.pop(2)
+</span></span></span><span class=line><span class=cl><span class=s2>    10
+</span></span></span><span class=line><span class=cl><span class=s2>    &gt;&gt;&gt; lst.pop(0)
+</span></span></span><span class=line><span class=cl><span class=s2>    1
+</span></span></span><span class=line><span class=cl><span class=s2>    &gt;&gt;&gt; lst.to_list()
+</span></span></span><span class=line><span class=cl><span class=s2>    [2, 200]
+</span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=c1># 1. If the list is empty, you know for sure that index is out of bounds...</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=bp>self</span><span class=o>.</span><span class=n>_first</span> <span class=ow>is</span> <span class=kc>None</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=k>raise</span> <span class=ne>IndexError</span>
+</span></span><span class=line><span class=cl>    <span class=c1># 2. Else if i is 0, remove the first node and return its item.</span>
+</span></span><span class=line><span class=cl>    <span class=k>elif</span> <span class=n>i</span> <span class=o>==</span> <span class=mi>0</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>curr_return</span><span class=p>,</span> <span class=bp>self</span><span class=o>.</span><span class=n>_first</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>_first</span><span class=o>.</span><span class=n>item</span><span class=p>,</span> <span class=bp>self</span><span class=o>.</span><span class=n>_first</span><span class=o>.</span><span class=n>next</span>
+</span></span><span class=line><span class=cl>    <span class=c1># 3. Else iterate to the (i-1)-th node and update links to remove</span>
+</span></span><span class=line><span class=cl>    <span class=c1>#    the node at position index. But don&#39;t forget to return the item!class LinkedList:</span>
+</span></span><span class=line><span class=cl>    <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>curr</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>_first</span>
+</span></span><span class=line><span class=cl>        <span class=n>curr_index</span> <span class=o>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>        <span class=k>while</span> <span class=ow>not</span> <span class=p>(</span><span class=n>curr</span> <span class=ow>is</span> <span class=kc>None</span> <span class=ow>or</span> <span class=n>curr_index</span> <span class=o>==</span> <span class=n>i</span> <span class=o>-</span> <span class=mi>1</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>            <span class=n>curr</span> <span class=o>=</span> <span class=n>curr</span><span class=o>.</span><span class=n>next</span>
+</span></span><span class=line><span class=cl>                <span class=n>curr_index</span> <span class=o>+=</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=k>assert</span> <span class=n>curr</span> <span class=ow>is</span> <span class=kc>None</span> <span class=ow>or</span> <span class=n>curr_index</span> <span class=o>==</span> <span class=n>i</span> <span class=o>-</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>curr</span> <span class=ow>or</span> <span class=n>curr</span><span class=o>.</span><span class=n>next</span> <span class=ow>is</span> <span class=kc>None</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>raise</span> <span class=ne>IndexError</span>
+</span></span><span class=line><span class=cl>        <span class=k>else</span><span class=p>:</span>  <span class=c1># curr_index == i</span>
+</span></span><span class=line><span class=cl>                <span class=n>curr_return</span><span class=p>,</span> <span class=n>curr</span><span class=o>.</span><span class=n>next</span> <span class=o>=</span> <span class=n>curr</span><span class=o>.</span><span class=n>next</span><span class=o>.</span><span class=n>item</span><span class=p>,</span> <span class=n>curr</span><span class=o>.</span><span class=n>next</span><span class=o>.</span><span class=n>next</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>curr_return</span>
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># alternative way</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>pop</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>i</span><span class=p>:</span> <span class=nb>int</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=n>Any</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>prev</span><span class=p>,</span> <span class=n>cur</span> <span class=o>=</span> <span class=kc>None</span><span class=p>,</span> <span class=bp>self</span><span class=o>.</span><span class=n>_first</span>
+</span></span><span class=line><span class=cl>    <span class=n>curr_index</span> <span class=o>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>	<span class=k>while</span> <span class=ow>not</span> <span class=p>(</span><span class=n>curr</span> <span class=ow>is</span> <span class=kc>None</span> <span class=ow>or</span> <span class=n>curr_index</span> <span class=o>==</span> <span class=n>i</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=n>prev</span><span class=p>,</span> <span class=n>curr</span> <span class=o>=</span> <span class=n>curr</span><span class=p>,</span> <span class=n>curr</span><span class=o>.</span><span class=n>next</span>
+</span></span><span class=line><span class=cl>        <span class=n>cur_index</span> <span class=o>=</span> <span class=n>curr_index</span> <span class=o>+</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>	<span class=k>if</span> <span class=n>curr</span> <span class=ow>is</span> <span class=kc>None</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=k>raise</span> <span class=ne>IndexError</span>
+</span></span><span class=line><span class=cl>    <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=c1># curr_index is i, and curr is the node at index i</span>
+</span></span><span class=line><span class=cl>        <span class=c1># Either prev is None (and curr is self._first)</span>
+</span></span><span class=line><span class=cl>        <span class=c1># Or prev is a node, and its acutally the node at index i-1</span>
+</span></span><span class=line><span class=cl>        <span class=n>item</span> <span class=o>=</span> <span class=n>curr</span><span class=o>.</span><span class=n>item</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>prev</span> <span class=ow>is</span> <span class=kc>None</span><span class=p>:</span>  <span class=c1># curr si self._first</span>
+</span></span><span class=line><span class=cl>            <span class=bp>self</span><span class=o>.</span><span class=n>_first</span> <span class=o>=</span> <span class=n>curr</span><span class=o>.</span><span class=n>next</span>
+</span></span><span class=line><span class=cl>        <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=n>prev</span><span class=o>.</span><span class=n>next</span> <span class=o>=</span> <span class=n>curr</span><span class=o>.</span><span class=n>next</span>
+</span></span><span class=line><span class=cl>     <span class=k>return</span> <span class=n>item</span>
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>Refers to &ldquo;prep2.py&rdquo; for the <code>remove</code> function, that is very similar to this <code>pop</code></p></blockquote><a href=#running-time-analysis><h2 id=running-time-analysis><span class=hanchor arialabel=Anchor># </span>Running-Time Analysis</h2></a><p>$Running~Time~Analysis$ Of <code>LinkedList.insert</code> (view code above)</p><ul><li>Let $n$ be the length (number of items) of <code>self</code></li><li>Since the code is split into two different cases with the outer if statement, the $RT$ analysis would be organized into cases as well</li></ul><ol><li>Case 1: <strong>Assume <code>i == 0</code></strong><ul><li>If the first <code>if</code> branch would execute, which takes constant time $RT = \Theta(1)$</li></ul></li><li>Case 2: <strong>Assume</strong> <code>i>0</code><ul><li>The declaration statements (<code>curr = self._first, curr_index = 0</code>) takes constant time</li><li>The <code>while</code> loop iterates until either it reaches the end of the list (<code>curr is None</code>) or until it reaches the correct index (<code>curr_index == i-1</code>)<ul><li>Case A: the loop will iterate $n$ iterations</li><li>Case B: the loop with iterate $i-1$ iterations, since <code>curr_index</code> starts at 0 and increases by 1 each iteration</li><li>Each iteration takes 1 steps, the total $RT$ for the while loop is $\min(n, i-1)$</li></ul></li><li>The total running time for this case is $RT= \min(n, i-1)+2= \Theta(\min(n,i-1))$</li></ul></li></ol><p><strong>Therefore:</strong></p><ul><li><p>Since in Case 2, the expression would becomes $\Theta(1)$ when $i=0$, and the overall running time of <code>LinkedLIst.insert</code> is $RT= \Theta(\min(n, i))$</p></li><li><p><em>Assume</em> $0 \le i &lt; n$,(not including the case where the index is the last) then $RT= \Theta(i)$</p></li></ul><a href=#comparing-linkedlist-and-list-running-times><h3 id=comparing-linkedlist-and-list-running-times><span class=hanchor arialabel=Anchor># </span>Comparing <code>LinkedList</code> and <code>list</code> running times</h3></a><table><thead><tr><th><em>Operation (assuming $0 \le i &lt; n $</em>)</th><th><code>List</code> RT</th><th><code>LinkedList</code> RT</th></tr></thead><tbody><tr><td>Indexing (<code>lst[i]</code>)</td><td>$\Theta(1)$</td><td>$\Theta(i)$</td></tr><tr><td>Inserting into index $i$</td><td>$\Theta(n-i)$</td><td>$\Theta(i)$</td></tr><tr><td>Removing item at index $i$</td><td>$\Theta(n-i)$</td><td>$\Theta(i)$</td></tr></tbody></table><ul><li>For list indexing, linked list have a worse performance</li><li>For insertion and deletion, linked list has the exact opposite $RT$ with list<ul><li>Want constant indexing mainly add/remove at the end of the list &ndash; prefer a <code>list</code></li><li>Mainly add/remove element at the front of the list &ndash; prefer a <code>Linkedlist</code></li></ul></li></ul></article><hr><div class=page-end id=footer><div class=backlinks-container><h3>Backlinks</h3><ul class=backlinks><li>No backlinks found</li></ul></div><div><script async src=https://cdn.jsdelivr.net/npm/d3@6.7.0/dist/d3.min.js integrity="sha256-+7jaYCp29O1JusNWHaYtgUn6EhuP0VaFuswhNV06MyI=" crossorigin=anonymous></script><h3>Interactive Graph</h3><div id=graph-container></div><style>:root{--g-node:var(--secondary);--g-node-active:var(--primary);--g-node-inactive:var(--visited);--g-link:var(--outlinegray);--g-link-active:#5a7282}</style><script src=https://mel10c.github.io/mel.zhu/js/graph.2d9e48dbe7ea47c0ef1c58296ce14448.js></script></div></div><div id=contact_buttons><footer><p>Made by Melaney Zhu using <a href=https://github.com/jackyzha0/quartz>Quartz</a>, © 2023</p><ul><li><a href=https://mel10c.github.io/mel.zhu/>Home</a></li><li><a href=https://www.instagram.com/melaney_dxl/>Instagram</a></li><li><a href=https://github.com/mel10c>GitHub</a></li><li><a href=https://linkedin.com/in/melzyy>LinkedIn</a></li><li><a href=https://github.com/mel10c/mel.zhu/blob/hugo/content/documents/Resume.pdf>Resume</a></li></ul></footer></div></div></body></html>

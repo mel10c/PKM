@@ -1,0 +1,381 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=description content="Trees Definition and Terminology   Tree data structure to represent hierarchical data its a recursive data structure. A tree is either:
+ Empty Have a root value connected to any number pf the trees, called the subtrees of the tree    Size of a tree is the number of values in the tree.
+  Leaf &ndash; a value with no subtrees
+  Internal value (opposite to leaf), its a value that has at least one subtree"><title>CSC111: 3_Trees</title><meta name=viewport content="width=device-width,initial-scale=1"><link rel="shortcut icon" type=image/png href=https://mel10c.github.io/mel.zhu//icon.png><link href=https://mel10c.github.io/mel.zhu/styles.9a8661985b360a1d97e0e538e164abef.min.css rel=stylesheet><link href=https://mel10c.github.io/mel.zhu/styles/_light_syntax.86a48a52faebeaaf42158b72922b1c90.min.css rel=stylesheet id=theme-link><script src=https://mel10c.github.io/mel.zhu/js/darkmode.905e4d2da56a9111aff695a0a4b69900.min.js></script>
+<script src=https://mel10c.github.io/mel.zhu/js/util.6f22941e242efae60fd84e7c32e874fa.min.js></script>
+<link rel=preload href=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css as=style onload='this.onload=null,this.rel="stylesheet"' integrity=sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js integrity=sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx crossorigin=anonymous></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin=anonymous></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/contrib/copy-tex.min.js integrity=sha384-ww/583aHhxWkz5DEVn6OKtNiIaLi2iBRNZXfJRiY1Ai7tnJ9UXpEsyvOITVpTl4A crossorigin=anonymous></script>
+<script async src=https://unpkg.com/@floating-ui/core@0.7.3></script>
+<script async src=https://unpkg.com/@floating-ui/dom@0.5.4></script>
+<script async src=https://mel10c.github.io/mel.zhu/js/popover.f03552ccb84d99ca615d1cfb9abde59e.min.js></script>
+<script defer src=https://mel10c.github.io/mel.zhu/js/code-title.ce4a43f09239a9efb48fee342e8ef2df.min.js></script>
+<script defer src=https://mel10c.github.io/mel.zhu/js/clipboard.2913da76d3cb21c5deaa4bae7da38c9f.min.js></script>
+<script defer src=https://mel10c.github.io/mel.zhu/js/callouts.7723cac461d613d118ee8bb8216b9838.min.js></script>
+<script>const SEARCH_ENABLED=!1,LATEX_ENABLED=!0,PRODUCTION=!0,BASE_URL="https://mel10c.github.io/mel.zhu/",fetchData=Promise.all([fetch("https://mel10c.github.io/mel.zhu/indices/linkIndex.4ecd462b2a0cc7b8f254e52a69d96e3c.min.json").then(e=>e.json()).then(e=>({index:e.index,links:e.links})),fetch("https://mel10c.github.io/mel.zhu/indices/contentIndex.6acfc2f415caa35851b6b3067c8415cf.min.json").then(e=>e.json())]).then(([{index:e,links:t},n])=>({index:e,links:t,content:n})),render=()=>{const e=new URL(BASE_URL),t=e.pathname,n=window.location.pathname,s=t==n;addCopyButtons(),addTitleToCodeBlocks(),addCollapsibleCallouts(),initPopover("https://mel10c.github.io/mel.zhu",!0);const o=document.getElementById("footer");if(o){const e=document.getElementById("graph-container");if(!e)return requestAnimationFrame(render);e.textContent="";const t=s&&!1;drawGraph("https://mel10c.github.io/mel.zhu",t,[{"/moc":"#4388cc"}],t?{centerForce:1,depth:-1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.5,linkDistance:1,opacityScale:3,repelForce:1,scale:1.4}:{centerForce:1,depth:1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.6,linkDistance:1,opacityScale:3,repelForce:2,scale:1.2})}var i=document.getElementsByClassName("mermaid");i.length>0&&import("https://unpkg.com/mermaid@9/dist/mermaid.esm.min.mjs").then(e=>{e.default.init()})},init=(e=document)=>{addCopyButtons(),addTitleToCodeBlocks(),renderMathInElement(e.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}],macros:{'’':"'"},throwOnError:!1})}</script><script type=module>
+    import { attachSPARouting } from "https:\/\/mel10c.github.io\/mel.zhu\/js\/router.9d4974281069e9ebb189f642ae1e3ca2.min.js"
+    attachSPARouting(init, render)
+  </script></head><body><div id=search-container><div id=search-space><input autocomplete=off id=search-bar name=search type=text aria-label=Search placeholder="Search for something..."><div id=results-container></div></div></div><script src=https://cdn.jsdelivr.net/npm/flexsearch@0.7.21/dist/flexsearch.bundle.js integrity="sha256-i3A0NZGkhsKjVMzFxv3ksk0DZh3aXqu0l49Bbh0MdjE=" crossorigin=anonymous defer></script>
+<script defer src=https://mel10c.github.io/mel.zhu/js/full-text-search.e6e2e0c213187ca0c703d6e2c7a77fcd.min.js></script><div class=singlePage><header><h1 id=page-title><a href=https://mel10c.github.io/mel.zhu/>MEL.ZHU</a></h1><div class=spacer></div><div id=search-icon><p>Search</p><svg tabindex="0" aria-labelledby="title desc" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title id="title">Search Icon</title><desc id="desc">Icon to open search</desc><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"/><circle cx="8" cy="8" r="7"/></g></svg></div><div class=darkmode><input class=toggle id=darkmode-toggle type=checkbox tabindex=-1>
+<label id=toggle-label-light for=darkmode-toggle tabindex=-1><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="dayIcon" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35"><title>Light Mode</title><path d="M6 17.5C6 16.672 5.328 16 4.5 16h-3C.672 16 0 16.672.0 17.5S.672 19 1.5 19h3C5.328 19 6 18.328 6 17.5zM7.5 26c-.414.0-.789.168-1.061.439l-2 2C4.168 28.711 4 29.086 4 29.5 4 30.328 4.671 31 5.5 31c.414.0.789-.168 1.06-.44l2-2C8.832 28.289 9 27.914 9 27.5 9 26.672 8.329 26 7.5 26zm10-20C18.329 6 19 5.328 19 4.5v-3C19 .672 18.329.0 17.5.0S16 .672 16 1.5v3C16 5.328 16.671 6 17.5 6zm10 3c.414.0.789-.168 1.06-.439l2-2C30.832 6.289 31 5.914 31 5.5 31 4.672 30.329 4 29.5 4c-.414.0-.789.168-1.061.44l-2 2C26.168 6.711 26 7.086 26 7.5 26 8.328 26.671 9 27.5 9zM6.439 8.561C6.711 8.832 7.086 9 7.5 9 8.328 9 9 8.328 9 7.5c0-.414-.168-.789-.439-1.061l-2-2C6.289 4.168 5.914 4 5.5 4 4.672 4 4 4.672 4 5.5c0 .414.168.789.439 1.06l2 2.001zM33.5 16h-3c-.828.0-1.5.672-1.5 1.5s.672 1.5 1.5 1.5h3c.828.0 1.5-.672 1.5-1.5S34.328 16 33.5 16zM28.561 26.439C28.289 26.168 27.914 26 27.5 26c-.828.0-1.5.672-1.5 1.5.0.414.168.789.439 1.06l2 2C28.711 30.832 29.086 31 29.5 31c.828.0 1.5-.672 1.5-1.5.0-.414-.168-.789-.439-1.061l-2-2zM17.5 29c-.829.0-1.5.672-1.5 1.5v3c0 .828.671 1.5 1.5 1.5s1.5-.672 1.5-1.5v-3C19 29.672 18.329 29 17.5 29zm0-22C11.71 7 7 11.71 7 17.5S11.71 28 17.5 28 28 23.29 28 17.5 23.29 7 17.5 7zm0 18c-4.136.0-7.5-3.364-7.5-7.5s3.364-7.5 7.5-7.5 7.5 3.364 7.5 7.5S21.636 25 17.5 25z"/></svg></label><label id=toggle-label-dark for=darkmode-toggle tabindex=-1><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="nightIcon" viewBox="0 0 100 100" style="enable-background='new 0 0 100 100'"><title>Dark Mode</title><path d="M96.76 66.458c-.853-.852-2.15-1.064-3.23-.534-6.063 2.991-12.858 4.571-19.655 4.571C62.022 70.495 50.88 65.88 42.5 57.5 29.043 44.043 25.658 23.536 34.076 6.47c.532-1.08.318-2.379-.534-3.23-.851-.852-2.15-1.064-3.23-.534-4.918 2.427-9.375 5.619-13.246 9.491-9.447 9.447-14.65 22.008-14.65 35.369.0 13.36 5.203 25.921 14.65 35.368s22.008 14.65 35.368 14.65c13.361.0 25.921-5.203 35.369-14.65 3.872-3.871 7.064-8.328 9.491-13.246C97.826 68.608 97.611 67.309 96.76 66.458z"/></svg></label></div></header><article><h1>CSC111: 3_Trees</h1><p class=meta>Last updated
+Unknown</p><ul class=tags><li><a href=https://mel10c.github.io/mel.zhu/tags/note/>Note</a></li></ul><aside class=mainTOC><details><summary>Table of Contents</summary><nav id=TableOfContents><ol><li><ol><li><a href=#definition-and-terminology>Definition and Terminology</a></li></ol></li><li><a href=#tree-implementation>Tree implementation</a></li><li><a href=#tree-recursion>Tree recursion</a><ol><li><a href=#ex-tree-size>Ex. Tree size</a></li><li><a href=#ex-tree__str__>Ex. <code>Tree.__str__</code></a></li></ol></li><li><a href=#mutating-trees-value-based-deletion>Mutating Trees (value-based deletion)</a></li><li><a href=#running-time-analysis-for-tree-operations>Running-Time Analysis for Tree Operations</a><ol><li></li><li><a href=#analyzing-the-structure-of-recursive-calls>Analyzing the structure of recursive calls</a></li><li><a href=#analyzing-the-non-recursive-part-of-each-call>Analyzing the non-recursive part of each call</a></li><li><a href=#generalize>Generalize</a></li></ol></li></ol></nav></details></aside><a href=#trees><h1 id=trees><span class=hanchor arialabel=Anchor># </span>Trees</h1></a><a href=#definition-and-terminology><h3 id=definition-and-terminology><span class=hanchor arialabel=Anchor># </span>Definition and Terminology</h3></a><ul><li><p><u>Tree</u> data structure to represent hierarchical data its a <strong>recursive</strong> data structure. A tree is either:</p><ol><li>Empty</li><li>Have a <strong>root value</strong> connected to any number pf the trees, called the <strong>subtrees</strong> of the tree</li></ol><img src=https://miro.medium.com/max/975/1*PWJiwTxRdQy8A_Y0hAv5Eg.png style=zoom:40%></li><li><p><u>Size</u> of a tree is the number of values in the tree.</p></li><li><p><u>Leaf</u> &ndash; a value with no subtrees</p></li><li><p><u>Internal value</u> (opposite to leaf), its a value that has at least one subtree</p></li><li><p><u>Height</u> of tree is the length of the <em>longest</em> path form tis room to one of its leaves</p></li><li><p><u>Children</u> of a value are all values directly connected underneath that value</p><ul><li><u>Descendants</u> of value are its children, the children of its children etc</li></ul></li><li><p><u>Parent</u> of a value is the value immediately above and connected to it. Each value in a tree has exactly one parent, except the root</p><ul><li><u>Ancestors</u> of a value are its parents, the parent of its parent etc</li></ul></li><li><p>A value is <em>never</em> a child or parent of itself</p></li></ul><a href=#tree-implementation><h2 id=tree-implementation><span class=hanchor arialabel=Anchor># </span>Tree implementation</h2></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>class</span> <span class=nc>Tree</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;A recursive tree data structure.
+</span></span></span><span class=line><span class=cl><span class=s2>    
+</span></span></span><span class=line><span class=cl><span class=s2>    Representation Invariants:
+</span></span></span><span class=line><span class=cl><span class=s2>        - self._root is not None or self._subtrees == []
+</span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=c1># Private Instance Attributes:</span>
+</span></span><span class=line><span class=cl>    <span class=c1>#   - _root:</span>
+</span></span><span class=line><span class=cl>    <span class=c1>#       The item stored at this tree&#39;s root, or None if the tree is empty.</span>
+</span></span><span class=line><span class=cl>    <span class=c1>#   - _subtrees:</span>
+</span></span><span class=line><span class=cl>    <span class=c1>#       The list of subtrees of this tree. This attribute is empty when</span>
+</span></span><span class=line><span class=cl>    <span class=c1>#       self._root is None (representing an empty tree). </span>
+</span></span><span class=line><span class=cl>    <span class=c1>#		However, this attribute may be empty when self._root is not None,</span>
+</span></span><span class=line><span class=cl>    <span class=c1>#       which represents a tree consisting of just one item.</span>
+</span></span><span class=line><span class=cl>    <span class=n>_root</span><span class=p>:</span> <span class=n>Optional</span><span class=p>[</span><span class=n>Any</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>    <span class=n>_subtrees</span><span class=p>:</span> <span class=nb>list</span><span class=p>[</span><span class=n>Tree</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>        
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>root</span><span class=p>:</span> <span class=n>Optional</span><span class=p>[</span><span class=n>Any</span><span class=p>],</span> <span class=n>subtrees</span><span class=p>:</span> <span class=nb>list</span><span class=p>[</span><span class=n>Tree</span><span class=p>])</span> <span class=o>-&gt;</span> <span class=kc>None</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34;Initialize a new Tree with the given root value and subtress.
+</span></span></span><span class=line><span class=cl><span class=s2>        
+</span></span></span><span class=line><span class=cl><span class=s2>        If root is None, the tree is empty
+</span></span></span><span class=line><span class=cl><span class=s2>        
+</span></span></span><span class=line><span class=cl><span class=s2>        Preconditions:
+</span></span></span><span class=line><span class=cl><span class=s2>        	- root is not none or subtrees ==[]
+</span></span></span><span class=line><span class=cl><span class=s2>        &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>_root</span> <span class=o>=</span> <span class=n>root</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>_subtrees</span> <span class=o>==</span> <span class=n>subtrees</span>
+</span></span><span class=line><span class=cl>        
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>is_empty</span><span class=p>(</span><span class=bp>self</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=nb>bool</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34;Return whether this tree is empty&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=bp>self</span><span class=o>.</span><span class=n>_root</span> <span class=ow>is</span> <span class=kc>None</span>
+</span></span></code></pre></td></tr></table></div></div><ol><li>Creates an empty tree when <code>root</code> is <code>None</code></li><li>A tree with a value and the given subtrees</li><li><code>Root</code> is not <code>None</code>, while <code>subtrees</code> are empty &ndash; a tree with a single root value</li></ol><a href=#tree-recursion><h2 id=tree-recursion><span class=hanchor arialabel=Anchor># </span>Tree recursion</h2></a><p>Code template:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>class</span> <span class=nc>Tree</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>method</span><span class=p>(</span><span class=bp>self</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=o>...</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=bp>self</span><span class=o>.</span><span class=n>is_empty</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>            <span class=p>(</span><span class=o>...</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>elif</span> <span class=bp>self</span><span class=o>.</span><span class=n>_root</span> <span class=p>(</span><span class=o>...</span><span class=p>):</span>  <span class=c1># explicit self._root case</span>
+</span></span><span class=line><span class=cl>            <span class=p>(</span><span class=o>...</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>for</span> <span class=n>subtree</span> <span class=ow>in</span> <span class=bp>self</span><span class=o>.</span><span class=n>subtrees</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                <span class=p>(</span><span class=o>...</span><span class=p>)</span> <span class=n>subtree</span><span class=o>.</span><span class=n>method</span><span class=p>()</span> <span class=p>(</span><span class=o>...</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=p>(</span><span class=o>...</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><a href=#ex-tree-size><h3 id=ex-tree-size><span class=hanchor arialabel=Anchor># </span>Ex. Tree size</h3></a><ul><li><p>Let $T$ be a tree, and let $size$ be a function mapping any tree to its size</p><ul><li><p>If $T$ is empty, then its size is 0: $size(T)=0$</p></li><li><p>If $T$ is non-empty, then it consists of a root value and collection of subtrees $T_0, T_1, \dots T_{k-1}$ (for some $k \in \N$). Then, the size of $T$ is the $sum$ of the sizes of its subtrees plus 1 for the root
+$$
+size(T) = 1 + \sum_{i=0}^{k-1} size(T_i)
+$$</p></li></ul></li><li><p>Combine these two cases to write a recursive mathematical definition for $size$ function
+$$
+size(T) =
+\begin{cases}
+0, & \text{ if } T \text{ is empty} \\ 1 + \sum_{i=0}^{k-1} size(T_i) &
+\text{ if } T \text{ has subtrees } T_0, T_1, \dots T_{k-1}
+\end{cases}
+$$</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>class</span> <span class=nc>Tree</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__len__</span><span class=p>(</span><span class=bp>self</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=nb>int</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34;Return the number of items contained in this tree.
+</span></span></span><span class=line><span class=cl><span class=s2>
+</span></span></span><span class=line><span class=cl><span class=s2>        &gt;&gt;&gt; t1 = Tree(None, [])
+</span></span></span><span class=line><span class=cl><span class=s2>        &gt;&gt;&gt; len(t1)
+</span></span></span><span class=line><span class=cl><span class=s2>        0
+</span></span></span><span class=line><span class=cl><span class=s2>        &gt;&gt;&gt; t2 = Tree(3, [Tree(4, []), Tree(1, [])])
+</span></span></span><span class=line><span class=cl><span class=s2>        &gt;&gt;&gt; len(t2)
+</span></span></span><span class=line><span class=cl><span class=s2>        3
+</span></span></span><span class=line><span class=cl><span class=s2>        &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=bp>self</span><span class=o>.</span><span class=n>is_empty</span><span class=p>():</span>  <span class=c1># tree is empty</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>        <span class=k>elif</span> <span class=bp>self</span><span class=o>.</span><span class=n>_subtrees</span> <span class=o>==</span> <span class=p>[]:</span>  <span class=c1># tree is a single item</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>        <span class=k>else</span><span class=p>:</span>  <span class=c1># tree has at least one subtree</span>
+</span></span><span class=line><span class=cl>            <span class=n>size_so_far</span> <span class=o>=</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>            <span class=k>for</span> <span class=n>subtree</span> <span class=ow>in</span> <span class=bp>self</span><span class=o>.</span><span class=n>_subtrees</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                <span class=n>size_so_far</span> <span class=o>+=</span> <span class=n>subtree</span><span class=o>.</span><span class=fm>__len__</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=n>size_so_far</span>
+</span></span></code></pre></td></tr></table></div></div></li></ul><a href=#ex-tree__str__><h3 id=ex-tree__str__><span class=hanchor arialabel=Anchor># </span>Ex. <code>Tree.__str__</code></h3></a><ul><li><p>f-Strings format: <code>f'{variable}'</code> == <code>str.format(variable)</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>name</span> <span class=o>=</span> <span class=s2>&#34;Mel&#34;</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=sa>f</span><span class=s2>&#34;Hello, </span><span class=si>{</span><span class=n>name</span><span class=si>}</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl><span class=s1>&#39;Hello, Mel&#39;</span>
+</span></span></code></pre></td></tr></table></div></div></li><li><p>Start with the value of root, then recursively add on the <code>__str__</code> for each of the subtrees</p></li><li><p>Base case returns an empty string</p></li><li><p>Pass in an extra parameter for the <code>depth</code> of the current tree, to add a corresponding number of indents before each value in the <code>str</code> that is returned</p></li><li><p>Make a <u><strong>parameter optional</strong></u> by giving it a <strong>default value</strong>: <code>depth: int = 0</code> to define a default value for <code>depth</code></p><ul><li>Since <code>depth</code> is optional, if assigned a specific value (ex. <code>t.__str__(5)</code>) then the depth would have the parameter to 5, otherwise, if not specified (ex. <code>t.__str__()</code>) then the depth parameter is assigned to 0</li><li>All optional parameter must appear <strong>after</strong> all of the required parameters in the function header</li><li><strong>DO NOT</strong> use mutable values like lists for the optional parameters</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>def</span> <span class=fm>__str__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>depth</span><span class=p>:</span> <span class=nb>int</span> <span class=o>=</span> <span class=mi>0</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=nb>str</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;Return a string represention of this tree
+</span></span></span><span class=line><span class=cl><span class=s2>
+</span></span></span><span class=line><span class=cl><span class=s2>    The indentation level is specified by the &lt;depth&gt; parameter
+</span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=bp>self</span><span class=o>.</span><span class=n>is_empty</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=s1>&#39;&#39;</span>
+</span></span><span class=line><span class=cl>    <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=c1># use newlines (&#39;\n&#39;) to separate the different values</span>
+</span></span><span class=line><span class=cl>        <span class=n>s</span> <span class=o>=</span> <span class=s1>&#39;	&#39;</span> <span class=o>*</span> <span class=n>depth</span> <span class=o>+</span>  <span class=sa>f</span><span class=s1>&#39;</span><span class=si>{</span><span class=bp>self</span><span class=o>.</span><span class=n>root</span><span class=si>}</span><span class=se>\n</span><span class=s1>&#39;</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=n>subtree</span> <span class=ow>in</span> <span class=bp>self</span><span class=o>.</span><span class=n>_subtrees</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=c1># the &#39;depth&#39; argument to the recursive call is modified</span>
+</span></span><span class=line><span class=cl>            <span class=n>s</span> <span class=o>+=</span> <span class=n>subtree</span><span class=o>.</span><span class=fm>__str__</span><span class=p>(</span><span class=n>depth</span> <span class=o>+</span> <span class=mi>1</span><span class=p>)</span>  <span class=c1># equivalent ot str(subtree)</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>s</span>
+</span></span></code></pre></td></tr></table></div></div></li></ul><a href=#traversal-orders><h4 id=traversal-orders><span class=hanchor arialabel=Anchor># </span>Traversal orders</h4></a><ul><li><p><u>Left-to-right <strong>preorder</strong></u></p><ol><li>First it visits the root value</li><li>Then it recursively visits each of its subtrees, in <em>left-to-right</em> order</li></ol></li><li><p><u>Left-to-right <strong>postorder</strong></u></p><ol><li>First recursively visits each of its subtrees</li><li>Then visits the root value</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>def</span> <span class=fm>__str__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>depth</span><span class=p>:</span> <span class=nb>int</span> <span class=o>=</span> <span class=mi>0</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=nb>str</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;Return a string represention of this tree
+</span></span></span><span class=line><span class=cl><span class=s2>
+</span></span></span><span class=line><span class=cl><span class=s2>    The indentation level is specified by the &lt;depth&gt; parameter
+</span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=bp>self</span><span class=o>.</span><span class=n>is_empty</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=s1>&#39;&#39;</span>
+</span></span><span class=line><span class=cl>    <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=c1># use newlines (&#39;\n&#39;) to separate the different values</span>
+</span></span><span class=line><span class=cl>        <span class=n>s</span> <span class=o>=</span> <span class=s1>&#39;&#39;</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=n>subtree</span> <span class=ow>in</span> <span class=bp>self</span><span class=o>.</span><span class=n>_subtrees</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=c1># the &#39;depth&#39; argument to the recursive call is modified</span>
+</span></span><span class=line><span class=cl>            <span class=n>s</span> <span class=o>+=</span> <span class=n>subtree</span><span class=o>.</span><span class=fm>__str__</span><span class=p>(</span><span class=n>depth</span> <span class=o>+</span> <span class=mi>1</span><span class=p>)</span>  <span class=c1># equivalent ot str(subtree)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=n>s</span> <span class=o>+=</span> <span class=s1>&#39;	&#39;</span> <span class=o>*</span> <span class=n>depth</span> <span class=o>+</span>  <span class=sa>f</span><span class=s1>&#39;</span><span class=si>{</span><span class=bp>self</span><span class=o>.</span><span class=n>root</span><span class=si>}</span><span class=se>\n</span><span class=s1>&#39;</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>s</span>
+</span></span></code></pre></td></tr></table></div></div></li></ul><a href=#mutating-trees-value-based-deletion><h2 id=mutating-trees-value-based-deletion><span class=hanchor arialabel=Anchor># </span>Mutating Trees (value-based deletion)</h2></a><ol><li><p>Start with the recursion template, and impolite the base case:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>class</span> <span class=nc>Tree</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>remove</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>item</span><span class=p>:</span> <span class=n>Any</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=nb>bool</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34;...&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=bp>self</span><span class=o>.</span><span class=n>is_empty</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=kc>False</span> <span class=c1># item cannot be in the tree</span>
+</span></span><span class=line><span class=cl>        <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=p>(</span><span class=o>...</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=k>for</span> <span class=n>subtree</span> <span class=ow>in</span> <span class=bp>self</span><span class=o>.</span><span class=n>subtrees</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                <span class=p>(</span><span class=o>...</span><span class=p>)</span> <span class=n>subtree</span><span class=o>.</span><span class=n>method</span><span class=p>()</span> <span class=p>(</span><span class=o>...</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=p>(</span><span class=o>...</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div></li><li><p>First check the root, the if not, recurse on the subtrees</p><ul><li>Deleting the root requires a little more step, use <code>Tree._delete_root</code> to hold on for now</li><li>Keep in mind that this function requires a return statement, include it in the recursions</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>class</span> <span class=nc>Tree</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>remove</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>item</span><span class=p>:</span> <span class=n>Any</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=nb>bool</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34;...&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=bp>self</span><span class=o>.</span><span class=n>is_empty</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=kc>False</span> 
+</span></span><span class=line><span class=cl>        <span class=k>elif</span><span class=p>:</span> <span class=bp>self</span><span class=o>.</span><span class=n>_root</span> <span class=o>==</span> <span class=n>item</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                <span class=bp>self</span><span class=o>.</span><span class=n>_delete_root</span><span class=p>()</span>  <span class=c1># delete the root</span>
+</span></span><span class=line><span class=cl>        <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>for</span> <span class=n>subtree</span> <span class=ow>in</span> <span class=bp>self</span><span class=o>.</span><span class=n>subtrees</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                <span class=n>deleted</span> <span class=o>=</span> <span class=n>subtree</span><span class=o>.</span><span class=n>remove</span><span class=p>(</span><span class=n>item</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                <span class=k>if</span> <span class=n>deleted</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                    <span class=k>return</span> <span class=kc>True</span>
+</span></span><span class=line><span class=cl>            <span class=c1># The item does not appear in this tree</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=kc>False</span>
+</span></span></code></pre></td></tr></table></div></div></li><li><p>Implement the <code>Tree._delete_root</code> function</p><ul><li>If this tree has subtrees, then the <code>_root</code> cannot be set to <code>None</code> (divide into cases)</li><li>Pick the rightmost subtree, and &ldquo;promote&rdquo; its root and subtrees by moving them up a level</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>class</span> <span class=nc>Tree</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>_delete_root</span><span class=p>(</span><span class=bp>self</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=kc>None</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34;Remove the root item of this tree.
+</span></span></span><span class=line><span class=cl><span class=s2>
+</span></span></span><span class=line><span class=cl><span class=s2>        Preconditions:
+</span></span></span><span class=line><span class=cl><span class=s2>            - not self.is_empty()
+</span></span></span><span class=line><span class=cl><span class=s2>        &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=bp>self</span><span class=o>.</span><span class=n>_subtrees</span> <span class=o>==</span> <span class=p>[]:</span>
+</span></span><span class=line><span class=cl>            <span class=bp>self</span><span class=o>.</span><span class=n>_root</span> <span class=o>=</span> <span class=kc>None</span>
+</span></span><span class=line><span class=cl>        <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=c1># Get the last subtree in this tree.</span>
+</span></span><span class=line><span class=cl>            <span class=n>chosen_subtree</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>_subtrees</span><span class=o>.</span><span class=n>pop</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=bp>self</span><span class=o>.</span><span class=n>_root</span> <span class=o>=</span> <span class=n>chosen_subtree</span><span class=o>.</span><span class=n>_root</span>
+</span></span><span class=line><span class=cl>            <span class=bp>self</span><span class=o>.</span><span class=n>_subtrees</span><span class=o>.</span><span class=n>extend</span><span class=p>(</span><span class=n>chosen_subtree</span><span class=o>.</span><span class=n>_subtrees</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div></li></ol><ul><li>Curren problem: when deleted a leaf, it would result in a empty tree (parent would contain an empty tree in its subtree list)</li></ul><ol start=4><li><p>Remove the deleted empty subtree from its parent&rsquo;s subtree list</p><ul><li>It is <strong>extremely dangerous</strong> to mutate the list during loops. This would interferes with he iterations of the loop that is underway. It is allowed here because <em>immediately</em> after the mutation, the loop would be stoped by the return statement</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>class</span> <span class=nc>Tree</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>remove</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>item</span><span class=p>:</span> <span class=n>Any</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=nb>bool</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34;A recursive tree data structure.
+</span></span></span><span class=line><span class=cl><span class=s2>
+</span></span></span><span class=line><span class=cl><span class=s2>    	Representation Invariants:
+</span></span></span><span class=line><span class=cl><span class=s2>        - self._root is not None or self._subtrees == []
+</span></span></span><span class=line><span class=cl><span class=s2>        &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=bp>self</span><span class=o>.</span><span class=n>is_empty</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=kc>False</span> 
+</span></span><span class=line><span class=cl>        <span class=k>elif</span><span class=p>:</span> <span class=bp>self</span><span class=o>.</span><span class=n>_root</span> <span class=o>==</span> <span class=n>item</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                <span class=bp>self</span><span class=o>.</span><span class=n>_delete_root</span><span class=p>()</span>  <span class=c1># delete the root</span>
+</span></span><span class=line><span class=cl>        <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>for</span> <span class=n>subtree</span> <span class=ow>in</span> <span class=bp>self</span><span class=o>.</span><span class=n>subtrees</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                <span class=n>deleted</span> <span class=o>=</span> <span class=n>subtree</span><span class=o>.</span><span class=n>remove</span><span class=p>(</span><span class=n>item</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                <span class=k>if</span> <span class=n>deleted</span> <span class=ow>and</span> <span class=n>subtree</span><span class=o>.</span><span class=n>is_empty</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>                    <span class=bp>self</span><span class=o>.</span><span class=n>_subtrees</span><span class=o>.</span><span class=n>remove</span><span class=p>(</span><span class=n>subtree</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>                    <span class=c1># item was deleted and subtree is empty</span>
+</span></span><span class=line><span class=cl>                    <span class=k>return</span> <span class=kc>True</span>
+</span></span><span class=line><span class=cl>                <span class=k>elif</span> <span class=n>deleted</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                    <span class=c1># item was deleted and subtree is NOT empty</span>
+</span></span><span class=line><span class=cl>                    <span class=k>return</span> <span class=kc>True</span>
+</span></span><span class=line><span class=cl>            <span class=c1># The item does not appear in this tree</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=kc>False</span>
+</span></span></code></pre></td></tr></table></div></div></li></ol><ul><li><p>Implicit assumptions are bad, explicit representation invariants are good for communication</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1>#ADD</span>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Tree</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;A recursive tree data structure.
+</span></span></span><span class=line><span class=cl><span class=s2>
+</span></span></span><span class=line><span class=cl><span class=s2>    Representation Invariants:
+</span></span></span><span class=line><span class=cl><span class=s2>        - self._root is not None or self._subtrees == []
+</span></span></span><span class=line><span class=cl><span class=s2>        - all(not subtree.is_empty() for subtree in self._subtrees)  # NEW
+</span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
+</span></span></code></pre></td></tr></table></div></div></li></ul><a href=#running-time-analysis-for-tree-operations><h2 id=running-time-analysis-for-tree-operations><span class=hanchor arialabel=Anchor># </span>Running-Time Analysis for Tree Operations</h2></a><blockquote><a href=#analyzing-tree__len__><h5 id=analyzing-tree__len__><span class=hanchor arialabel=Anchor># </span>Analyzing <code>Tree.__len__</code></h5></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>class</span> <span class=nc>Tree</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__len__</span><span class=p>(</span><span class=bp>self</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=nb>int</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34;Return the number of items contained in this tree.
+</span></span></span><span class=line><span class=cl><span class=s2>        &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=bp>self</span><span class=o>.</span><span class=n>is_empty</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>        <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=n>size_so_far</span> <span class=o>=</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>            <span class=k>for</span> <span class=n>subtree</span> <span class=ow>in</span> <span class=bp>self</span><span class=o>.</span><span class=n>_subtrees</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                <span class=n>size_so_far</span> <span class=o>+=</span> <span class=n>subtree</span><span class=o>.</span><span class=fm>__len__</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=n>size_so_far</span>
+</span></span></code></pre></td></tr></table></div></div></blockquote><ul><li>Let $n$ be the size of <code>self</code> (the num of items in tree), assume $n>0$ so the else branch execute</li></ul><a href=#analyzing-the-structure-of-recursive-calls><h3 id=analyzing-the-structure-of-recursive-calls><span class=hanchor arialabel=Anchor># </span>Analyzing the structure of recursive calls</h3></a><blockquote><p>Suppose a tree defined like this: <img src=https://tva1.sinaimg.cn/large/008eGmZEly1go0r022484j30ke0ia760.jpg alt="Screen Shot 2021-02-25 at 21.54.00" style=zoom:35%></p><ul><li><p>Make the initial call for the root, call (A) would then later generate 3 recursive calls on each of this subtrees (B), (C), (D)</p><ul><li><p>The recursive call on (B) would then generate 2 more recursive calls on (E), (F)</p><ul><li>Both (E) and (F) is a leaf, no more recursive calls would be generated</li></ul></li><li><p>The call on (C) would then trigger 2 more recursive calls on (G), (H)</p><ul><li>(G) is a leaf, recursion ends for this branch</li><li>The call on (H) would then lead to one more recursive call on (J)<ul><li>(J) is a leaf, the recursion ends for this branch</li></ul></li></ul></li><li><p>The call on (D) would lead to the recursive call on (I)</p><ul><li>(I) is a leaf, no more recursive call would happen</li></ul></li></ul></li></ul></blockquote><ul><li><p>Takeaway: the structure of the recursive calls exactly follows the structure of the tree</p><ul><li>With is example of 10 items, 10 calls were called on the whole tree.</li></ul></li></ul><a href=#analyzing-the-non-recursive-part-of-each-call><h3 id=analyzing-the-non-recursive-part-of-each-call><span class=hanchor arialabel=Anchor># </span>Analyzing the non-recursive part of each call</h3></a><ul><li><p>Count the <strong>number of steps performed by a single recursive call</strong>, then <strong>add those up</strong> across al the different recursive calls that are made</p><ul><li><em>Assuming each recursive call takes constant time</em>, count the non-recursive steps in the code</li></ul><blockquote><ul><li>1 step for the initial assignment statement</li><li>$k$ Steps for the lop, where $k$ is the number of subtree in the tree (loop body takes 1 step)</li><li>1 step for the return statement</li></ul><p>Result in $k+2$ steps for the <strong>non-recursive cost</strong> of each branch</p></blockquote></li><li><p>The number of subtrees changes for each recursive call $k$ is not constant, so CANNOT do simple multiplication. Instead, write the steps into a tree</p><blockquote><p><img src=https://tva1.sinaimg.cn/large/008eGmZEly1go0tbafhqmj30ji0iq0us.jpg alt="Screen Shot 2021-02-25 at 23.13.41" style=zoom:40%> Adding up (separate num of $k$ and num of $+2$)</p><ul><li>Sum of all subtrees ($k$) is 9, one less the total number of elements (because each non-root item has exactly one parent, it is counted in exactly one subtree)</li><li>Sum of all $+2$s is the constant number of steps (2) times the number of recursive calls, which is equal tot he number of items (10). $2 \times 1 = 20$</li><li>Total is $9+20 = 29$ steps</li></ul></blockquote></li></ul><a href=#generalize><h3 id=generalize><span class=hanchor arialabel=Anchor># </span>Generalize</h3></a><ul><li>For non-empty trees of any size. Let $n \in \Z^+$, assume the tree has the size $n$, then there will be $n$ recursive calls been made<ul><li>The &ldquo;constant time&rdquo; part of the steps takes $2n$ across all of the recursive calls</li><li>The total number of steps taken by the for loop across al recursive calls is the sum of all the numbers of the children of each node, which is $n-1$</li></ul></li><li>**The total running time of $2n + (n-1) = 3n-1$, which is $ \Theta(n)$ **</li></ul></article><hr><div class=page-end id=footer><div class=backlinks-container><h3>Backlinks</h3><ul class=backlinks><li>No backlinks found</li></ul></div><div><script async src=https://cdn.jsdelivr.net/npm/d3@6.7.0/dist/d3.min.js integrity="sha256-+7jaYCp29O1JusNWHaYtgUn6EhuP0VaFuswhNV06MyI=" crossorigin=anonymous></script><h3>Interactive Graph</h3><div id=graph-container></div><style>:root{--g-node:var(--secondary);--g-node-active:var(--primary);--g-node-inactive:var(--visited);--g-link:var(--outlinegray);--g-link-active:#5a7282}</style><script src=https://mel10c.github.io/mel.zhu/js/graph.2d9e48dbe7ea47c0ef1c58296ce14448.js></script></div></div><div id=contact_buttons><footer><p>Made by Melaney Zhu using <a href=https://github.com/jackyzha0/quartz>Quartz</a>, © 2023</p><ul><li><a href=https://mel10c.github.io/mel.zhu/>Home</a></li><li><a href=https://www.instagram.com/melaney_dxl/>Instagram</a></li><li><a href=https://github.com/mel10c>GitHub</a></li><li><a href=https://linkedin.com/in/melzyy>LinkedIn</a></li><li><a href=https://github.com/mel10c/mel.zhu/blob/hugo/content/documents/Resume.pdf>Resume</a></li></ul></footer></div></div></body></html>

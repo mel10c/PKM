@@ -1,0 +1,140 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=description content="Range and Nullspace of a Linear Transformation Range and Nullspace of a Linear Transformation   Range - the range (or image) of a linear transformation $T: V \to W$ is the set of vectors $T$ can output, which is $$ \text{range}(T) = \left{ \vec{y} \in W: \vec{y} = T\vec{x}~ \text{ for some }~ \vec{x} \in V \right} $$
+  The range of a linear transformation is the exact same as the definition of the range of a function"><title>MAT223: 11_Range & Nullspace</title><meta name=viewport content="width=device-width,initial-scale=1"><link rel="shortcut icon" type=image/png href=https://mel10c.github.io/mel.zhu//icon.png><link href=https://mel10c.github.io/mel.zhu/styles.9a8661985b360a1d97e0e538e164abef.min.css rel=stylesheet><link href=https://mel10c.github.io/mel.zhu/styles/_light_syntax.86a48a52faebeaaf42158b72922b1c90.min.css rel=stylesheet id=theme-link><script src=https://mel10c.github.io/mel.zhu/js/darkmode.905e4d2da56a9111aff695a0a4b69900.min.js></script>
+<script src=https://mel10c.github.io/mel.zhu/js/util.6f22941e242efae60fd84e7c32e874fa.min.js></script>
+<link rel=preload href=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css as=style onload='this.onload=null,this.rel="stylesheet"' integrity=sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js integrity=sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx crossorigin=anonymous></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin=anonymous></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/contrib/copy-tex.min.js integrity=sha384-ww/583aHhxWkz5DEVn6OKtNiIaLi2iBRNZXfJRiY1Ai7tnJ9UXpEsyvOITVpTl4A crossorigin=anonymous></script>
+<script async src=https://unpkg.com/@floating-ui/core@0.7.3></script>
+<script async src=https://unpkg.com/@floating-ui/dom@0.5.4></script>
+<script async src=https://mel10c.github.io/mel.zhu/js/popover.f03552ccb84d99ca615d1cfb9abde59e.min.js></script>
+<script defer src=https://mel10c.github.io/mel.zhu/js/code-title.ce4a43f09239a9efb48fee342e8ef2df.min.js></script>
+<script defer src=https://mel10c.github.io/mel.zhu/js/clipboard.2913da76d3cb21c5deaa4bae7da38c9f.min.js></script>
+<script defer src=https://mel10c.github.io/mel.zhu/js/callouts.7723cac461d613d118ee8bb8216b9838.min.js></script>
+<script>const SEARCH_ENABLED=!1,LATEX_ENABLED=!0,PRODUCTION=!0,BASE_URL="https://mel10c.github.io/mel.zhu/",fetchData=Promise.all([fetch("https://mel10c.github.io/mel.zhu/indices/linkIndex.4ecd462b2a0cc7b8f254e52a69d96e3c.min.json").then(e=>e.json()).then(e=>({index:e.index,links:e.links})),fetch("https://mel10c.github.io/mel.zhu/indices/contentIndex.6acfc2f415caa35851b6b3067c8415cf.min.json").then(e=>e.json())]).then(([{index:e,links:t},n])=>({index:e,links:t,content:n})),render=()=>{const e=new URL(BASE_URL),t=e.pathname,n=window.location.pathname,s=t==n;addCopyButtons(),addTitleToCodeBlocks(),addCollapsibleCallouts(),initPopover("https://mel10c.github.io/mel.zhu",!0);const o=document.getElementById("footer");if(o){const e=document.getElementById("graph-container");if(!e)return requestAnimationFrame(render);e.textContent="";const t=s&&!1;drawGraph("https://mel10c.github.io/mel.zhu",t,[{"/moc":"#4388cc"}],t?{centerForce:1,depth:-1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.5,linkDistance:1,opacityScale:3,repelForce:1,scale:1.4}:{centerForce:1,depth:1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.6,linkDistance:1,opacityScale:3,repelForce:2,scale:1.2})}var i=document.getElementsByClassName("mermaid");i.length>0&&import("https://unpkg.com/mermaid@9/dist/mermaid.esm.min.mjs").then(e=>{e.default.init()})},init=(e=document)=>{addCopyButtons(),addTitleToCodeBlocks(),renderMathInElement(e.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}],macros:{'’':"'"},throwOnError:!1})}</script><script type=module>
+    import { attachSPARouting } from "https:\/\/mel10c.github.io\/mel.zhu\/js\/router.9d4974281069e9ebb189f642ae1e3ca2.min.js"
+    attachSPARouting(init, render)
+  </script></head><body><div id=search-container><div id=search-space><input autocomplete=off id=search-bar name=search type=text aria-label=Search placeholder="Search for something..."><div id=results-container></div></div></div><script src=https://cdn.jsdelivr.net/npm/flexsearch@0.7.21/dist/flexsearch.bundle.js integrity="sha256-i3A0NZGkhsKjVMzFxv3ksk0DZh3aXqu0l49Bbh0MdjE=" crossorigin=anonymous defer></script>
+<script defer src=https://mel10c.github.io/mel.zhu/js/full-text-search.e6e2e0c213187ca0c703d6e2c7a77fcd.min.js></script><div class=singlePage><header><h1 id=page-title><a href=https://mel10c.github.io/mel.zhu/>MEL.ZHU</a></h1><div class=spacer></div><div id=search-icon><p>Search</p><svg tabindex="0" aria-labelledby="title desc" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title id="title">Search Icon</title><desc id="desc">Icon to open search</desc><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"/><circle cx="8" cy="8" r="7"/></g></svg></div><div class=darkmode><input class=toggle id=darkmode-toggle type=checkbox tabindex=-1>
+<label id=toggle-label-light for=darkmode-toggle tabindex=-1><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="dayIcon" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35"><title>Light Mode</title><path d="M6 17.5C6 16.672 5.328 16 4.5 16h-3C.672 16 0 16.672.0 17.5S.672 19 1.5 19h3C5.328 19 6 18.328 6 17.5zM7.5 26c-.414.0-.789.168-1.061.439l-2 2C4.168 28.711 4 29.086 4 29.5 4 30.328 4.671 31 5.5 31c.414.0.789-.168 1.06-.44l2-2C8.832 28.289 9 27.914 9 27.5 9 26.672 8.329 26 7.5 26zm10-20C18.329 6 19 5.328 19 4.5v-3C19 .672 18.329.0 17.5.0S16 .672 16 1.5v3C16 5.328 16.671 6 17.5 6zm10 3c.414.0.789-.168 1.06-.439l2-2C30.832 6.289 31 5.914 31 5.5 31 4.672 30.329 4 29.5 4c-.414.0-.789.168-1.061.44l-2 2C26.168 6.711 26 7.086 26 7.5 26 8.328 26.671 9 27.5 9zM6.439 8.561C6.711 8.832 7.086 9 7.5 9 8.328 9 9 8.328 9 7.5c0-.414-.168-.789-.439-1.061l-2-2C6.289 4.168 5.914 4 5.5 4 4.672 4 4 4.672 4 5.5c0 .414.168.789.439 1.06l2 2.001zM33.5 16h-3c-.828.0-1.5.672-1.5 1.5s.672 1.5 1.5 1.5h3c.828.0 1.5-.672 1.5-1.5S34.328 16 33.5 16zM28.561 26.439C28.289 26.168 27.914 26 27.5 26c-.828.0-1.5.672-1.5 1.5.0.414.168.789.439 1.06l2 2C28.711 30.832 29.086 31 29.5 31c.828.0 1.5-.672 1.5-1.5.0-.414-.168-.789-.439-1.061l-2-2zM17.5 29c-.829.0-1.5.672-1.5 1.5v3c0 .828.671 1.5 1.5 1.5s1.5-.672 1.5-1.5v-3C19 29.672 18.329 29 17.5 29zm0-22C11.71 7 7 11.71 7 17.5S11.71 28 17.5 28 28 23.29 28 17.5 23.29 7 17.5 7zm0 18c-4.136.0-7.5-3.364-7.5-7.5s3.364-7.5 7.5-7.5 7.5 3.364 7.5 7.5S21.636 25 17.5 25z"/></svg></label><label id=toggle-label-dark for=darkmode-toggle tabindex=-1><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="nightIcon" viewBox="0 0 100 100" style="enable-background='new 0 0 100 100'"><title>Dark Mode</title><path d="M96.76 66.458c-.853-.852-2.15-1.064-3.23-.534-6.063 2.991-12.858 4.571-19.655 4.571C62.022 70.495 50.88 65.88 42.5 57.5 29.043 44.043 25.658 23.536 34.076 6.47c.532-1.08.318-2.379-.534-3.23-.851-.852-2.15-1.064-3.23-.534-4.918 2.427-9.375 5.619-13.246 9.491-9.447 9.447-14.65 22.008-14.65 35.369.0 13.36 5.203 25.921 14.65 35.368s22.008 14.65 35.368 14.65c13.361.0 25.921-5.203 35.369-14.65 3.872-3.871 7.064-8.328 9.491-13.246C97.826 68.608 97.611 67.309 96.76 66.458z"/></svg></label></div></header><article><h1>MAT223: 11_Range & Nullspace</h1><p class=meta>Last updated
+Unknown</p><ul class=tags><li><a href=https://mel10c.github.io/mel.zhu/tags/note/>Note</a></li></ul><aside class=mainTOC><details><summary>Table of Contents</summary><nav id=TableOfContents><ol><li><a href=#range-and-nullspace-of-a-linear-transformation-1>Range and Nullspace of a Linear Transformation</a><ol><li></li></ol></li><li><a href=#fundamental-subspaces-of-a-matrix>Fundamental Subspaces of a Matrix</a><ol><li></li><li><a href=#transpose>Transpose</a></li></ol></li><li><a href=#equations-null-space-and-geometry>Equations, Null Space, and Geometry</a><ol><li></li></ol></li><li><a href=#transformations-and-matrices>Transformations and Matrices</a><ol><li></li></ol></li><li><a href=#range-vs-column-space--null-space-vs-null-space>Range vs Column Space & Null Space vs. Null Space</a><ol><li></li></ol></li><li><a href=#rank-nullity-theorem>Rank-Nullity Theorem</a><ol><li></li></ol></li></ol></nav></details></aside><a href=#range-and-nullspace-of-a-linear-transformation><h1 id=range-and-nullspace-of-a-linear-transformation><span class=hanchor arialabel=Anchor># </span>Range and Nullspace of a Linear Transformation</h1></a><a href=#range-and-nullspace-of-a-linear-transformation-1><h2 id=range-and-nullspace-of-a-linear-transformation-1><span class=hanchor arialabel=Anchor># </span>Range and Nullspace of a Linear Transformation</h2></a><ul><li><p><u>Range</u> - the <strong>range</strong> (or image) of a linear transformation $T: V \to W$ is the set of vectors $T$ can output, which is
+$$
+\text{range}(T) = \left{ \vec{y} \in W: \vec{y} = T\vec{x}~ \text{ for some }~ \vec{x} \in V \right}
+$$</p></li><li><p>The range of a linear transformation is the <em>exact same</em> as the definition of the range of a function</p></li><li><p>The range of a linear transformation is always a subspace</p></li><li><p><u>Rank</u> a linear transformation $T: \R^{n} \to \R^{m}$, the <strong>rank</strong> of $T$, denoted $\text{rank}(T)$, is the dimension of the range of $T$</p><blockquote><ul><li>Rank 0 transformation turns all vectors into $\vec{0}$</li><li>Rank 1 transformation turns all vectors into lines etc&mldr;</li></ul></blockquote></li></ul><blockquote><a href=#let-mathcalp-be-the-plane-given-by-xy--z--0-and-let-t-r3-to-r3-be-projection-onto-mathcalp-find-textranget-textrankt><h5 id=let-mathcalp-be-the-plane-given-by-xy--z--0-and-let-t-r3-to-r3-be-projection-onto-mathcalp-find-textranget-textrankt><span class=hanchor arialabel=Anchor># </span>Let $\mathcal{P}$ be the plane given by $x+y + z = 0$, and let $T: \R^{3} \to \R^{3}$ be projection onto $\mathcal{P}$. Find $\text{range}(T), \text{rank}(T)$</h5></a><p>First, find $\text{range}(T)$. Since $T$ is a projection onto $\mathcal{P}$, then $\text{range}(T) \subseteq \mathcal{P}$. And $T(\vec{p}) = \vec{p}$ for all $\vec{p} \in \mathcal{P}$. Then get $\mathcal{P} \subseteq \text{range}(T)$, which implies that $\text{range}(T) = \mathcal{P}$
+Since $\mathcal{P}$ is a plane, then $\text{dim}(\mathcal{P}) = 2 = \text{dim}(\text{range}(T)) = \text{rank}(T)$</p></blockquote><ul><li><u>Null space (kernel)</u> - of a linear transformation $T: V \to W$ is the set of vectors that get mapped to the zero vector under $T$. That is:
+$$
+\text{null}(T) = \left{ \vec{x} \in V: T\vec{x} = \vec{0} \right}
+$$</li><li>The null space of a linear transformation is always a subspace</li><li>Akin to the rank-range connection, there is a <em>special</em> number called the <em><strong>nullity</strong></em> which specifies the dimension of the null space.<ul><li><u>Nullity</u> - a linear transformation $T: \R^{n} \to \R^{m}$, the <strong>nullity</strong> of $T$ denoted $\text{nullity}(T)$ is the dimension of the null space of $T$</li></ul><blockquote><a href=#let-mathcalp-be-the-plane-given-by-x--y--z--0-and-let-t-r3-to-r3-be-projection-onto-mathcalp-find-nullt-and-nullityt><h5 id=let-mathcalp-be-the-plane-given-by-x--y--z--0-and-let-t-r3-to-r3-be-projection-onto-mathcalp-find-nullt-and-nullityt><span class=hanchor arialabel=Anchor># </span>Let $\mathcal{P}$ be the plane given by $x + y + z = 0$, and let $T: \R^{3} \to \R^{3}$ be projection onto $\mathcal{P}$. Find null$(T)$ and nullity$(T)$</h5></a><p>Since $T$ is a projection onto $P$, (and because $\mathcal{P}$ passes through $\vec{0}$), then every normal vector for $\mathcal{P}$ will get sent to $\vec{0}$ when $T$ is applied. And besides $\vec{0}$ itself, these are the only vectors that get sent to $\vec{0}$. Then:
+$$
+\text{null}(T) = { \text{normal vectors}~ \cup { \vec{0} } } = \text{span} \left{ \begin{bmatrix}1 \\ 1 \\ 1\end{bmatrix} \right}
+$$
+Since null$(T)$ is a line, then nullity$(T) = 1$</p></blockquote></li></ul><a href=#fundamental-subspaces-of-a-matrix><h2 id=fundamental-subspaces-of-a-matrix><span class=hanchor arialabel=Anchor># </span>Fundamental Subspaces of a Matrix</h2></a><ul><li>Every linear transformation has a range and a null space. Then, every matrix is associated with three fundamental subspaces</li><li><u>Fundamental Subspaces</u> - associated with any matrix $M$ are <strong>3 fundamental subspaces</strong>: the <strong><u>row space</u></strong>, denoted row$(M)$, is the span of the rows of $M$; the <strong><u>column space</u></strong>, denoted col$(M)$, is the span of the columns fo $M$; and the <strong><u>null space</u></strong>, denoted null$(M)$, is the set of solutions to $M\vec{x} = \vec{0}$<ul><li>The columns of $A$ corresponding to <strong>pivot columns</strong> of rref$(A)$ form a basis of col$(A)$</li><li>The <strong>non-zero rows</strong> of rref$(A)$ form a basis for row$(A)$</li></ul></li><li>To find a basis for the column/row space of matrix $M$<ol><li>Assume to pick a basis for the span ${v_1, v_2 , \dots }$ where $v_1, v_2$ are columns/row of the matrix $M$</li><li>Row reduce $M$ to get tis row-reducing-echelon-form</li><li>Pick the pivot columns which are the original vectors form a <em>maximal linearly independent subset</em> (the independent vectors in this span) as the vectors in the span of column space $M$</li></ol></li></ul><blockquote><a href=#find-the-null-space-of-m--beginbmatrix-1--2--5--2---2---2-endbmatrix><h5 id=find-the-null-space-of-m--beginbmatrix-1--2--5--2---2---2-endbmatrix><span class=hanchor arialabel=Anchor># </span>Find the null space of $M = \begin{bmatrix} 1 & 2 & 5 \\ 2 & -2 & -2 \end{bmatrix}$</h5></a><p>Need to solve the homogeneous matrix equation of $M\vec{x} = \vec{0}$, first row reduce
+$$
+\text{rref} (M) =
+\begin{bmatrix} 1 & 0 & 1 \\ 0 & 1 & 2 \end{bmatrix}
+$$
+See that the $z$ column is a free variable column (let $t$ reps $z$)
+$$
+\begin{bmatrix} 1 & 0 & 1 \\ 0 & 1 & 2 \end{bmatrix}
+\begin{bmatrix} x \\ y \z \end{bmatrix} = 0 \</p><p>\left{\begin{matrix} x + z = 0 \\ y + 2z = 0\end{matrix}\right.</p><p>\quad \Rightarrow \quad
+\left{\begin{matrix} x = -z = -t \\ y = -2z = -2t\end{matrix}\right.
+$$
+Therefore the complete solution in vector form:
+$$
+\text{null} (M) = \text{span}
+\left{ \begin{bmatrix} -1 \\ -2 \1 \end{bmatrix} \right }
+$$</p><a href=#for-the-same-m-above-find-a-basis-for-the-row-space-and-the-columns-of-m><h5 id=for-the-same-m-above-find-a-basis-for-the-row-space-and-the-columns-of-m><span class=hanchor arialabel=Anchor># </span>For the same $M$ above, find a basis for the row space and the columns of $M$</h5></a><p>For column space: row reduce columns of $M$ and find its independent subsets
+$$
+\text{rrerf} \left(\begin{bmatrix} 1 & 2 & 5 \\ 2 & -2 & -2 \end{bmatrix} \right)
+= \begin{bmatrix} 1 & 0 & 1 \\ 0 & 1 & 2 \end{bmatrix}
+$$
+$\therefore$ The first 2 columns are linearly independent, thus
+$$
+\text{col}(M) = \text{span}
+\left{\begin{bmatrix} 1 \2 \end{bmatrix},
+\begin{bmatrix} 2 \-2 \end{bmatrix} \right} = \R^2
+\quad\text{and a basis is } \quad
+\left{\begin{bmatrix} 1 \2 \end{bmatrix},
+\begin{bmatrix} 2 \-2 \end{bmatrix} \right}
+$$
+For the row space: row reduce the rows of $M$ and find its independent subsets
+$$
+\text{rrerf}
+\left(\begin{bmatrix} 1 & 2 \\ 2 & -2 \5 & -2 \end{bmatrix} \right)
+= \begin{bmatrix} 1 & 0 \\ 0 & 1 \0 & 0 \end{bmatrix}
+$$
+$\therefore$ This span is already linearly independent, thus
+$$
+\text{row}(M) = \text{span}
+\left{\begin{bmatrix} 1 \2 \5 \end{bmatrix},
+\begin{bmatrix} 2 \-2 \-2 \end{bmatrix} \right}
+\quad\text{and a basis is } \quad
+\left{\begin{bmatrix} 1 \2 \5 \end{bmatrix},
+\begin{bmatrix} 2 \-2 \-2 \end{bmatrix} \right}
+$$</p></blockquote><a href=#transpose><h3 id=transpose><span class=hanchor arialabel=Anchor># </span>Transpose</h3></a><ul><li><p><u>Transpose</u>, notated $M^T$ is a matrix where the rows and columns of $M$ are swapped
+$$
+M =
+\begin{bmatrix}
+a_{11} & a_{12} & a_{13} & \dots & a_{1m} \\ a_{21} & a_{22} & a_{23} & \dots & a_{2m} \\ \vdots & \vdots & \vdots & \ddots & \vdots \\ a_{n1} & a_{n2} & a_{n3} & \dots & a_{nm}
+\end{bmatrix}
+\quad \quad \quad
+M^T =
+\begin{bmatrix}
+a_{11} & a_{21} & \dots & a_{n1} \\ a_{12} & a_{22} & \dots & a_{n2} \\ a_{13} & a_{23} & \dots & a_{n3} \\ \vdots & \vdots & \ddots & \vdots \\ a_{1m} & a_{2m} & \dots & a_{nm}
+\end{bmatrix}
+$$</p></li><li><p>For a matrix $A$, the <strong>dimension of the row space equals the dimension of the column space</strong>
+$$
+\text{col}(M) = \text{row} (M^T) \quad \text{and} \quad
+\text{row}(M) = \text{col} (M^T)
+$$
+Every pivot of rref$(A)$ <em>lies in exactly one row and one column.</em> Thus the number of basis vectors in row$(A)$ is the same as the number of basis vectors in col$(A)$</p></li></ul><a href=#equations-null-space-and-geometry><h2 id=equations-null-space-and-geometry><span class=hanchor arialabel=Anchor># </span>Equations, Null Space, and Geometry</h2></a><ul><li><p>Let $A$ be a matrix, $\vec{b}$ be a vector, and let $\vec{p}$ be a particular solution to $A\vec{x} = \vec{b}$. Then the set of all solutions to $A\vec{x} = \vec{b}$ is
+$$
+\text{null}(A) + {\vec{p} }
+$$
+To right a complete solutions to $A\vec{x} = \vec{b}$, need ① nullspace of $A$ ② particular solution to $A\vec{x} = \vec{b}$</p></li><li><p>Let $M$ be a matrix and let $\vec{r}_1, \dots, \vec{r}_n$ be the rows of $M$. Then the solutions to $M\vec{x} = \vec{0}$ is precisely the vectors which are <strong>orthogonal to every row</strong> ($\vec{r}$) of $M$.</p><ul><li>null$(M)$ consists of all vectors orthogonal to the rows of $M$</li><li>row$(M)$ consists of all vectors orthogonal to everything in null$(M)$</li></ul><blockquote><a href=#let-veca--beginbmatrix-1--2-5-endbmatrix-and-vecb--beginbmatrix-2---2--2-endbmatrix-find-all-vectors-orthogonal-to-both-of-them><h5 id=let-veca--beginbmatrix-1--2-5-endbmatrix-and-vecb--beginbmatrix-2---2--2-endbmatrix-find-all-vectors-orthogonal-to-both-of-them><span class=hanchor arialabel=Anchor># </span>Let $\vec{a} = \begin{bmatrix} 1 \\ 2 \5 \end{bmatrix}$, and $\vec{b} = \begin{bmatrix} 2 \\ -2 \-2 \end{bmatrix}$. Find all vectors orthogonal to both of them</h5></a><p>Let $M = \begin{bmatrix} 1 & 2 & 5 \\ 2 & -2 & -2 \end{bmatrix}$ be the matrix whose rows are $\vec{a}, \vec{b}$. Then, calculate null$(M)$ to get all vectors orthogonal to row$(M)$. Thus the solution is:
+$$
+\text{null} (M) = \text{span}
+\left{ \begin{bmatrix} -1 \\ -2 \1 \end{bmatrix} \right }
+$$</p></blockquote></li></ul><a href=#transformations-and-matrices><h2 id=transformations-and-matrices><span class=hanchor arialabel=Anchor># </span>Transformations and Matrices</h2></a><ul><li><p><u>Induced Transformations</u> - Let $M$ be an $n \times m$ matrix. $M$ <strong>induces</strong> a linearly transformation $\mathcal{T}<em>M: \R^m \to \R^n$ defined by
+$$
+[\mathcal{T}<em>M \vec{v}]</em>\mathcal{E&rsquo;} = M [\vec{v}]</em>\mathcal{E}
+$$</p><p>Where $\mathcal{E}$ is the standard bassi for $R^m$ and $\mathcal{E&rsquo;}$ is the standard basis for $\R^n$</p><blockquote><a href=#let-mathcalt-be-the-transformation-induced-by-the-matrix-m--beginbmatrix-1--2--5--2---2---2-endbmatrix-and-let-vecv--3-vece_1---3vece_3-computer-mathcalt-vecv><h5 id=let-mathcalt-be-the-transformation-induced-by-the-matrix-m--beginbmatrix-1--2--5--2---2---2-endbmatrix-and-let-vecv--3-vece_1---3vece_3-computer-mathcalt-vecv><span class=hanchor arialabel=Anchor># </span>Let $\mathcal{T}$ be the transformation induced by the matrix $M = \begin{bmatrix} 1 & 2 & 5 \\ 2 & -2 & -2 \end{bmatrix}$, and let $\vec{v} = 3 \vec{e}_1 - 3\vec{e}_3$. Computer $\mathcal{T} (\vec{v})$</h5></a><p>Using the definition fo induced transformations:
+$$
+[\mathcal{T}<em>M \vec{v}]</em>\mathcal{E&rsquo;} = M [\vec{v}]<em>\mathcal{E} =
+\begin{bmatrix} 1 & 2 & 5 \\ 2 & -2 & -2 \end{bmatrix}
+[\vec{v}]</em>\mathcal{E}
+$$
+The equation of $\vec{v}$ is given, calculate and substitute the values of $[\vec{v}]_\mathcal{E}$
+$$
+[\mathcal{T}<em>M \vec{v}]</em>\mathcal{E&rsquo;}
+\begin{bmatrix} 1 & 2 & 5 \\ 2 & -2 & -2 \end{bmatrix}
+\begin{bmatrix} 3 \\ 0 \-3 \end{bmatrix}
+= \begin{bmatrix} -12 \12 \end{bmatrix}
+$$
+In other words $</p></blockquote></li><li><p><u>Rank of a matrix</u> - let $M$ be a matrix, the <strong>rank</strong> of $M$, denoted rank$(M)$, is the rank of the linear transformation <em><strong>induced</strong></em> by $M$</p></li><li><p><u>Nullity of a matrix</u> - let $M$ be a matrix, the <strong>nullity</strong> of $M$, denoted nullity$(M)$, is the nullity of the linear transformation <em><strong>induced</strong></em> by $M$</p></li></ul><a href=#range-vs-column-space--null-space-vs-null-space><h2 id=range-vs-column-space--null-space-vs-null-space><span class=hanchor arialabel=Anchor># </span>Range vs Column Space & Null Space vs. Null Space</h2></a><ul><li><p>Let $M$ be a matrix and $\mathcal{T}$ a transformation. The column space of $M$ is the set of all linear combinations of the columns of $M$. <strong>However, the columns of $M$ are numbers, not vectors</strong>, so need to turn them into vectors first
+$$
+\text{col}(M) = \text{span}
+{[C_1]<em>\mathcal{E}, [C_2]</em>\mathcal{E}, \dots, [C_m]_\mathcal{E}, }
+$$
+This gets $M[\vec{e}_i] = C_i$ by the definition of induced transformation, know
+$$
+[\mathcal{T}(\vec{e}<em>i)]</em>\mathcal{E} = M[\vec{e}<em>i]</em>\mathcal{E} = C_i
+\quad \Rightarrow \quad
+\mathcal{T}(\vec{e}<em>i) = [C_i]</em>\mathcal{E}
+$$
+Every <strong>input</strong> of $\mathcal{T}$ can be written as a linear combination of $\vec{e}<em>i$ (because $\mathcal{E}$ is a basis) and therefore, since $\mathcal{T}$ is linear, every <strong>output</strong> can be written as linear combinations of $[C_i]</em>\mathcal{E}$ Thus
+$$
+\text{range}(T) = \text{col}(M)
+$$</p><blockquote><a href=#let-mathcalt-r3-to-r2-be-defined-by-mathcaltbeginbmatrix-x--y-z-endbmatrix--beginbmatrix-2x-z--4x-2z-endbmatrix-find-the-range-and-rank-of-mathcalt><h5 id=let-mathcalt-r3-to-r2-be-defined-by-mathcaltbeginbmatrix-x--y-z-endbmatrix--beginbmatrix-2x-z--4x-2z-endbmatrix-find-the-range-and-rank-of-mathcalt><span class=hanchor arialabel=Anchor># </span>Let $\mathcal{T}: \R^3 \to \R^2$ be defined by $\mathcal{T}\begin{bmatrix} x \ y \z \end{bmatrix} = \begin{bmatrix} 2x-z \ 4x-2z \end{bmatrix}$. Find the range and rank of $\mathcal{T}$</h5></a><p>Let $M$ be a matrix for $\mathcal{T}$. And $M = \begin{bmatrix} 1 & 0 & -1 \ 4 & 0 & -2 \end{bmatrix}$. From definitions, know:</p><ul><li>$\text{range}(T) = \text{col}(M)$</li><li>$\text{rank}(T) = \text{dim}(\text{range}(T)) = \text{dim}(\text{col}(M))$</li></ul><p>See that $\left{\begin{bmatrix} 2\4 \end{bmatrix} \right}$ is a basis for col$(M)$ and its one diminutional then:
+$$
+\text{range}(\mathcal{T}) = \text{span}
+\left{\begin{bmatrix} 2\4 \end{bmatrix} \right}
+\quad \text{and} \quad
+\text{rank}(\mathcal{T}) = 1
+$$</p></blockquote></li><li><p>Let $M$ be a matrix, the <strong>rank</strong> of $M$ is equal to the <strong>number of pivots in rref</strong>$(M)$</p></li><li><p>Let $\mathcal{T}$ be a linear transformation and let $M$ be a matrix for $\mathcal{T}$. Then <strong>nullity</strong>$(T)$ is equal to the <strong>number of free variable columns in rref$(M)$</strong></p></li><li><p>For a matrix $A$, $\text{rank}(A) = \text{rank}(A^T)$</p></li></ul><a href=#rank-nullity-theorem><h2 id=rank-nullity-theorem><span class=hanchor arialabel=Anchor># </span>Rank-Nullity Theorem</h2></a><ul><li><p>Define a matrix $A$
+$$
+\text{rank}(A) + \text{nullity}(A) = \text{# of columns in}A
+$$</p><ul><li>Rank is the number of <em>pivots</em> of $A$ and Nullity is the number of <em>non-pivots</em> of $A$</li></ul></li><li><p>Define a transformation $\mathcal{T}$
+$$
+\text{rank}(\mathcal{T}) + \text{nullity}(\mathcal{T}) =
+\text{dim}(\text{domain of }\mathcal{T})
+$$</p></li></ul><blockquote><a href=#let-mathcalp-subseteq-r4-be-a-plane-in-r4-given-in-vector-form-by-vecx--t-beginbmatrix-1--2-2-2-endbmatrix--s-beginbmatrix--1-1--1-1-endbmatrix-how-many-normal-vectors-does-mathcalp-have><h5 id=let-mathcalp-subseteq-r4-be-a-plane-in-r4-given-in-vector-form-by-vecx--t-beginbmatrix-1--2-2-2-endbmatrix--s-beginbmatrix--1-1--1-1-endbmatrix-how-many-normal-vectors-does-mathcalp-have><span class=hanchor arialabel=Anchor># </span>Let $\mathcal{P} \subseteq \R^4$ be a plane in $\R^4$ given in vector form by $\vec{x} = t \begin{bmatrix} 1 \ 2 \2 \2 \end{bmatrix} + s \begin{bmatrix} -1 \1 \-1 \1 \end{bmatrix}$ How many normal vectors does $\mathcal{P}$ have</h5></a><p>The matrix $A = \begin{bmatrix} 1 & 2 & 2 & 2 \ -1 & 1 & -1 & 1 \end{bmatrix}$ is rank 2, and so has nullity 2</p><p>Therefore there exist linear independent normal directions for $\mathcal{P}$</p></blockquote></article><hr><div class=page-end id=footer><div class=backlinks-container><h3>Backlinks</h3><ul class=backlinks><li>No backlinks found</li></ul></div><div><script async src=https://cdn.jsdelivr.net/npm/d3@6.7.0/dist/d3.min.js integrity="sha256-+7jaYCp29O1JusNWHaYtgUn6EhuP0VaFuswhNV06MyI=" crossorigin=anonymous></script><h3>Interactive Graph</h3><div id=graph-container></div><style>:root{--g-node:var(--secondary);--g-node-active:var(--primary);--g-node-inactive:var(--visited);--g-link:var(--outlinegray);--g-link-active:#5a7282}</style><script src=https://mel10c.github.io/mel.zhu/js/graph.2d9e48dbe7ea47c0ef1c58296ce14448.js></script></div></div><div id=contact_buttons><footer><p>Made by Melaney Zhu using <a href=https://github.com/jackyzha0/quartz>Quartz</a>, © 2023</p><ul><li><a href=https://mel10c.github.io/mel.zhu/>Home</a></li><li><a href=https://www.instagram.com/melaney_dxl/>Instagram</a></li><li><a href=https://github.com/mel10c>GitHub</a></li><li><a href=https://linkedin.com/in/melzyy>LinkedIn</a></li><li><a href=https://github.com/mel10c/mel.zhu/blob/hugo/content/documents/Resume.pdf>Resume</a></li></ul></footer></div></div></body></html>

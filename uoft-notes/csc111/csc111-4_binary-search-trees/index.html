@@ -1,0 +1,218 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=description content="Binary Search Trees  Define a new abstract data type (ADT) that is an extension of the Set ADT that allows for duplicates Multiset  Data: an unordered collection of values, allowing duplicates Operations: get size, insert a value, remove one occurrence of a specified value, check membership in the multiset   Using list to implement the Multiset ADT  Searching would have the $RT$ of $\Theta(n)$ if simply append new items to the list Using binary search algorithm would improve the $RT$ to $\Theta(\log n)$    Binary Search Tree definitions   Binary tree is a tree in which every item has two (possibly empty) subtrees, which are labelled its left and right subtrees."><title>CSC111: 4_Binary Search Trees</title><meta name=viewport content="width=device-width,initial-scale=1"><link rel="shortcut icon" type=image/png href=https://mel10c.github.io/mel.zhu//icon.png><link href=https://mel10c.github.io/mel.zhu/styles.9a8661985b360a1d97e0e538e164abef.min.css rel=stylesheet><link href=https://mel10c.github.io/mel.zhu/styles/_light_syntax.86a48a52faebeaaf42158b72922b1c90.min.css rel=stylesheet id=theme-link><script src=https://mel10c.github.io/mel.zhu/js/darkmode.905e4d2da56a9111aff695a0a4b69900.min.js></script>
+<script src=https://mel10c.github.io/mel.zhu/js/util.6f22941e242efae60fd84e7c32e874fa.min.js></script>
+<link rel=preload href=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css as=style onload='this.onload=null,this.rel="stylesheet"' integrity=sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js integrity=sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx crossorigin=anonymous></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin=anonymous></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/contrib/copy-tex.min.js integrity=sha384-ww/583aHhxWkz5DEVn6OKtNiIaLi2iBRNZXfJRiY1Ai7tnJ9UXpEsyvOITVpTl4A crossorigin=anonymous></script>
+<script async src=https://unpkg.com/@floating-ui/core@0.7.3></script>
+<script async src=https://unpkg.com/@floating-ui/dom@0.5.4></script>
+<script async src=https://mel10c.github.io/mel.zhu/js/popover.f03552ccb84d99ca615d1cfb9abde59e.min.js></script>
+<script defer src=https://mel10c.github.io/mel.zhu/js/code-title.ce4a43f09239a9efb48fee342e8ef2df.min.js></script>
+<script defer src=https://mel10c.github.io/mel.zhu/js/clipboard.2913da76d3cb21c5deaa4bae7da38c9f.min.js></script>
+<script defer src=https://mel10c.github.io/mel.zhu/js/callouts.7723cac461d613d118ee8bb8216b9838.min.js></script>
+<script>const SEARCH_ENABLED=!1,LATEX_ENABLED=!0,PRODUCTION=!0,BASE_URL="https://mel10c.github.io/mel.zhu/",fetchData=Promise.all([fetch("https://mel10c.github.io/mel.zhu/indices/linkIndex.4ecd462b2a0cc7b8f254e52a69d96e3c.min.json").then(e=>e.json()).then(e=>({index:e.index,links:e.links})),fetch("https://mel10c.github.io/mel.zhu/indices/contentIndex.6acfc2f415caa35851b6b3067c8415cf.min.json").then(e=>e.json())]).then(([{index:e,links:t},n])=>({index:e,links:t,content:n})),render=()=>{const e=new URL(BASE_URL),t=e.pathname,n=window.location.pathname,s=t==n;addCopyButtons(),addTitleToCodeBlocks(),addCollapsibleCallouts(),initPopover("https://mel10c.github.io/mel.zhu",!0);const o=document.getElementById("footer");if(o){const e=document.getElementById("graph-container");if(!e)return requestAnimationFrame(render);e.textContent="";const t=s&&!1;drawGraph("https://mel10c.github.io/mel.zhu",t,[{"/moc":"#4388cc"}],t?{centerForce:1,depth:-1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.5,linkDistance:1,opacityScale:3,repelForce:1,scale:1.4}:{centerForce:1,depth:1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.6,linkDistance:1,opacityScale:3,repelForce:2,scale:1.2})}var i=document.getElementsByClassName("mermaid");i.length>0&&import("https://unpkg.com/mermaid@9/dist/mermaid.esm.min.mjs").then(e=>{e.default.init()})},init=(e=document)=>{addCopyButtons(),addTitleToCodeBlocks(),renderMathInElement(e.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}],macros:{'’':"'"},throwOnError:!1})}</script><script type=module>
+    import { attachSPARouting } from "https:\/\/mel10c.github.io\/mel.zhu\/js\/router.9d4974281069e9ebb189f642ae1e3ca2.min.js"
+    attachSPARouting(init, render)
+  </script></head><body><div id=search-container><div id=search-space><input autocomplete=off id=search-bar name=search type=text aria-label=Search placeholder="Search for something..."><div id=results-container></div></div></div><script src=https://cdn.jsdelivr.net/npm/flexsearch@0.7.21/dist/flexsearch.bundle.js integrity="sha256-i3A0NZGkhsKjVMzFxv3ksk0DZh3aXqu0l49Bbh0MdjE=" crossorigin=anonymous defer></script>
+<script defer src=https://mel10c.github.io/mel.zhu/js/full-text-search.e6e2e0c213187ca0c703d6e2c7a77fcd.min.js></script><div class=singlePage><header><h1 id=page-title><a href=https://mel10c.github.io/mel.zhu/>MEL.ZHU</a></h1><div class=spacer></div><div id=search-icon><p>Search</p><svg tabindex="0" aria-labelledby="title desc" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title id="title">Search Icon</title><desc id="desc">Icon to open search</desc><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"/><circle cx="8" cy="8" r="7"/></g></svg></div><div class=darkmode><input class=toggle id=darkmode-toggle type=checkbox tabindex=-1>
+<label id=toggle-label-light for=darkmode-toggle tabindex=-1><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="dayIcon" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35"><title>Light Mode</title><path d="M6 17.5C6 16.672 5.328 16 4.5 16h-3C.672 16 0 16.672.0 17.5S.672 19 1.5 19h3C5.328 19 6 18.328 6 17.5zM7.5 26c-.414.0-.789.168-1.061.439l-2 2C4.168 28.711 4 29.086 4 29.5 4 30.328 4.671 31 5.5 31c.414.0.789-.168 1.06-.44l2-2C8.832 28.289 9 27.914 9 27.5 9 26.672 8.329 26 7.5 26zm10-20C18.329 6 19 5.328 19 4.5v-3C19 .672 18.329.0 17.5.0S16 .672 16 1.5v3C16 5.328 16.671 6 17.5 6zm10 3c.414.0.789-.168 1.06-.439l2-2C30.832 6.289 31 5.914 31 5.5 31 4.672 30.329 4 29.5 4c-.414.0-.789.168-1.061.44l-2 2C26.168 6.711 26 7.086 26 7.5 26 8.328 26.671 9 27.5 9zM6.439 8.561C6.711 8.832 7.086 9 7.5 9 8.328 9 9 8.328 9 7.5c0-.414-.168-.789-.439-1.061l-2-2C6.289 4.168 5.914 4 5.5 4 4.672 4 4 4.672 4 5.5c0 .414.168.789.439 1.06l2 2.001zM33.5 16h-3c-.828.0-1.5.672-1.5 1.5s.672 1.5 1.5 1.5h3c.828.0 1.5-.672 1.5-1.5S34.328 16 33.5 16zM28.561 26.439C28.289 26.168 27.914 26 27.5 26c-.828.0-1.5.672-1.5 1.5.0.414.168.789.439 1.06l2 2C28.711 30.832 29.086 31 29.5 31c.828.0 1.5-.672 1.5-1.5.0-.414-.168-.789-.439-1.061l-2-2zM17.5 29c-.829.0-1.5.672-1.5 1.5v3c0 .828.671 1.5 1.5 1.5s1.5-.672 1.5-1.5v-3C19 29.672 18.329 29 17.5 29zm0-22C11.71 7 7 11.71 7 17.5S11.71 28 17.5 28 28 23.29 28 17.5 23.29 7 17.5 7zm0 18c-4.136.0-7.5-3.364-7.5-7.5s3.364-7.5 7.5-7.5 7.5 3.364 7.5 7.5S21.636 25 17.5 25z"/></svg></label><label id=toggle-label-dark for=darkmode-toggle tabindex=-1><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="nightIcon" viewBox="0 0 100 100" style="enable-background='new 0 0 100 100'"><title>Dark Mode</title><path d="M96.76 66.458c-.853-.852-2.15-1.064-3.23-.534-6.063 2.991-12.858 4.571-19.655 4.571C62.022 70.495 50.88 65.88 42.5 57.5 29.043 44.043 25.658 23.536 34.076 6.47c.532-1.08.318-2.379-.534-3.23-.851-.852-2.15-1.064-3.23-.534-4.918 2.427-9.375 5.619-13.246 9.491-9.447 9.447-14.65 22.008-14.65 35.369.0 13.36 5.203 25.921 14.65 35.368s22.008 14.65 35.368 14.65c13.361.0 25.921-5.203 35.369-14.65 3.872-3.871 7.064-8.328 9.491-13.246C97.826 68.608 97.611 67.309 96.76 66.458z"/></svg></label></div></header><article><h1>CSC111: 4_Binary Search Trees</h1><p class=meta>Last updated
+Unknown</p><ul class=tags><li><a href=https://mel10c.github.io/mel.zhu/tags/note/>Note</a></li></ul><aside class=mainTOC><details><summary>Table of Contents</summary><nav id=TableOfContents><ol><li><a href=#binary-search-tree-definitions>Binary Search Tree definitions</a></li><li><a href=#search-for-bst>Search for BST</a></li><li><a href=#mutating-bst>Mutating BST</a><ol><li><a href=#insertion>Insertion</a></li><li><a href=#deletion>Deletion</a></li></ol></li><li><a href=#running-time-analysis-__contains__>Running time analysis (<code>__contains__</code>)</a><ol><li></li></ol></li></ol></nav></details></aside><a href=#binary-search-trees><h1 id=binary-search-trees><span class=hanchor arialabel=Anchor># </span>Binary Search Trees</h1></a><ul><li>Define a new abstract data type (ADT) that is an extension of the Set ADT that allows for duplicates</li><li><u>Multiset</u><ul><li>Data: an unordered collection of values, allowing duplicates</li><li>Operations: get size, insert a value, remove one occurrence of a specified value, check membership in the multiset</li></ul></li><li>Using <code>list</code> to implement the Multiset ADT<ul><li>Searching would have the $RT$ of $\Theta(n)$ if simply append new items to the list</li><li>Using <u>binary search</u> algorithm would improve the $RT$ to $\Theta(\log n)$</li></ul></li></ul><a href=#binary-search-tree-definitions><h2 id=binary-search-tree-definitions><span class=hanchor arialabel=Anchor># </span>Binary Search Tree definitions</h2></a><ul><li><p><u>Binary tree</u> is a tree in which every item has two (possibly empty) subtrees, which are labelled its <em>left</em> and <em>right</em> subtrees.</p></li><li><p><strong>Binary search tree property</strong> - its value $\ge$ all items of <em>left</em> subtree, and $\le$ all items of <em>right</em> subtree</p></li><li><p><u><strong>Binary search tree (BST)</strong></u> - <strong>every</strong> item in the tree satisfies the <em>binary search tree property</em></p><ul><li>As a &ldquo;sorted tree&rdquo;, efficient at insertion and deletion while painting the softness</li><li>Empty case: Tree class (<code>_root</code> is None, subtrees is []), BST class (<code>_root</code>, <code>_left</code>, <code>_right</code> are all None)</li><li>For non-empty BST, start by assigning at the <code>_root</code>, then sort into <code>_left</code> or <code>_right</code><ul><li>Leaf branches refer to <strong>empty BST (NOT refer to None)</strong></li><li>For BST, the only case for any of the attributes to be None is for it to be empty</li></ul></li></ul></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>class</span> <span class=nc>BinarySearchTree</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;Binary Search Tree class.
+</span></span></span><span class=line><span class=cl><span class=s2>    
+</span></span></span><span class=line><span class=cl><span class=s2>    Representation Invariants:
+</span></span></span><span class=line><span class=cl><span class=s2>      - (self._root is None) == (self._left is None)
+</span></span></span><span class=line><span class=cl><span class=s2>      - (self._root is None) == (self._right is None)
+</span></span></span><span class=line><span class=cl><span class=s2>      - (BST Property) if self._root is not None, then
+</span></span></span><span class=line><span class=cl><span class=s2>          all items in self._left are &lt;= self._root, and
+</span></span></span><span class=line><span class=cl><span class=s2>          all items in self._right are &gt;= self._root
+</span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=c1># Private Instance Attributes:</span>
+</span></span><span class=line><span class=cl>    <span class=c1>#   - _root:</span>
+</span></span><span class=line><span class=cl>    <span class=c1>#       The item stored at the root of this tree, or None if this tree is empty.</span>
+</span></span><span class=line><span class=cl>    <span class=c1>#   - _left:</span>
+</span></span><span class=line><span class=cl>    <span class=c1>#       The left subtree, or None if this tree is empty.</span>
+</span></span><span class=line><span class=cl>    <span class=c1>#   - _right:</span>
+</span></span><span class=line><span class=cl>    <span class=c1>#       The right subtree, or None if this tree is empty.</span>
+</span></span><span class=line><span class=cl>    <span class=n>_root</span><span class=p>:</span> <span class=n>Optional</span><span class=p>[</span><span class=n>Any</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>    <span class=n>_left</span><span class=p>:</span> <span class=n>Optional</span><span class=p>[</span><span class=n>BinarySearchTree</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>	<span class=n>_right</span><span class=p>:</span> <span class=n>Optional</span><span class=p>[</span><span class=n>BinarySearchTree</span><span class=p>]</span>
+</span></span></code></pre></td></tr></table></div></div><ul><li><p>Based on the <code>Tree</code> class, the initializer and is_empty function:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>class</span> <span class=nc>BinarySearchTree</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>root</span><span class=p>:</span> <span class=n>Optional</span><span class=p>[</span><span class=n>Any</span><span class=p>])</span> <span class=o>-&gt;</span> <span class=kc>None</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34;Initialize a new BST containing only the given root value.
+</span></span></span><span class=line><span class=cl><span class=s2>
+</span></span></span><span class=line><span class=cl><span class=s2>        If &lt;root&gt; is None, initialize an empty BST.
+</span></span></span><span class=line><span class=cl><span class=s2>        &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>root</span> <span class=ow>is</span> <span class=kc>None</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=bp>self</span><span class=o>.</span><span class=n>_root</span> <span class=o>=</span> <span class=kc>None</span>
+</span></span><span class=line><span class=cl>            <span class=bp>self</span><span class=o>.</span><span class=n>_left</span> <span class=o>=</span> <span class=kc>None</span>
+</span></span><span class=line><span class=cl>            <span class=bp>self</span><span class=o>.</span><span class=n>_right</span> <span class=o>=</span> <span class=kc>None</span>
+</span></span><span class=line><span class=cl>        <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=bp>self</span><span class=o>.</span><span class=n>_root</span> <span class=o>=</span> <span class=n>root</span>
+</span></span><span class=line><span class=cl>            <span class=bp>self</span><span class=o>.</span><span class=n>_left</span> <span class=o>=</span> <span class=n>BinarySearchTree</span><span class=p>(</span><span class=kc>None</span><span class=p>)</span>   <span class=c1># self._left is an empty BST</span>
+</span></span><span class=line><span class=cl>            <span class=bp>self</span><span class=o>.</span><span class=n>_right</span> <span class=o>=</span> <span class=n>BinarySearchTree</span><span class=p>(</span><span class=kc>None</span><span class=p>)</span>  <span class=c1># self._right is an empty BST</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>is_empty</span><span class=p>(</span><span class=bp>self</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=nb>bool</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34;Return whether this BST is empty.
+</span></span></span><span class=line><span class=cl><span class=s2>        &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=bp>self</span><span class=o>.</span><span class=n>_root</span> <span class=ow>is</span> <span class=kc>None</span>
+</span></span></code></pre></td></tr></table></div></div></li></ul><a href=#search-for-bst><h2 id=search-for-bst><span class=hanchor arialabel=Anchor># </span>Search for BST</h2></a><ul><li>For BSTs <em>the initial comparison to the root tells you which subtree you need to check</em>.<ul><li>Check if its less than the root, search on left; greater than root, search right</li></ul></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>class</span> <span class=nc>BinarySearchTree</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__contains__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>item</span><span class=p>:</span> <span class=n>Any</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=nb>bool</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34;Return whether &lt;item&gt; is in this BST.
+</span></span></span><span class=line><span class=cl><span class=s2>        &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=bp>self</span><span class=o>.</span><span class=n>is_empty</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=kc>False</span>
+</span></span><span class=line><span class=cl>        <span class=k>elif</span> <span class=n>item</span> <span class=o>==</span> <span class=bp>self</span><span class=o>.</span><span class=n>_root</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=kc>True</span>
+</span></span><span class=line><span class=cl>        <span class=k>elif</span> <span class=n>item</span> <span class=o>&lt;</span> <span class=bp>self</span><span class=o>.</span><span class=n>_root</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=bp>self</span><span class=o>.</span><span class=n>_left</span><span class=o>.</span><span class=fm>__contains__</span><span class=p>(</span><span class=n>item</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=bp>self</span><span class=o>.</span><span class=n>_right</span><span class=o>.</span><span class=fm>__contains__</span><span class=p>(</span><span class=n>item</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><a href=#mutating-bst><h2 id=mutating-bst><span class=hanchor arialabel=Anchor># </span>Mutating BST</h2></a><a href=#insertion><h3 id=insertion><span class=hanchor arialabel=Anchor># </span>Insertion</h3></a><ol><li>If BST is empty, make the new item the root of the tree</li><li>Otherwise, use binary search tree property, insert into either left or right subtree as a leaf</li></ol><a href=#deletion><h3 id=deletion><span class=hanchor arialabel=Anchor># </span>Deletion</h3></a><ul><li><p>Use recursion to find the item (similar to the <code>contains</code> function)</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>class</span> <span class=nc>BinarySearchTree</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>remove</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>item</span><span class=p>:</span> <span class=n>Any</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=kc>None</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34;Remove *one* occurrence of &lt;item&gt; from this BST.
+</span></span></span><span class=line><span class=cl><span class=s2>
+</span></span></span><span class=line><span class=cl><span class=s2>        Do nothing if &lt;item&gt; is not in the BST.
+</span></span></span><span class=line><span class=cl><span class=s2>        &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=bp>self</span><span class=o>.</span><span class=n>is_empty</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>            <span class=k>pass</span>
+</span></span><span class=line><span class=cl>        <span class=k>elif</span> <span class=bp>self</span><span class=o>.</span><span class=n>_root</span> <span class=o>==</span> <span class=n>item</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=bp>self</span><span class=o>.</span><span class=n>_remove_root</span><span class=p>()</span>  <span class=c1># refer to helper function</span>
+</span></span><span class=line><span class=cl>        <span class=k>elif</span> <span class=n>item</span> <span class=o>&lt;</span> <span class=bp>self</span><span class=o>.</span><span class=n>_root</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=bp>self</span><span class=o>.</span><span class=n>_left</span><span class=o>.</span><span class=n>remove</span><span class=p>(</span><span class=n>item</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=bp>self</span><span class=o>.</span><span class=n>_right</span><span class=o>.</span><span class=n>remove</span><span class=p>(</span><span class=n>item</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div></li><li><p>Now as the root of a subtree (possibly a leaf), delete this root with a helper function</p><ul><li>Set <code>self._root = None</code> if the tree consist <em>just</em> the root (no subtrees)</li><li>If at least one of the subtrees is empty, then &ldquo;promote&rdquo; the other subtree up</li><li>If both subtrees are non-empty, <em>replace</em> the root with another value and remove the replaced value from else where<ul><li>This replacement value is either the <strong>max</strong> of the left or the <strong>min</strong> of the right subtree</li><li>Extract the replacement value using: <code>BinarySearchTree._extract_max</code></li></ul></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>class</span> <span class=nc>BinarySearchTree</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>_remove_root</span><span class=p>(</span><span class=bp>self</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=kc>None</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34;...&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=bp>self</span><span class=o>.</span><span class=n>_left</span><span class=o>.</span><span class=n>is_empty</span><span class=p>()</span> <span class=ow>and</span> <span class=bp>self</span><span class=o>.</span><span class=n>_right</span><span class=o>.</span><span class=n>is_empty</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>            <span class=bp>self</span><span class=o>.</span><span class=n>_root</span> <span class=o>=</span> <span class=kc>None</span>
+</span></span><span class=line><span class=cl>            <span class=bp>self</span><span class=o>.</span><span class=n>_left</span> <span class=o>=</span> <span class=kc>None</span>
+</span></span><span class=line><span class=cl>            <span class=bp>self</span><span class=o>.</span><span class=n>_right</span> <span class=o>=</span> <span class=kc>None</span>
+</span></span><span class=line><span class=cl>        <span class=k>elif</span> <span class=bp>self</span><span class=o>.</span><span class=n>_left</span><span class=o>.</span><span class=n>is_empty</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>            <span class=c1># &#34;Promote&#34; the right subtree.</span>
+</span></span><span class=line><span class=cl>            <span class=bp>self</span><span class=o>.</span><span class=n>_root</span><span class=p>,</span> <span class=bp>self</span><span class=o>.</span><span class=n>_left</span><span class=p>,</span> <span class=bp>self</span><span class=o>.</span><span class=n>_right</span> <span class=o>=</span> \
+</span></span><span class=line><span class=cl>                <span class=bp>self</span><span class=o>.</span><span class=n>_right</span><span class=o>.</span><span class=n>_root</span><span class=p>,</span> <span class=bp>self</span><span class=o>.</span><span class=n>_right</span><span class=o>.</span><span class=n>_left</span><span class=p>,</span> <span class=bp>self</span><span class=o>.</span><span class=n>_right</span><span class=o>.</span><span class=n>_right</span>
+</span></span><span class=line><span class=cl>        <span class=k>elif</span> <span class=bp>self</span><span class=o>.</span><span class=n>_right</span><span class=o>.</span><span class=n>is_empty</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>            <span class=c1># &#34;Promote&#34; the left subtree.</span>
+</span></span><span class=line><span class=cl>            <span class=bp>self</span><span class=o>.</span><span class=n>_root</span><span class=p>,</span> <span class=bp>self</span><span class=o>.</span><span class=n>_left</span><span class=p>,</span> <span class=bp>self</span><span class=o>.</span><span class=n>_right</span> <span class=o>=</span> \
+</span></span><span class=line><span class=cl>                <span class=bp>self</span><span class=o>.</span><span class=n>_left</span><span class=o>.</span><span class=n>_root</span><span class=p>,</span> <span class=bp>self</span><span class=o>.</span><span class=n>_left</span><span class=o>.</span><span class=n>_left</span><span class=p>,</span> <span class=bp>self</span><span class=o>.</span><span class=n>_left</span><span class=o>.</span><span class=n>_right</span>
+</span></span><span class=line><span class=cl>        <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=bp>self</span><span class=o>.</span><span class=n>_root</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>_left</span><span class=o>.</span><span class=n>_extract_max</span><span class=p>()</span>  <span class=c1># helper function</span>
+</span></span></code></pre></td></tr></table></div></div></li><li><p>Keep going to the right to bigger and bigger values until the end, then remove it. (Max has at most one child, therefore the process would be much easier)</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>class</span> <span class=nc>BinarySearchTree</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>_extract_max</span><span class=p>(</span><span class=bp>self</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=n>Any</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34;Remove and return the maximum item stored in this tree.
+</span></span></span><span class=line><span class=cl><span class=s2>
+</span></span></span><span class=line><span class=cl><span class=s2>        Preconditions:
+</span></span></span><span class=line><span class=cl><span class=s2>          - not self.is_empty()
+</span></span></span><span class=line><span class=cl><span class=s2>        &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=bp>self</span><span class=o>.</span><span class=n>_right</span><span class=o>.</span><span class=n>is_empty</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>            <span class=n>max_item</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>_root</span>
+</span></span><span class=line><span class=cl>            <span class=c1># Version 1: Like remove_root, &#34;promote&#34; the left subtree.</span>
+</span></span><span class=line><span class=cl>            <span class=bp>self</span><span class=o>.</span><span class=n>_root</span><span class=p>,</span> <span class=bp>self</span><span class=o>.</span><span class=n>_left</span><span class=p>,</span> <span class=bp>self</span><span class=o>.</span><span class=n>_right</span> <span class=o>=</span> \
+</span></span><span class=line><span class=cl>                <span class=bp>self</span><span class=o>.</span><span class=n>_left</span><span class=o>.</span><span class=n>_root</span><span class=p>,</span> <span class=bp>self</span><span class=o>.</span><span class=n>_left</span><span class=o>.</span><span class=n>_left</span><span class=p>,</span> <span class=bp>self</span><span class=o>.</span><span class=n>_left</span><span class=o>.</span><span class=n>_right</span>
+</span></span><span class=line><span class=cl>            <span class=c1># Version: 2:</span>
+</span></span><span class=line><span class=cl>            <span class=c1># self._delete_root()</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=n>max_item</span>
+</span></span><span class=line><span class=cl>        <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=bp>self</span><span class=o>.</span><span class=n>_right</span><span class=o>.</span><span class=n>_extract_max</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div></li></ul><a href=#running-time-analysis-__contains__><h2 id=running-time-analysis-__contains__><span class=hanchor arialabel=Anchor># </span>Running time analysis (<code>__contains__</code>)</h2></a><ul><li>Start with analyzing the non-recursive running time of the method<ul><li>Assume that each recursive call takes constant time</li><li>The <code>self.is_empty()</code> and <code>item==self._root</code> and <code>item &lt; self._root</code> and the return statements are constant time</li><li>Therefore, the non-recursive cost is 1 step per recursive call</li></ul></li><li>Analyzing the recursive calls<ul><li>BST&rsquo;s contains method only recurse on <em>one</em> of its subtrees, so the number of recursive calls differences depending on the values stored in the tree and the searching value</li><li>So <code>__contains__</code> has a spread of running times, so Worst-case is focused here</li><li>The total number of recursive calls is <em>at most</em> the height of the BST plus 1 (longest possible search path is equal to the height of the BST, plus 1 is for recursing into an empty subtree)</li><li>Since each non-recursive call takes 1 step,T this gives a total of $h+1$ steps, where $h$ is the height of the BST. Thus worst-case running time is $\Theta(h)$</li></ul></li></ul><a href=#bst-height-vs-size><h4 id=bst-height-vs-size><span class=hanchor arialabel=Anchor># </span>BST height vs size</h4></a><ul><li>The height of a BST can be much smaller than its size</li><li>A BST with $n$ items, its height can be as large as $n$. Or as small as $\log_2n$<ul><li>The height of tree $h$ can have size at most $2^h -1$ items. If store $n$ item in a BST, need $h \ge \log_2(n+1)$ to store all of them</li></ul></li><li>If it can be guaranteed that BST always have height roughly $\log_2n$, then in fact all three BST&rsquo;s operations (search, insert, delete) have a worst-case running time of $\Theta(h)=\Theta(\log n)$. This is better than sorted list (search of $\Theta(\log n)$, with insert and delete at $\Theta(n)$<ul><li>Under this assumption, BST are more efficient than Multiset ADT</li></ul></li></ul></article><hr><div class=page-end id=footer><div class=backlinks-container><h3>Backlinks</h3><ul class=backlinks><li>No backlinks found</li></ul></div><div><script async src=https://cdn.jsdelivr.net/npm/d3@6.7.0/dist/d3.min.js integrity="sha256-+7jaYCp29O1JusNWHaYtgUn6EhuP0VaFuswhNV06MyI=" crossorigin=anonymous></script><h3>Interactive Graph</h3><div id=graph-container></div><style>:root{--g-node:var(--secondary);--g-node-active:var(--primary);--g-node-inactive:var(--visited);--g-link:var(--outlinegray);--g-link-active:#5a7282}</style><script src=https://mel10c.github.io/mel.zhu/js/graph.2d9e48dbe7ea47c0ef1c58296ce14448.js></script></div></div><div id=contact_buttons><footer><p>Made by Melaney Zhu using <a href=https://github.com/jackyzha0/quartz>Quartz</a>, © 2023</p><ul><li><a href=https://mel10c.github.io/mel.zhu/>Home</a></li><li><a href=https://www.instagram.com/melaney_dxl/>Instagram</a></li><li><a href=https://github.com/mel10c>GitHub</a></li><li><a href=https://linkedin.com/in/melzyy>LinkedIn</a></li><li><a href=https://github.com/mel10c/mel.zhu/blob/hugo/content/documents/Resume.pdf>Resume</a></li></ul></footer></div></div></body></html>

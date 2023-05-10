@@ -1,0 +1,329 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=description content="Graphs in Python Representing Graphs in Python The _Vertex class  Implement graph as a node-based data structure  vertex - node; edge - implicit as a variable in the vertex node   Restrictions on edges: cannot have a vertex with an edge to itself AND all edges are symmetric  1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21  from __future__ import annotations from typing import Any class _Vertex: &#34;&#34;&#34;A vertex in a graph Instance Attributes: - item: The data stored in this vertex - neighbours: The vertices that are adjacent to this vertex Representation Invariants: - self not in self."><title>CSC111: 7_Graphs in Python</title><meta name=viewport content="width=device-width,initial-scale=1"><link rel="shortcut icon" type=image/png href=https://mel10c.github.io/mel.zhu//icon.png><link href=https://mel10c.github.io/mel.zhu/styles.9a8661985b360a1d97e0e538e164abef.min.css rel=stylesheet><link href=https://mel10c.github.io/mel.zhu/styles/_light_syntax.86a48a52faebeaaf42158b72922b1c90.min.css rel=stylesheet id=theme-link><script src=https://mel10c.github.io/mel.zhu/js/darkmode.905e4d2da56a9111aff695a0a4b69900.min.js></script>
+<script src=https://mel10c.github.io/mel.zhu/js/util.6f22941e242efae60fd84e7c32e874fa.min.js></script>
+<link rel=preload href=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css as=style onload='this.onload=null,this.rel="stylesheet"' integrity=sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js integrity=sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx crossorigin=anonymous></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin=anonymous></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/contrib/copy-tex.min.js integrity=sha384-ww/583aHhxWkz5DEVn6OKtNiIaLi2iBRNZXfJRiY1Ai7tnJ9UXpEsyvOITVpTl4A crossorigin=anonymous></script>
+<script async src=https://unpkg.com/@floating-ui/core@0.7.3></script>
+<script async src=https://unpkg.com/@floating-ui/dom@0.5.4></script>
+<script async src=https://mel10c.github.io/mel.zhu/js/popover.f03552ccb84d99ca615d1cfb9abde59e.min.js></script>
+<script defer src=https://mel10c.github.io/mel.zhu/js/code-title.ce4a43f09239a9efb48fee342e8ef2df.min.js></script>
+<script defer src=https://mel10c.github.io/mel.zhu/js/clipboard.2913da76d3cb21c5deaa4bae7da38c9f.min.js></script>
+<script defer src=https://mel10c.github.io/mel.zhu/js/callouts.7723cac461d613d118ee8bb8216b9838.min.js></script>
+<script>const SEARCH_ENABLED=!1,LATEX_ENABLED=!0,PRODUCTION=!0,BASE_URL="https://mel10c.github.io/mel.zhu/",fetchData=Promise.all([fetch("https://mel10c.github.io/mel.zhu/indices/linkIndex.4ecd462b2a0cc7b8f254e52a69d96e3c.min.json").then(e=>e.json()).then(e=>({index:e.index,links:e.links})),fetch("https://mel10c.github.io/mel.zhu/indices/contentIndex.6acfc2f415caa35851b6b3067c8415cf.min.json").then(e=>e.json())]).then(([{index:e,links:t},n])=>({index:e,links:t,content:n})),render=()=>{const e=new URL(BASE_URL),t=e.pathname,n=window.location.pathname,s=t==n;addCopyButtons(),addTitleToCodeBlocks(),addCollapsibleCallouts(),initPopover("https://mel10c.github.io/mel.zhu",!0);const o=document.getElementById("footer");if(o){const e=document.getElementById("graph-container");if(!e)return requestAnimationFrame(render);e.textContent="";const t=s&&!1;drawGraph("https://mel10c.github.io/mel.zhu",t,[{"/moc":"#4388cc"}],t?{centerForce:1,depth:-1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.5,linkDistance:1,opacityScale:3,repelForce:1,scale:1.4}:{centerForce:1,depth:1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.6,linkDistance:1,opacityScale:3,repelForce:2,scale:1.2})}var i=document.getElementsByClassName("mermaid");i.length>0&&import("https://unpkg.com/mermaid@9/dist/mermaid.esm.min.mjs").then(e=>{e.default.init()})},init=(e=document)=>{addCopyButtons(),addTitleToCodeBlocks(),renderMathInElement(e.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}],macros:{'’':"'"},throwOnError:!1})}</script><script type=module>
+    import { attachSPARouting } from "https:\/\/mel10c.github.io\/mel.zhu\/js\/router.9d4974281069e9ebb189f642ae1e3ca2.min.js"
+    attachSPARouting(init, render)
+  </script></head><body><div id=search-container><div id=search-space><input autocomplete=off id=search-bar name=search type=text aria-label=Search placeholder="Search for something..."><div id=results-container></div></div></div><script src=https://cdn.jsdelivr.net/npm/flexsearch@0.7.21/dist/flexsearch.bundle.js integrity="sha256-i3A0NZGkhsKjVMzFxv3ksk0DZh3aXqu0l49Bbh0MdjE=" crossorigin=anonymous defer></script>
+<script defer src=https://mel10c.github.io/mel.zhu/js/full-text-search.e6e2e0c213187ca0c703d6e2c7a77fcd.min.js></script><div class=singlePage><header><h1 id=page-title><a href=https://mel10c.github.io/mel.zhu/>MEL.ZHU</a></h1><div class=spacer></div><div id=search-icon><p>Search</p><svg tabindex="0" aria-labelledby="title desc" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title id="title">Search Icon</title><desc id="desc">Icon to open search</desc><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"/><circle cx="8" cy="8" r="7"/></g></svg></div><div class=darkmode><input class=toggle id=darkmode-toggle type=checkbox tabindex=-1>
+<label id=toggle-label-light for=darkmode-toggle tabindex=-1><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="dayIcon" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35"><title>Light Mode</title><path d="M6 17.5C6 16.672 5.328 16 4.5 16h-3C.672 16 0 16.672.0 17.5S.672 19 1.5 19h3C5.328 19 6 18.328 6 17.5zM7.5 26c-.414.0-.789.168-1.061.439l-2 2C4.168 28.711 4 29.086 4 29.5 4 30.328 4.671 31 5.5 31c.414.0.789-.168 1.06-.44l2-2C8.832 28.289 9 27.914 9 27.5 9 26.672 8.329 26 7.5 26zm10-20C18.329 6 19 5.328 19 4.5v-3C19 .672 18.329.0 17.5.0S16 .672 16 1.5v3C16 5.328 16.671 6 17.5 6zm10 3c.414.0.789-.168 1.06-.439l2-2C30.832 6.289 31 5.914 31 5.5 31 4.672 30.329 4 29.5 4c-.414.0-.789.168-1.061.44l-2 2C26.168 6.711 26 7.086 26 7.5 26 8.328 26.671 9 27.5 9zM6.439 8.561C6.711 8.832 7.086 9 7.5 9 8.328 9 9 8.328 9 7.5c0-.414-.168-.789-.439-1.061l-2-2C6.289 4.168 5.914 4 5.5 4 4.672 4 4 4.672 4 5.5c0 .414.168.789.439 1.06l2 2.001zM33.5 16h-3c-.828.0-1.5.672-1.5 1.5s.672 1.5 1.5 1.5h3c.828.0 1.5-.672 1.5-1.5S34.328 16 33.5 16zM28.561 26.439C28.289 26.168 27.914 26 27.5 26c-.828.0-1.5.672-1.5 1.5.0.414.168.789.439 1.06l2 2C28.711 30.832 29.086 31 29.5 31c.828.0 1.5-.672 1.5-1.5.0-.414-.168-.789-.439-1.061l-2-2zM17.5 29c-.829.0-1.5.672-1.5 1.5v3c0 .828.671 1.5 1.5 1.5s1.5-.672 1.5-1.5v-3C19 29.672 18.329 29 17.5 29zm0-22C11.71 7 7 11.71 7 17.5S11.71 28 17.5 28 28 23.29 28 17.5 23.29 7 17.5 7zm0 18c-4.136.0-7.5-3.364-7.5-7.5s3.364-7.5 7.5-7.5 7.5 3.364 7.5 7.5S21.636 25 17.5 25z"/></svg></label><label id=toggle-label-dark for=darkmode-toggle tabindex=-1><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="nightIcon" viewBox="0 0 100 100" style="enable-background='new 0 0 100 100'"><title>Dark Mode</title><path d="M96.76 66.458c-.853-.852-2.15-1.064-3.23-.534-6.063 2.991-12.858 4.571-19.655 4.571C62.022 70.495 50.88 65.88 42.5 57.5 29.043 44.043 25.658 23.536 34.076 6.47c.532-1.08.318-2.379-.534-3.23-.851-.852-2.15-1.064-3.23-.534-4.918 2.427-9.375 5.619-13.246 9.491-9.447 9.447-14.65 22.008-14.65 35.369.0 13.36 5.203 25.921 14.65 35.368s22.008 14.65 35.368 14.65c13.361.0 25.921-5.203 35.369-14.65 3.872-3.871 7.064-8.328 9.491-13.246C97.826 68.608 97.611 67.309 96.76 66.458z"/></svg></label></div></header><article><h1>CSC111: 7_Graphs in Python</h1><p class=meta>Last updated
+Unknown</p><ul class=tags><li><a href=https://mel10c.github.io/mel.zhu/tags/note/>Note</a></li></ul><aside class=mainTOC><details><summary>Table of Contents</summary><nav id=TableOfContents><ol><li><a href=#representing-graphs-in-python>Representing Graphs in Python</a><ol><li><a href=#the-_vertex-class>The <code>_Vertex</code> class</a></li><li><a href=#the-graph-class>The <code>Graph</code> class</a></li><li><a href=#checking-adjacency>Checking adjacency</a></li></ol></li><li><a href=#connectivity-and-recursive-graph-traversal>Connectivity and Recursive Graph Traversal</a><ol><li><a href=#recursionerror-and-the-danger-of-infinite-recursion><code>RecursionError</code> and the danger of infinite recursion</a></li><li><a href=#fixing-the-recursion-error>Fixing the recursion error</a></li></ol></li></ol></nav></details></aside><a href=#graphs-in-python><h1 id=graphs-in-python><span class=hanchor arialabel=Anchor># </span>Graphs in Python</h1></a><a href=#representing-graphs-in-python><h2 id=representing-graphs-in-python><span class=hanchor arialabel=Anchor># </span>Representing Graphs in Python</h2></a><a href=#the-_vertex-class><h3 id=the-_vertex-class><span class=hanchor arialabel=Anchor># </span>The <code>_Vertex</code> class</h3></a><ul><li>Implement graph as a <em>node-based</em> data structure<ul><li><strong>vertex</strong> - node; <strong>edge</strong> - implicit as a variable in the vertex node</li></ul></li><li>Restrictions on edges: cannot have a vertex with an edge to itself AND all edges are symmetric</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-Python data-lang=Python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>__future__</span> <span class=kn>import</span> <span class=n>annotations</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>typing</span> <span class=kn>import</span> <span class=n>Any</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>_Vertex</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;A vertex in a graph
+</span></span></span><span class=line><span class=cl><span class=s2>
+</span></span></span><span class=line><span class=cl><span class=s2>    Instance Attributes:
+</span></span></span><span class=line><span class=cl><span class=s2>        - item: The data stored in this vertex
+</span></span></span><span class=line><span class=cl><span class=s2>        - neighbours: The vertices that are adjacent to this vertex
+</span></span></span><span class=line><span class=cl><span class=s2>    
+</span></span></span><span class=line><span class=cl><span class=s2>    Representation Invariants:
+</span></span></span><span class=line><span class=cl><span class=s2>        - self not in self.neighbours
+</span></span></span><span class=line><span class=cl><span class=s2>        - all(self in u.neighbours for u in self.neighbours)
+</span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=n>item</span><span class=p>:</span> <span class=n>Any</span>
+</span></span><span class=line><span class=cl>    <span class=n>neighbours</span><span class=p>:</span> <span class=nb>set</span><span class=p>[</span><span class=n>_Vertex</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>item</span><span class=p>:</span> <span class=n>Any</span><span class=p>,</span> <span class=n>neighbours</span><span class=p>:</span> <span class=nb>set</span><span class=p>[</span><span class=n>_Vertex</span><span class=p>])</span> <span class=o>-&gt;</span> <span class=kc>None</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34;Initialize a new vertex with the given item and neighbours&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>item</span> <span class=o>=</span> <span class=n>item</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>neighbours</span> <span class=o>=</span> <span class=n>neighbours</span>
+</span></span></code></pre></td></tr></table></div></div><blockquote><a href=#example-of-using-this-class><h5 id=example-of-using-this-class><span class=hanchor arialabel=Anchor># </span>Example of using this class:</h5></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>v1</span> <span class=o>=</span> <span class=n>_Vertex</span><span class=p>(</span><span class=s1>&#39;a&#39;</span><span class=p>,</span> <span class=nb>set</span><span class=p>())</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>v2</span> <span class=o>=</span> <span class=n>_Vertex</span><span class=p>(</span><span class=s1>&#39;b&#39;</span><span class=p>,</span> <span class=nb>set</span><span class=p>())</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>v3</span> <span class=o>=</span> <span class=n>_Vertex</span><span class=p>(</span><span class=s1>&#39;c&#39;</span><span class=p>,</span> <span class=nb>set</span><span class=p>())</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>v1</span><span class=o>.</span><span class=n>neighbours</span> <span class=o>=</span> <span class=p>{</span><span class=n>v2</span><span class=p>,</span> <span class=n>v3</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>v2</span><span class=o>.</span><span class=n>neighbours</span> <span class=o>=</span> <span class=p>{</span><span class=n>v1</span><span class=p>,</span> <span class=n>v3</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>v3</span><span class=o>.</span><span class=n>neighbours</span> <span class=o>=</span> <span class=p>{</span><span class=n>v1</span><span class=p>,</span> <span class=n>v2</span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div></blockquote><ul><li>Similar to <code>Tree_subtree</code> attribute, but this case treats the class as representing a single element, not the whole graph itself.</li><li>This collection is <strong>unordered</strong> (no left-to-right) ordering like trees</li></ul><a href=#the-graph-class><h3 id=the-graph-class><span class=hanchor arialabel=Anchor># </span>The <code>Graph</code> class</h3></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-Python data-lang=Python><span class=line><span class=cl><span class=k>class</span> <span class=nc>Graph</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;A graph&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=c1># Private Instance Attributes:</span>
+</span></span><span class=line><span class=cl>    <span class=c1>#    - _vertices: A collection of the vertices contained in this graph. </span>
+</span></span><span class=line><span class=cl>    <span class=c1>#                 Maps item to _Vertex instance</span>
+</span></span><span class=line><span class=cl>    <span class=n>_vertices</span><span class=p>:</span> <span class=nb>dict</span><span class=p>[</span><span class=n>Any</span><span class=p>,</span> <span class=n>_Vertex</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=kc>None</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34;Initialize an empty graph (no vertices or edges)&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>_vertics</span> <span class=o>=</span> <span class=p>{}</span>
+</span></span></code></pre></td></tr></table></div></div><ul><li><p>This would only great empty graphs. The mutating method is here:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-Python data-lang=Python><span class=line><span class=cl><span class=k>class</span> <span class=nc>Graph</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>add_vertex</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>item</span><span class=p>:</span> <span class=n>Any</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=kc>None</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34;Add a vertex with the given item to this graph
+</span></span></span><span class=line><span class=cl><span class=s2>
+</span></span></span><span class=line><span class=cl><span class=s2>        The new vertex is not adjacent to any other vertices.
+</span></span></span><span class=line><span class=cl><span class=s2>
+</span></span></span><span class=line><span class=cl><span class=s2>        Preconditions:
+</span></span></span><span class=line><span class=cl><span class=s2>            - item not in self._vertices
+</span></span></span><span class=line><span class=cl><span class=s2>        &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>_vertices</span><span class=p>[</span><span class=n>item</span><span class=p>]</span> <span class=o>=</span> <span class=n>_Vertex</span><span class=p>(</span><span class=n>item</span><span class=p>,</span> <span class=nb>set</span><span class=p>())</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>add_edge</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>item1</span><span class=p>:</span> <span class=n>Any</span><span class=p>,</span> <span class=n>item2</span><span class=p>:</span> <span class=n>Any</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=kc>None</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34;Add an edge between the two vertices with the given items in this graph
+</span></span></span><span class=line><span class=cl><span class=s2>
+</span></span></span><span class=line><span class=cl><span class=s2>        Raise a ValueError if item1 and item2 do not appearas vertices in this graph
+</span></span></span><span class=line><span class=cl><span class=s2>
+</span></span></span><span class=line><span class=cl><span class=s2>        Preconditions:
+</span></span></span><span class=line><span class=cl><span class=s2>            - item1 != item2
+</span></span></span><span class=line><span class=cl><span class=s2>        &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>item1</span> <span class=ow>in</span> <span class=bp>self</span><span class=o>.</span><span class=n>_vertices</span> <span class=ow>and</span> <span class=n>item2</span> <span class=ow>in</span> <span class=bp>self</span><span class=o>.</span><span class=n>vertices</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=n>v1</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>_vertices</span><span class=p>[</span><span class=n>item1</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>            <span class=n>v2</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>_vertices</span><span class=p>[</span><span class=n>item2</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=c1># Add the new edge</span>
+</span></span><span class=line><span class=cl>            <span class=n>v1</span><span class=o>.</span><span class=n>neighbouts</span><span class=o>.</span><span class=n>add</span><span class=p>(</span><span class=n>v2</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=n>v2</span><span class=o>.</span><span class=n>neighbouts</span><span class=o>.</span><span class=n>add</span><span class=p>(</span><span class=n>v1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>raise</span> <span class=ne>ValueError</span>
+</span></span></code></pre></td></tr></table></div></div><blockquote><a href=#create-graph-objects-and-populate-them-with-vertices-and-edges><h5 id=create-graph-objects-and-populate-them-with-vertices-and-edges><span class=hanchor arialabel=Anchor># </span>Create <code>Graph</code> objects and populate them with vertices and edges</h5></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-Python data-lang=Python><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>g</span> <span class=o>=</span> <span class=n>Graph</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>g</span><span class=o>.</span><span class=n>add_vertex</span><span class=p>(</span><span class=s1>&#39;a&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>g</span><span class=o>.</span><span class=n>add_vertex</span><span class=p>(</span><span class=s1>&#39;b&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>g</span><span class=o>.</span><span class=n>add_vertex</span><span class=p>(</span><span class=s1>&#39;c&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>g</span><span class=o>.</span><span class=n>add_edge</span><span class=p>(</span><span class=s1>&#39;a&#39;</span><span class=p>,</span> <span class=s1>&#39;b&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>g</span><span class=o>.</span><span class=n>add_edge</span><span class=p>(</span><span class=s1>&#39;a&#39;</span><span class=p>,</span> <span class=s1>&#39;c&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>g</span><span class=o>.</span><span class=n>add_edge</span><span class=p>(</span><span class=s1>&#39;b&#39;</span><span class=p>,</span> <span class=s1>&#39;c&#39;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div></blockquote></li></ul><a href=#checking-adjacency><h3 id=checking-adjacency><span class=hanchor arialabel=Anchor># </span>Checking adjacency</h3></a><ul><li>Implement 2 <code>Graph</code> methods to check adjacency of a vertex</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-Python data-lang=Python><span class=line><span class=cl><span class=k>class</span> <span class=nc>Graph</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>adjacent</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>item1</span><span class=p>:</span> <span class=n>Any</span><span class=p>,</span> <span class=n>tiem2</span><span class=p>:</span> <span class=n>Any</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=nb>bool</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;Return whether item1 and item2 are adjacent vertices in this graph.
+</span></span></span><span class=line><span class=cl><span class=s2>
+</span></span></span><span class=line><span class=cl><span class=s2>    Return False if item1 or item2 do not appear as vertices in this graph
+</span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>item1</span> <span class=ow>in</span> <span class=bp>self</span><span class=o>.</span><span class=n>_vertices</span> <span class=ow>and</span> <span class=n>item2</span> <span class=ow>in</span> <span class=bp>self</span><span class=o>.</span><span class=n>_vertices</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>v1</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>verticies</span><span class=p>[</span><span class=n>item1</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=nb>any</span><span class=p>(</span><span class=n>v2</span><span class=o>.</span><span class=n>item</span> <span class=o>==</span> <span class=n>item2</span> <span class=k>for</span> <span class=n>v2</span> <span class=ow>in</span> <span class=n>v1</span><span class=o>.</span><span class=n>neighours</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=kc>False</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>get_neighbours</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>item</span><span class=p>:</span> <span class=n>Any</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=nb>set</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34;Return a set of the neighbours of the given item
+</span></span></span><span class=line><span class=cl><span class=s2>
+</span></span></span><span class=line><span class=cl><span class=s2>        Note that the *item* are returned, not the _Vertex objects themselves
+</span></span></span><span class=line><span class=cl><span class=s2>
+</span></span></span><span class=line><span class=cl><span class=s2>        Raise a ValueError if item does not appear as vertex in this graph
+</span></span></span><span class=line><span class=cl><span class=s2>        &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>item</span> <span class=ow>in</span> <span class=bp>self</span><span class=o>.</span><span class=n>_vertices</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=n>v</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>_vertices</span><span class=p>[</span><span class=n>item</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=p>{</span><span class=n>neighbour</span><span class=o>.</span><span class=n>item</span> <span class=k>for</span> <span class=n>neighbour</span> <span class=ow>in</span> <span class=n>v</span><span class=o>.</span><span class=n>neighbours</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>        <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>raise</span> <span class=ne>ValueError</span>
+</span></span></code></pre></td></tr></table></div></div><blockquote><a href=#create-graph-objects-and-populate-them-with-vertices-and-edges-1><h5 id=create-graph-objects-and-populate-them-with-vertices-and-edges-1><span class=hanchor arialabel=Anchor># </span>Create <code>Graph</code> objects and populate them with vertices and edges</h5></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-Python data-lang=Python><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>g</span> <span class=o>=</span> <span class=n>Graph</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>g</span><span class=o>.</span><span class=n>add_vertex</span><span class=p>(</span><span class=s1>&#39;a&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>g</span><span class=o>.</span><span class=n>add_vertex</span><span class=p>(</span><span class=s1>&#39;b&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>g</span><span class=o>.</span><span class=n>add_vertex</span><span class=p>(</span><span class=s1>&#39;c&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>g</span><span class=o>.</span><span class=n>add_vertex</span><span class=p>(</span><span class=s1>&#39;d&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>g</span><span class=o>.</span><span class=n>add_edge</span><span class=p>(</span><span class=s1>&#39;a&#39;</span><span class=p>,</span> <span class=s1>&#39;b&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>g</span><span class=o>.</span><span class=n>add_edge</span><span class=p>(</span><span class=s1>&#39;b&#39;</span><span class=p>,</span> <span class=s1>&#39;c&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>g</span><span class=o>.</span><span class=n>adjacent</span><span class=p>(</span><span class=s1>&#39;a&#39;</span><span class=p>,</span> <span class=s1>&#39;b&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=kc>True</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>g</span><span class=o>.</span><span class=n>adjacent</span><span class=p>(</span><span class=s1>&#39;a&#39;</span><span class=p>,</span> <span class=s1>&#39;d&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=kc>False</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>g</span><span class=o>.</span><span class=n>get_neighbours</span><span class=p>(</span><span class=s1>&#39;b&#39;</span><span class=p>)</span> <span class=o>==</span> <span class=p>{</span><span class=s1>&#39;a&#39;</span><span class=p>,</span> <span class=s1>&#39;c&#39;</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=kc>True</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;&gt;&gt;</span> <span class=n>g</span><span class=o>.</span><span class=n>get_neighbours</span><span class=p>(</span><span class=s1>&#39;d&#39;</span><span class=p>)</span> <span class=o>==</span> <span class=nb>set</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=kc>True</span>
+</span></span></code></pre></td></tr></table></div></div></blockquote><a href=#connectivity-and-recursive-graph-traversal><h2 id=connectivity-and-recursive-graph-traversal><span class=hanchor arialabel=Anchor># </span>Connectivity and Recursive Graph Traversal</h2></a><ul><li><p>Goal: Implement a generalization method that checks whether two vertices are connected</p></li><li><p>This method follows a similar structure where it first finds a vertex that correspond to the input <code>item1</code></p></li><li><p>But checking connectivity is much harder than checking adjacencies. Use a helper function in the <code>_Vertex</code> class called <code>check_connected</code>, write down the code so far:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-Python data-lang=Python><span class=line><span class=cl><span class=k>class</span> <span class=nc>Graph</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>connected</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>item1</span><span class=p>:</span> <span class=n>Any</span><span class=p>,</span> <span class=n>item2</span><span class=p>:</span> <span class=n>Any</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=nb>bool</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34;Return whether item1 and item2 are connected vertices in this graph
+</span></span></span><span class=line><span class=cl><span class=s2>
+</span></span></span><span class=line><span class=cl><span class=s2>        Return False if item1 or item2 does not appear as vertices in the graph
+</span></span></span><span class=line><span class=cl><span class=s2>
+</span></span></span><span class=line><span class=cl><span class=s2>        &gt;&gt;&gt; g = Graph()
+</span></span></span><span class=line><span class=cl><span class=s2>        &gt;&gt;&gt; g.add_vertex(1)
+</span></span></span><span class=line><span class=cl><span class=s2>        &gt;&gt;&gt; g.add_vertex(2)
+</span></span></span><span class=line><span class=cl><span class=s2>        &gt;&gt;&gt; g.add_vertex(3)
+</span></span></span><span class=line><span class=cl><span class=s2>        &gt;&gt;&gt; g.add_vertex(4)
+</span></span></span><span class=line><span class=cl><span class=s2>        &gt;&gt;&gt; g.add_edge(1, 2)
+</span></span></span><span class=line><span class=cl><span class=s2>        &gt;&gt;&gt; g.add_edge(2, 3)
+</span></span></span><span class=line><span class=cl><span class=s2>        &gt;&gt;&gt; g.add_edge(1, 3)
+</span></span></span><span class=line><span class=cl><span class=s2>        &gt;&gt;&gt; g.connected(1, 3)
+</span></span></span><span class=line><span class=cl><span class=s2>        True
+</span></span></span><span class=line><span class=cl><span class=s2>        &gt;&gt;&gt; g.connected(1, 4)
+</span></span></span><span class=line><span class=cl><span class=s2>        False
+</span></span></span><span class=line><span class=cl><span class=s2>        &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>item1</span> <span class=ow>in</span> <span class=bp>self</span><span class=o>.</span><span class=n>_vertices</span> <span class=ow>and</span> <span class=n>item2</span> <span class=ow>in</span> <span class=bp>self</span><span class=o>.</span><span class=n>_vertices</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=n>v1</span> <span class=o>=</span> <span class=bp>self</span><span class=o>.</span><span class=n>vertices</span><span class=p>[</span><span class=n>item1</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=n>v1</span><span class=o>.</span><span class=n>check_connected</span><span class=p>(</span><span class=n>item2</span><span class=p>,</span> <span class=nb>set</span><span class=p>())</span>  <span class=c1># pass in an empty &#34;visited&#34; set</span>
+</span></span><span class=line><span class=cl>        <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=kc>False</span>
+</span></span></code></pre></td></tr></table></div></div></li><li><p>Given 2 vertices $v_1$ and $v_2$, they are connected when:</p><ul><li>$v_1 = v_2$ or there exist a neighbour $u$ of $v_1$ such that $u, v_2$ are connected</li></ul></li><li><p>This has a basic recursive definition, but does not strictly follows the recursive structure.</p><ul><li>It does not <strong>break down the datatype</strong> (graph into a smaller instance)</li><li>This leads to a new type of error <code>RecursionError</code></li></ul></li></ul><a href=#recursionerror-and-the-danger-of-infinite-recursion><h3 id=recursionerror-and-the-danger-of-infinite-recursion><span class=hanchor arialabel=Anchor># </span><code>RecursionError</code> and the danger of infinite recursion</h3></a><ul><li>To understand this, do a manual tracing</li><li>Let a graph <code>g</code> have 3 vertices, containing the items <code>1, 2, 3</code>. If call <code>g.connected(1, 3)</code>, the program will first find the vertex corresponding to <code>1</code>, which can be called $v_1$. <strong>Then the code would call <code>_Vertex.check_connected</code> on $v_1$ and <code>3</code></strong>. This is the problem
+<img src=https://tva1.sinaimg.cn/large/008eGmZEly1goxzgscwhkj309w03cdfo.jpg alt=infinite-recursion style=zoom:38%><ol><li>For $v_1$, <code>self.item ==1</code>, which is not <code>3</code>. This enters the recursive branch.</li><li>The only neighbour for $v_1$ is the vertex containing <code>2</code>, which can be called as $v_2$. Then the code would make a recursive call to <code>_Vertex.check_connected</code> of $v_2$ and <code>3</code></li><li>For $v_2$, <code>self.item == 2</code>, which is not <code>3</code>. This again, enters the recursive branch. The only neighbour of $v_2$ is $v_1$, then it would make a recursive call on $v_1$ and <code>3</code></li><li>For $v_1$ &mldr;</li></ol></li><li><u>Infinite recursion</u> - a code has expression a recursion computation that does not stop by reaching the base case<ul><li>In the above case, the Python interpreter alternates between calling the <code>Vertex.check_connected</code> with $v_1$ and <code>3</code> and with $v_2$ and <code>3</code>, and never stops</li><li>This keeps adding a <em>stack frame</em> onto the function call stack, which at then would reach the limit the Python interpreter has set, and leads to a <code>RecursionError</code></li></ul></li></ul><a href=#fixing-the-recursion-error><h3 id=fixing-the-recursion-error><span class=hanchor arialabel=Anchor># </span>Fixing the recursion error</h3></a><ul><li>Modify the recursive condition: Given 2 vertices $v_1$ and $v_2$, they are connected when:<ul><li>$v_1 = v_2$ or</li><li>There exists a neighbour $u$ of $v_1$ such that $u$ and $v_2$ are connected by a path <strong>that does not use $v_1$</strong></li><li>Achieve this by adding a <code>visited</code> parameter (which is already in the <code>Graph</code> code above)</li></ul></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-Python data-lang=Python><span class=line><span class=cl><span class=k>class</span> <span class=nc>_Vertex</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>check_connected</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>target_item</span><span class=p>:</span> <span class=n>Any</span><span class=p>,</span> <span class=n>visited</span><span class=p>:</span> <span class=nb>set</span><span class=p>[</span><span class=n>_Vertex</span><span class=p>])</span> <span class=o>-&gt;</span> <span class=nb>bool</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34;Return whether this vertex is connected to a vertex corresponding to the target_item,
+</span></span></span><span class=line><span class=cl><span class=s2>        WITHOUT using any of the vertices in visited
+</span></span></span><span class=line><span class=cl><span class=s2>
+</span></span></span><span class=line><span class=cl><span class=s2>        Preconditions:
+</span></span></span><span class=line><span class=cl><span class=s2>            - set not in visited
+</span></span></span><span class=line><span class=cl><span class=s2>        &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=bp>self</span><span class=o>.</span><span class=n>item</span> <span class=o>==</span> <span class=n>target_item</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=kc>True</span>
+</span></span><span class=line><span class=cl>        <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=n>visited</span><span class=o>.</span><span class=n>add</span><span class=p>(</span><span class=bp>self</span><span class=p>)</span>  <span class=c1># add self to the set of visited vertices </span>
+</span></span><span class=line><span class=cl>            <span class=k>for</span> <span class=n>u</span> <span class=ow>in</span> <span class=bp>self</span><span class=o>.</span><span class=n>neighbours</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                <span class=c1># only recursive on vertices that haven&#39;t been visited</span>
+</span></span><span class=line><span class=cl>                <span class=k>if</span> <span class=n>u</span> <span class=ow>not</span> <span class=ow>in</span> <span class=n>visited</span> <span class=ow>and</span> <span class=n>u</span><span class=o>.</span><span class=n>check_connected</span><span class=p>(</span><span class=n>target_item</span><span class=p>,</span> <span class=n>visited</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>                    <span class=k>return</span> <span class=kc>True</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=kc>False</span>
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>But even though this implementation is correct, and much more efficient than the previous one, it does come with an important warning we want you to remember for the future. Whenever you use recursion with a mutable argument, be very careful when choosing whether to mutate that argument or create a modified copy—if you choose to mutate the argument, know that all recursive calls will mutate it as well!</p></blockquote></article><hr><div class=page-end id=footer><div class=backlinks-container><h3>Backlinks</h3><ul class=backlinks><li>No backlinks found</li></ul></div><div><script async src=https://cdn.jsdelivr.net/npm/d3@6.7.0/dist/d3.min.js integrity="sha256-+7jaYCp29O1JusNWHaYtgUn6EhuP0VaFuswhNV06MyI=" crossorigin=anonymous></script><h3>Interactive Graph</h3><div id=graph-container></div><style>:root{--g-node:var(--secondary);--g-node-active:var(--primary);--g-node-inactive:var(--visited);--g-link:var(--outlinegray);--g-link-active:#5a7282}</style><script src=https://mel10c.github.io/mel.zhu/js/graph.2d9e48dbe7ea47c0ef1c58296ce14448.js></script></div></div><div id=contact_buttons><footer><p>Made by Melaney Zhu using <a href=https://github.com/jackyzha0/quartz>Quartz</a>, © 2023</p><ul><li><a href=https://mel10c.github.io/mel.zhu/>Home</a></li><li><a href=https://www.instagram.com/melaney_dxl/>Instagram</a></li><li><a href=https://github.com/mel10c>GitHub</a></li><li><a href=https://linkedin.com/in/melzyy>LinkedIn</a></li><li><a href=https://github.com/mel10c/mel.zhu/blob/hugo/content/documents/Resume.pdf>Resume</a></li></ul></footer></div></div></body></html>

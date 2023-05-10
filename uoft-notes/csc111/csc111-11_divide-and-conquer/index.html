@@ -1,0 +1,195 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=description content="Divide and Conquer Algorithms Introduction to Divide-and-Conquer Algorithms   Divide-and-conquer algorithms - splitting the task up into subtasks can make it easier to manage
+  Given the problem input, split it up into two or more smaller subparts with the same structure
+(Given a list to sort, split it up into two or more smaller lists)
+  Recursively run the algorithm on each subpart separately
+(Recursively run the sorting algorithm on each smaller list separately)"><title>CSC111: 11_Divide-and-Conquer</title><meta name=viewport content="width=device-width,initial-scale=1"><link rel="shortcut icon" type=image/png href=https://mel10c.github.io/mel.zhu//icon.png><link href=https://mel10c.github.io/mel.zhu/styles.9a8661985b360a1d97e0e538e164abef.min.css rel=stylesheet><link href=https://mel10c.github.io/mel.zhu/styles/_light_syntax.86a48a52faebeaaf42158b72922b1c90.min.css rel=stylesheet id=theme-link><script src=https://mel10c.github.io/mel.zhu/js/darkmode.905e4d2da56a9111aff695a0a4b69900.min.js></script>
+<script src=https://mel10c.github.io/mel.zhu/js/util.6f22941e242efae60fd84e7c32e874fa.min.js></script>
+<link rel=preload href=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css as=style onload='this.onload=null,this.rel="stylesheet"' integrity=sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js integrity=sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx crossorigin=anonymous></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin=anonymous></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/contrib/copy-tex.min.js integrity=sha384-ww/583aHhxWkz5DEVn6OKtNiIaLi2iBRNZXfJRiY1Ai7tnJ9UXpEsyvOITVpTl4A crossorigin=anonymous></script>
+<script async src=https://unpkg.com/@floating-ui/core@0.7.3></script>
+<script async src=https://unpkg.com/@floating-ui/dom@0.5.4></script>
+<script async src=https://mel10c.github.io/mel.zhu/js/popover.f03552ccb84d99ca615d1cfb9abde59e.min.js></script>
+<script defer src=https://mel10c.github.io/mel.zhu/js/code-title.ce4a43f09239a9efb48fee342e8ef2df.min.js></script>
+<script defer src=https://mel10c.github.io/mel.zhu/js/clipboard.2913da76d3cb21c5deaa4bae7da38c9f.min.js></script>
+<script defer src=https://mel10c.github.io/mel.zhu/js/callouts.7723cac461d613d118ee8bb8216b9838.min.js></script>
+<script>const SEARCH_ENABLED=!1,LATEX_ENABLED=!0,PRODUCTION=!0,BASE_URL="https://mel10c.github.io/mel.zhu/",fetchData=Promise.all([fetch("https://mel10c.github.io/mel.zhu/indices/linkIndex.4ecd462b2a0cc7b8f254e52a69d96e3c.min.json").then(e=>e.json()).then(e=>({index:e.index,links:e.links})),fetch("https://mel10c.github.io/mel.zhu/indices/contentIndex.6acfc2f415caa35851b6b3067c8415cf.min.json").then(e=>e.json())]).then(([{index:e,links:t},n])=>({index:e,links:t,content:n})),render=()=>{const e=new URL(BASE_URL),t=e.pathname,n=window.location.pathname,s=t==n;addCopyButtons(),addTitleToCodeBlocks(),addCollapsibleCallouts(),initPopover("https://mel10c.github.io/mel.zhu",!0);const o=document.getElementById("footer");if(o){const e=document.getElementById("graph-container");if(!e)return requestAnimationFrame(render);e.textContent="";const t=s&&!1;drawGraph("https://mel10c.github.io/mel.zhu",t,[{"/moc":"#4388cc"}],t?{centerForce:1,depth:-1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.5,linkDistance:1,opacityScale:3,repelForce:1,scale:1.4}:{centerForce:1,depth:1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.6,linkDistance:1,opacityScale:3,repelForce:2,scale:1.2})}var i=document.getElementsByClassName("mermaid");i.length>0&&import("https://unpkg.com/mermaid@9/dist/mermaid.esm.min.mjs").then(e=>{e.default.init()})},init=(e=document)=>{addCopyButtons(),addTitleToCodeBlocks(),renderMathInElement(e.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}],macros:{'’':"'"},throwOnError:!1})}</script><script type=module>
+    import { attachSPARouting } from "https:\/\/mel10c.github.io\/mel.zhu\/js\/router.9d4974281069e9ebb189f642ae1e3ca2.min.js"
+    attachSPARouting(init, render)
+  </script></head><body><div id=search-container><div id=search-space><input autocomplete=off id=search-bar name=search type=text aria-label=Search placeholder="Search for something..."><div id=results-container></div></div></div><script src=https://cdn.jsdelivr.net/npm/flexsearch@0.7.21/dist/flexsearch.bundle.js integrity="sha256-i3A0NZGkhsKjVMzFxv3ksk0DZh3aXqu0l49Bbh0MdjE=" crossorigin=anonymous defer></script>
+<script defer src=https://mel10c.github.io/mel.zhu/js/full-text-search.e6e2e0c213187ca0c703d6e2c7a77fcd.min.js></script><div class=singlePage><header><h1 id=page-title><a href=https://mel10c.github.io/mel.zhu/>MEL.ZHU</a></h1><div class=spacer></div><div id=search-icon><p>Search</p><svg tabindex="0" aria-labelledby="title desc" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title id="title">Search Icon</title><desc id="desc">Icon to open search</desc><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"/><circle cx="8" cy="8" r="7"/></g></svg></div><div class=darkmode><input class=toggle id=darkmode-toggle type=checkbox tabindex=-1>
+<label id=toggle-label-light for=darkmode-toggle tabindex=-1><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="dayIcon" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35"><title>Light Mode</title><path d="M6 17.5C6 16.672 5.328 16 4.5 16h-3C.672 16 0 16.672.0 17.5S.672 19 1.5 19h3C5.328 19 6 18.328 6 17.5zM7.5 26c-.414.0-.789.168-1.061.439l-2 2C4.168 28.711 4 29.086 4 29.5 4 30.328 4.671 31 5.5 31c.414.0.789-.168 1.06-.44l2-2C8.832 28.289 9 27.914 9 27.5 9 26.672 8.329 26 7.5 26zm10-20C18.329 6 19 5.328 19 4.5v-3C19 .672 18.329.0 17.5.0S16 .672 16 1.5v3C16 5.328 16.671 6 17.5 6zm10 3c.414.0.789-.168 1.06-.439l2-2C30.832 6.289 31 5.914 31 5.5 31 4.672 30.329 4 29.5 4c-.414.0-.789.168-1.061.44l-2 2C26.168 6.711 26 7.086 26 7.5 26 8.328 26.671 9 27.5 9zM6.439 8.561C6.711 8.832 7.086 9 7.5 9 8.328 9 9 8.328 9 7.5c0-.414-.168-.789-.439-1.061l-2-2C6.289 4.168 5.914 4 5.5 4 4.672 4 4 4.672 4 5.5c0 .414.168.789.439 1.06l2 2.001zM33.5 16h-3c-.828.0-1.5.672-1.5 1.5s.672 1.5 1.5 1.5h3c.828.0 1.5-.672 1.5-1.5S34.328 16 33.5 16zM28.561 26.439C28.289 26.168 27.914 26 27.5 26c-.828.0-1.5.672-1.5 1.5.0.414.168.789.439 1.06l2 2C28.711 30.832 29.086 31 29.5 31c.828.0 1.5-.672 1.5-1.5.0-.414-.168-.789-.439-1.061l-2-2zM17.5 29c-.829.0-1.5.672-1.5 1.5v3c0 .828.671 1.5 1.5 1.5s1.5-.672 1.5-1.5v-3C19 29.672 18.329 29 17.5 29zm0-22C11.71 7 7 11.71 7 17.5S11.71 28 17.5 28 28 23.29 28 17.5 23.29 7 17.5 7zm0 18c-4.136.0-7.5-3.364-7.5-7.5s3.364-7.5 7.5-7.5 7.5 3.364 7.5 7.5S21.636 25 17.5 25z"/></svg></label><label id=toggle-label-dark for=darkmode-toggle tabindex=-1><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="nightIcon" viewBox="0 0 100 100" style="enable-background='new 0 0 100 100'"><title>Dark Mode</title><path d="M96.76 66.458c-.853-.852-2.15-1.064-3.23-.534-6.063 2.991-12.858 4.571-19.655 4.571C62.022 70.495 50.88 65.88 42.5 57.5 29.043 44.043 25.658 23.536 34.076 6.47c.532-1.08.318-2.379-.534-3.23-.851-.852-2.15-1.064-3.23-.534-4.918 2.427-9.375 5.619-13.246 9.491-9.447 9.447-14.65 22.008-14.65 35.369.0 13.36 5.203 25.921 14.65 35.368s22.008 14.65 35.368 14.65c13.361.0 25.921-5.203 35.369-14.65 3.872-3.871 7.064-8.328 9.491-13.246C97.826 68.608 97.611 67.309 96.76 66.458z"/></svg></label></div></header><article><h1>CSC111: 11_Divide-and-Conquer</h1><p class=meta>Last updated
+Unknown</p><ul class=tags><li><a href=https://mel10c.github.io/mel.zhu/tags/note/>Note</a></li></ul><aside class=mainTOC><details><summary>Table of Contents</summary><nav id=TableOfContents><ol><li><a href=#introduction-to-divide-and-conquer-algorithms>Introduction to Divide-and-Conquer Algorithms</a></li><li><a href=#mergesort>Mergesort</a><ol><li><a href=#running-time-analysis>Running-time analysis</a></li></ol></li><li><a href=#quicksort>Quicksort</a><ol><li><a href=#running-time-analysis-1>Running time analysis</a></li></ol></li><li><a href=#mergesort-vs-quicksort>Mergesort vs. Quicksort</a></li></ol></nav></details></aside><a href=#divide-and-conquer-algorithms><h1 id=divide-and-conquer-algorithms><span class=hanchor arialabel=Anchor># </span>Divide and Conquer Algorithms</h1></a><a href=#introduction-to-divide-and-conquer-algorithms><h2 id=introduction-to-divide-and-conquer-algorithms><span class=hanchor arialabel=Anchor># </span>Introduction to Divide-and-Conquer Algorithms</h2></a><ul><li><p><u>Divide-and-conquer algorithms</u> - splitting the task up into subtasks can make it easier to manage</p><ol><li><p>Given the problem input, split it up into two or more smaller subparts with the same structure</p><p>(Given a list to sort, <em>split</em> it up into two or more smaller lists)</p></li><li><p>Recursively run the algorithm on each subpart separately</p><p>(Recursively run the sorting algorithm on each smaller list separately)</p></li><li><p>Combine the results of each recursive call into a single result, saving the original problem
+(<em>Combine</em> the sorted results of each recursive call into a single sorted lists)</p></li></ol></li></ul><a href=#mergesort><h2 id=mergesort><span class=hanchor arialabel=Anchor># </span>Mergesort</h2></a><ul><li><u>Mergesort</u> - first divide-and-conquer sorting algorithm (<strong>Non-mutating</strong> version)<ol><li>Given an input list to sort, divide the input into the left half and right half</li><li>Recursively sort each half</li><li>Merge each sorted half together</li></ol></li></ul><ol><li><p>First determine a base case (when can the algorithm not divide the list any further)</p><ul><li>When list has fewer than two elements</li></ul></li><li><p>Recursive step, divided the list into halves, then sort each half, then <strong>merge</strong> it together</p><ul><li>Inntuitively, we can use a similar idea as selection sort: build up a sorted list one element at a time, by repeatedly removing the next smallest element from <code>lst1</code> or <code>lst2</code>.</li></ul><table><thead><tr><th style=text-align:left>Unmerged items in <code>lst1</code></th><th style=text-align:left>Unmerged items in <code>lst2</code></th><th style=text-align:left>Comparison</th><th style=text-align:left>Sorted list</th></tr></thead><tbody><tr><td style=text-align:left><code>[-1, 3, 7, 10]</code></td><td style=text-align:left><code>[-3, 0, 2, 6]</code></td><td style=text-align:left><code>-1</code> vs. <code>-3</code></td><td style=text-align:left><code>[-3]</code></td></tr><tr><td style=text-align:left><code>[-1, 3, 7, 10]</code></td><td style=text-align:left><code>[0, 2, 6]</code></td><td style=text-align:left><code>-1</code> vs. <code>0</code></td><td style=text-align:left><code>[-3, -1]</code></td></tr><tr><td style=text-align:left><code>[3, 7, 10]</code></td><td style=text-align:left><code>[0, 2, 6]</code></td><td style=text-align:left><code>3</code> vs. <code>0</code></td><td style=text-align:left><code>[-3, -1, 0]</code></td></tr><tr><td style=text-align:left><code>[3, 7, 10]</code></td><td style=text-align:left><code>[2, 6]</code></td><td style=text-align:left><code>3</code> vs. <code>2</code></td><td style=text-align:left><code>[-3, -1, 0, 2]</code></td></tr><tr><td style=text-align:left><code>[3, 7, 10]</code></td><td style=text-align:left><code>[6]</code></td><td style=text-align:left><code>3</code> vs. <code>6</code></td><td style=text-align:left><code>[-3, -1, 0, 2, 3]</code></td></tr><tr><td style=text-align:left><code>[7, 10]</code></td><td style=text-align:left><code>[6]</code></td><td style=text-align:left><code>7</code> vs. <code>6</code></td><td style=text-align:left><code>[-3, -1, 0, 2, 3, 6]</code></td></tr><tr><td style=text-align:left><code>[7, 10]</code></td><td style=text-align:left><code>[]</code></td><td style=text-align:left>N/A</td><td style=text-align:left><code>[-3, -1, 0, 2, 3, 6]</code></td></tr></tbody></table><ul><li>Then, simply concatenate the sorted list with the unmerged items from the remaining list, as the latter will all be <code>>=</code> the former. So the final result is <code>[-3, -1, 0, 2, 3, 6] + [7, 10]</code>, yielding the merged sorted list.</li></ul></li></ol><ul><li><p>The <em>important</em> part is the helper merge function</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>def</span> <span class=nf>_merge</span><span class=p>(</span><span class=n>lst1</span><span class=p>:</span> <span class=nb>list</span><span class=p>,</span> <span class=n>lst2</span><span class=p>:</span> <span class=nb>list</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=nb>list</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;Return a sorted list with the elements in lst1 and lst2.
+</span></span></span><span class=line><span class=cl><span class=s2>
+</span></span></span><span class=line><span class=cl><span class=s2>    Preconditions:
+</span></span></span><span class=line><span class=cl><span class=s2>        - is_sorted(lst1)
+</span></span></span><span class=line><span class=cl><span class=s2>        - is_sorted(lst2)
+</span></span></span><span class=line><span class=cl><span class=s2>
+</span></span></span><span class=line><span class=cl><span class=s2>    &gt;&gt;&gt; _merge([-1, 3, 7, 10], [-3, 0, 2, 6])
+</span></span></span><span class=line><span class=cl><span class=s2>    [-3, -1, 0, 2, 3, 6, 7, 10]
+</span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=n>i1</span><span class=p>,</span> <span class=n>i2</span> <span class=o>=</span> <span class=mi>0</span><span class=p>,</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>    <span class=n>sorted_so_far</span> <span class=o>=</span> <span class=p>[]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>while</span> <span class=n>i1</span> <span class=o>&lt;</span> <span class=nb>len</span><span class=p>(</span><span class=n>lst1</span><span class=p>)</span> <span class=ow>and</span> <span class=n>i2</span> <span class=o>&lt;</span> <span class=nb>len</span><span class=p>(</span><span class=n>lst2</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=c1># Loop invariant:</span>
+</span></span><span class=line><span class=cl>        <span class=c1># sorted_so_far is a merged version of lst1[:i1] and lst2[:i2]</span>
+</span></span><span class=line><span class=cl>        <span class=k>assert</span> <span class=n>sorted_so_far</span> <span class=o>==</span> <span class=nb>sorted</span><span class=p>(</span><span class=n>lst1</span><span class=p>[:</span><span class=n>i1</span><span class=p>]</span> <span class=o>+</span> <span class=n>lst2</span><span class=p>[:</span><span class=n>i2</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>lst1</span><span class=p>[</span><span class=n>i1</span><span class=p>]</span> <span class=o>&lt;=</span> <span class=n>lst2</span><span class=p>[</span><span class=n>i2</span><span class=p>]:</span>
+</span></span><span class=line><span class=cl>            <span class=n>sorted_so_far</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>lst1</span><span class=p>[</span><span class=n>i1</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>            <span class=n>i1</span> <span class=o>+=</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>        <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=n>sorted_so_far</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>lst2</span><span class=p>[</span><span class=n>i2</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>            <span class=n>i2</span> <span class=o>+=</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1># When the loop is over, either i1 <mark> len(lst1) or i2 </mark> len(lst2)</span>
+</span></span><span class=line><span class=cl>    <span class=k>assert</span> <span class=n>i1</span> <span class=o>==</span> <span class=nb>len</span><span class=p>(</span><span class=n>lst1</span><span class=p>)</span> <span class=ow>or</span> <span class=n>i2</span> <span class=o>==</span> <span class=nb>len</span><span class=p>(</span><span class=n>lst2</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1># In either case, the remaining unmerged elements can be concatenated to sorted_so_far.</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>i1</span> <span class=o>==</span> <span class=nb>len</span><span class=p>(</span><span class=n>lst1</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>sorted_so_far</span> <span class=o>+</span> <span class=n>lst2</span><span class=p>[</span><span class=n>i2</span><span class=p>:]</span>
+</span></span><span class=line><span class=cl>    <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>sorted_so_far</span> <span class=o>+</span> <span class=n>lst1</span><span class=p>[</span><span class=n>i1</span><span class=p>:]</span>
+</span></span></code></pre></td></tr></table></div></div></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>def</span> <span class=nf>mergesort</span><span class=p>(</span><span class=n>lst</span><span class=p>:</span> <span class=nb>list</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=nb>list</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;Return a new sorted list with the same elements as lst.
+</span></span></span><span class=line><span class=cl><span class=s2>
+</span></span></span><span class=line><span class=cl><span class=s2>    This is a *non-mutating* version of mergesort; it does not mutate the input list.
+</span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=nb>len</span><span class=p>(</span><span class=n>lst</span><span class=p>)</span> <span class=o>&lt;</span> <span class=mi>2</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>lst</span><span class=o>.</span><span class=n>copy</span><span class=p>()</span>  <span class=c1># Use the list.copy method to return a new list object</span>
+</span></span><span class=line><span class=cl>    <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=c1># Divide the list into two parts, and sort them recursively.</span>
+</span></span><span class=line><span class=cl>        <span class=n>mid</span> <span class=o>=</span> <span class=nb>len</span><span class=p>(</span><span class=n>lst</span><span class=p>)</span> <span class=o>//</span> <span class=mi>2</span>
+</span></span><span class=line><span class=cl>        <span class=n>left_sorted</span> <span class=o>=</span> <span class=n>mergesort</span><span class=p>(</span><span class=n>lst</span><span class=p>[:</span><span class=n>mid</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>        <span class=n>right_sorted</span> <span class=o>=</span> <span class=n>mergesort</span><span class=p>(</span><span class=n>lst</span><span class=p>[</span><span class=n>mid</span><span class=p>:])</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=c1># Merge the two sorted halves. Using a helper here!</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>_merge</span><span class=p>(</span><span class=n>left_sorted</span><span class=p>,</span> <span class=n>right_sorted</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><a href=#running-time-analysis><h3 id=running-time-analysis><span class=hanchor arialabel=Anchor># </span>Running-time analysis</h3></a><ul><li>First we need to analyse the structure of the recursive calls made.</li><li>At the start of the list of length $n$, where $n > 1$. (For simplicity, assume $n$ is a power of 2)</li><li>In the recursive step, divide the list, each sublist has length of $\frac{n}{2}$, then recurse on each one. Then this would result in a length of $\frac{n}{4}$</li><li>Following this pattern, for each call to <code>mergesort</code> with a list of length $\frac{n}{2^k}$ for some $k \in \N$, get 2 resultant sublist of length $\frac{n}{2^{k+1}}$. The base case is reached when the call has a list length of 1</li><li>For non-recursive running time. Consider a list <code>lst</code> with length $n$, where $n \ge 2$, assume $n$ is power of 2 (ignores floors and ceilings)<ul><li>The IF condition check <code>len(lst) &lt; 2</code> and the calculation fo <code>mid</code> takes constant time<ul><li>If $n &lt; 2$ base case executes, which is constant time</li></ul></li><li>List slicing operations<code>lst[:mid]</code> and <code>list[mid:]</code> takes time proportional tot he length of the slice, which is $\frac{n}{2}$</li><li>So in the recursive step, <code>left_sorted</code> and <code>right_sorted</code> each have some $\frac{n}{2}$, running time of <code>_merge</code> is then $\frac{n}{2} + \frac{n}{2} = n$ steps</li><li>So the total is $1 + \frac{n}{2} + \frac{n}{2} + n = 2n + 1$ where $n \ge 2$</li></ul></li></ul><a href=#putting-it-together><h4 id=putting-it-together><span class=hanchor arialabel=Anchor># </span>Putting it together</h4></a><img src=https://tva1.sinaimg.cn/large/008eGmZEly1gpbk4z7qnrj30ny0g3mxg.jpg alt=mergesort-recursion-tree-full style=zoom:38%><ol><li>The initial <code>mergesort</code> call on a list of length $n$ takes $n$ steps</li><li>Each of the recursive calls on a list of length $\frac{n}{2}$ takes $\frac{n}{2}$ steps. Then each of the call on a list of length $\frac{n}{4}$ takes $\frac{n}{4}$ steps</li><li>This pattern continues, until reach the base case, which takes 1 step</li></ol><ul><li>Adding up all the numbers (key observation, each <em>level</em> in the tree has nodes with the same running time, and since this is binary tree, the number of nodes at any depth is easy to find)<ul><li>At depth $d$ in the tree, there are $2^d$ nodes, and each node contains the number $\frac{n}{2^d}$</li><li>When adding the nodes at at each depth , get $2^d \cdot \frac{n}{2^d}=n$.</li><li>In other words, <strong><em>each level</em> in the tree, it has the same total running time</strong></li></ul></li><li>There are a total of $\log_2 (n)+1$ levels in total. Get the total running then is $n \cdot (\log_2 (n)+1$</li><li><strong>This result in $\Theta(n \log n)$,</strong> this is much better then worst case $\Theta(n^2)$ for selection and insertion sort</li></ul><a href=#quicksort><h2 id=quicksort><span class=hanchor arialabel=Anchor># </span>Quicksort</h2></a><ul><li><u>Quicksort</u> - second divide-and-conquer sorting algorithm (<strong>Non-mutating</strong> version)<ol><li>First pick one one element from the input list, which we call the <strong>pivot</strong>. Then, we split up the list into two parts: the elements less than or equal to the pivot, and those greater than the pivot. This is traditionally called the <em>partitioning</em> step.</li><li>Next, we sort each part recursively.</li><li>Finally, we concatenate the two sorted parts, putting the pivot in between them.</li></ol></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>def</span> <span class=nf>quicksort</span><span class=p>(</span><span class=n>lst</span><span class=p>:</span> <span class=nb>list</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=nb>list</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;Return a sorted list with the same elements as lst.
+</span></span></span><span class=line><span class=cl><span class=s2>
+</span></span></span><span class=line><span class=cl><span class=s2>    This is a *non-mutating* version of quicksort; it does not mutate the
+</span></span></span><span class=line><span class=cl><span class=s2>    input list.
+</span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=nb>len</span><span class=p>(</span><span class=n>lst</span><span class=p>)</span> <span class=o>&lt;</span> <span class=mi>2</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>lst</span><span class=o>.</span><span class=n>copy</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=c1># Divide the list into two parts by picking a pivot and then partitioning the list.</span>
+</span></span><span class=line><span class=cl>        <span class=c1># In this implementation, we&#39;re choosing the first element as the pivot, but</span>
+</span></span><span class=line><span class=cl>        <span class=c1># we could have made lots of other choices here (e.g., last, random).</span>
+</span></span><span class=line><span class=cl>        <span class=n>pivot</span> <span class=o>=</span> <span class=n>lst</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>        <span class=n>smaller</span><span class=p>,</span> <span class=n>bigger</span> <span class=o>=</span> <span class=n>_partition</span><span class=p>(</span><span class=n>lst</span><span class=p>[</span><span class=mi>1</span><span class=p>:],</span> <span class=n>pivot</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=c1># Sort each part recursively</span>
+</span></span><span class=line><span class=cl>        <span class=n>smaller_sorted</span> <span class=o>=</span> <span class=n>quicksort</span><span class=p>(</span><span class=n>smaller</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>bigger_sorted</span> <span class=o>=</span> <span class=n>quicksort</span><span class=p>(</span><span class=n>bigger</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=c1># Combine the two sorted parts. No need for a helper here!</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>smaller_sorted</span> <span class=o>+</span> <span class=p>[</span><span class=n>pivot</span><span class=p>]</span> <span class=o>+</span> <span class=n>bigger_sorted</span>
+</span></span></code></pre></td></tr></table></div></div><ul><li><p>Using a helper partition function</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>def</span> <span class=nf>_partition</span><span class=p>(</span><span class=n>lst</span><span class=p>:</span> <span class=nb>list</span><span class=p>,</span> <span class=n>pivot</span><span class=p>:</span> <span class=n>Any</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=nb>tuple</span><span class=p>[</span><span class=nb>list</span><span class=p>,</span> <span class=nb>list</span><span class=p>]:</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;Return a partition of lst with the chosen pivot.
+</span></span></span><span class=line><span class=cl><span class=s2>
+</span></span></span><span class=line><span class=cl><span class=s2>    Return two lists, where the first contains the items in lst
+</span></span></span><span class=line><span class=cl><span class=s2>    that are &lt;= pivot, and the second contains the items in lst that are &gt; pivot.
+</span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=n>smaller</span> <span class=o>=</span> <span class=p>[]</span>
+</span></span><span class=line><span class=cl>    <span class=n>bigger</span> <span class=o>=</span> <span class=p>[]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>item</span> <span class=ow>in</span> <span class=n>lst</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>item</span> <span class=o>&lt;=</span> <span class=n>pivot</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=n>smaller</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>item</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=n>bigger</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>item</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=p>(</span><span class=n>smaller</span><span class=p>,</span> <span class=n>bigger</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div></li></ul><a href=#running-time-analysis-1><h3 id=running-time-analysis-1><span class=hanchor arialabel=Anchor># </span>Running time analysis</h3></a><ul><li><p>The non-recursive part of <code>quicksort</code> is $\Theta(n)$, where $n$ is the length of the input list. (This for the list slicing part, other statements takes constant time)</p></li><li><p><code>quicksort</code> also always makes two recursive calls, on its two partitions. (Also result in binary tree)</p></li><li><p>However, the two partitions does not always have the same length, it <strong>depends of the choice of pivot</strong></p><ul><li><p>If pivot is median of the list, 2 partitions has a size $\frac{n}{2}$, which results in $\Theta(n \log n)$ (<strong>minimum</strong>)</p></li><li><p>If the pivot is the smallest element, then the <code>smaller</code> partition has no elements whereas the <code>bigger</code> partition have all remaining of $n-1$ elements. (This is the <strong>maximum</strong> running time)</p><p><img src=https://tva1.sinaimg.cn/large/008eGmZEly1gpbkhrxrwnj30me0jk0t1.jpg alt=quicksort-unbalanced-tree style=zoom:38%> $\left(\sum_{i = 1}^n i\right) + (n-1) = \frac{n(n+1)}{2} + n-1
+\Rightarrow \Theta(n^2)$</p></li><li><p><strong>This means <code>quicksort</code> has a running time range from $\Theta(n \log n)$ to $\Theta(n^2)$</strong></p></li></ul></li></ul><a href=#mergesort-vs-quicksort><h2 id=mergesort-vs-quicksort><span class=hanchor arialabel=Anchor># </span>Mergesort vs. Quicksort</h2></a><ul><li>Both mergesort and quicksort are recursive sorting algorithms based on the <em>divide-and-conquer</em> paradigm.<ul><li>For mergesort, the “divide” step is simple, since the input list is simply split in half. <strong>The “combine” step is the hard part</strong>, where we use a clever <code>_merge</code> helper to merge the two sorted lists together.</li><li>For quicksort, <strong>the “divide” step is the complex one</strong>, where the input list is partitioned into two parts based on comparing the items to a chosen pivot value. But once that’s done, the “combine” step is simple: we cna just concatenate the results.</li></ul></li><li>The asymptotic Theta notion simplifies the running-time analysis, which also <em>flattens</em> the reported running times.<ul><li>In practice, an <em>in-place</em> implementation of quicksort can be significantly faster than mergesort</li><li>For most inputs, quicksort has “smaller constants” than mergesort, and performs fewer primitive machine operations than mergesort does.</li><li><strong>Simply put, for most inputs quicksort is faster than mergesort, even though its worst-case running time is larger.</strong></li></ul></li></ul><blockquote><p><strong>What sorting algorithm do Python’s built-in <code>sorted</code> and <code>list.sort</code> functions use?!</strong>**</p><p>It turns out that Python uses a sorting algorithm known as
+<a href=https://en.wikipedia.org/wiki/Timsort rel=noopener><strong>Timsort</strong></a>, which was invented by Tim Peters in 2002 specifically for the Python programming language. You might be disappointed that we didn’t cover that algorithm in this course, but in fact, Timsort is essentially a highly optimized version of mergesort. Timsort uses the same basic idea of merging sorted sublists, but does so in a much smarter and more efficient way than our <code>mergesort</code> implementation, and adds a few tweaks based on empirical tests. One of those tweaks is switching to <em>insertion sort</em> to sort small sublists, which again reveals how our asymptotic worst-case running time doesn’t tell the full story.</p></blockquote></article><hr><div class=page-end id=footer><div class=backlinks-container><h3>Backlinks</h3><ul class=backlinks><li>No backlinks found</li></ul></div><div><script async src=https://cdn.jsdelivr.net/npm/d3@6.7.0/dist/d3.min.js integrity="sha256-+7jaYCp29O1JusNWHaYtgUn6EhuP0VaFuswhNV06MyI=" crossorigin=anonymous></script><h3>Interactive Graph</h3><div id=graph-container></div><style>:root{--g-node:var(--secondary);--g-node-active:var(--primary);--g-node-inactive:var(--visited);--g-link:var(--outlinegray);--g-link-active:#5a7282}</style><script src=https://mel10c.github.io/mel.zhu/js/graph.2d9e48dbe7ea47c0ef1c58296ce14448.js></script></div></div><div id=contact_buttons><footer><p>Made by Melaney Zhu using <a href=https://github.com/jackyzha0/quartz>Quartz</a>, © 2023</p><ul><li><a href=https://mel10c.github.io/mel.zhu/>Home</a></li><li><a href=https://www.instagram.com/melaney_dxl/>Instagram</a></li><li><a href=https://github.com/mel10c>GitHub</a></li><li><a href=https://linkedin.com/in/melzyy>LinkedIn</a></li><li><a href=https://github.com/mel10c/mel.zhu/blob/hugo/content/documents/Resume.pdf>Resume</a></li></ul></footer></div></div></body></html>

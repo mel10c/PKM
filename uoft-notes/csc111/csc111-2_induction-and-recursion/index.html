@@ -1,0 +1,299 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=description content="Induction and Recursion Proof by Induction   The induction principle applies to universal statements over the natural numbers
+ Using chain of implications    The base case is a poof that the stamens is True for the first natural number $n=0$, i.e. prove that $P(n)$ holds
+  The inductive step is a poof that for all $k \in \mathbb{N}$ if $P(k)$ is True then $P(k+1)$ is also True $$ \forall k \in \mathbb{N},~ P(k) \quad \Rightarrow \quad P(k+1) $$"><title>CSC111: 2_Induction and Recursion</title><meta name=viewport content="width=device-width,initial-scale=1"><link rel="shortcut icon" type=image/png href=https://mel10c.github.io/mel.zhu//icon.png><link href=https://mel10c.github.io/mel.zhu/styles.9a8661985b360a1d97e0e538e164abef.min.css rel=stylesheet><link href=https://mel10c.github.io/mel.zhu/styles/_light_syntax.86a48a52faebeaaf42158b72922b1c90.min.css rel=stylesheet id=theme-link><script src=https://mel10c.github.io/mel.zhu/js/darkmode.905e4d2da56a9111aff695a0a4b69900.min.js></script>
+<script src=https://mel10c.github.io/mel.zhu/js/util.6f22941e242efae60fd84e7c32e874fa.min.js></script>
+<link rel=preload href=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css as=style onload='this.onload=null,this.rel="stylesheet"' integrity=sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js integrity=sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx crossorigin=anonymous></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin=anonymous></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/contrib/copy-tex.min.js integrity=sha384-ww/583aHhxWkz5DEVn6OKtNiIaLi2iBRNZXfJRiY1Ai7tnJ9UXpEsyvOITVpTl4A crossorigin=anonymous></script>
+<script async src=https://unpkg.com/@floating-ui/core@0.7.3></script>
+<script async src=https://unpkg.com/@floating-ui/dom@0.5.4></script>
+<script async src=https://mel10c.github.io/mel.zhu/js/popover.f03552ccb84d99ca615d1cfb9abde59e.min.js></script>
+<script defer src=https://mel10c.github.io/mel.zhu/js/code-title.ce4a43f09239a9efb48fee342e8ef2df.min.js></script>
+<script defer src=https://mel10c.github.io/mel.zhu/js/clipboard.2913da76d3cb21c5deaa4bae7da38c9f.min.js></script>
+<script defer src=https://mel10c.github.io/mel.zhu/js/callouts.7723cac461d613d118ee8bb8216b9838.min.js></script>
+<script>const SEARCH_ENABLED=!1,LATEX_ENABLED=!0,PRODUCTION=!0,BASE_URL="https://mel10c.github.io/mel.zhu/",fetchData=Promise.all([fetch("https://mel10c.github.io/mel.zhu/indices/linkIndex.4ecd462b2a0cc7b8f254e52a69d96e3c.min.json").then(e=>e.json()).then(e=>({index:e.index,links:e.links})),fetch("https://mel10c.github.io/mel.zhu/indices/contentIndex.6acfc2f415caa35851b6b3067c8415cf.min.json").then(e=>e.json())]).then(([{index:e,links:t},n])=>({index:e,links:t,content:n})),render=()=>{const e=new URL(BASE_URL),t=e.pathname,n=window.location.pathname,s=t==n;addCopyButtons(),addTitleToCodeBlocks(),addCollapsibleCallouts(),initPopover("https://mel10c.github.io/mel.zhu",!0);const o=document.getElementById("footer");if(o){const e=document.getElementById("graph-container");if(!e)return requestAnimationFrame(render);e.textContent="";const t=s&&!1;drawGraph("https://mel10c.github.io/mel.zhu",t,[{"/moc":"#4388cc"}],t?{centerForce:1,depth:-1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.5,linkDistance:1,opacityScale:3,repelForce:1,scale:1.4}:{centerForce:1,depth:1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.6,linkDistance:1,opacityScale:3,repelForce:2,scale:1.2})}var i=document.getElementsByClassName("mermaid");i.length>0&&import("https://unpkg.com/mermaid@9/dist/mermaid.esm.min.mjs").then(e=>{e.default.init()})},init=(e=document)=>{addCopyButtons(),addTitleToCodeBlocks(),renderMathInElement(e.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}],macros:{'’':"'"},throwOnError:!1})}</script><script type=module>
+    import { attachSPARouting } from "https:\/\/mel10c.github.io\/mel.zhu\/js\/router.9d4974281069e9ebb189f642ae1e3ca2.min.js"
+    attachSPARouting(init, render)
+  </script></head><body><div id=search-container><div id=search-space><input autocomplete=off id=search-bar name=search type=text aria-label=Search placeholder="Search for something..."><div id=results-container></div></div></div><script src=https://cdn.jsdelivr.net/npm/flexsearch@0.7.21/dist/flexsearch.bundle.js integrity="sha256-i3A0NZGkhsKjVMzFxv3ksk0DZh3aXqu0l49Bbh0MdjE=" crossorigin=anonymous defer></script>
+<script defer src=https://mel10c.github.io/mel.zhu/js/full-text-search.e6e2e0c213187ca0c703d6e2c7a77fcd.min.js></script><div class=singlePage><header><h1 id=page-title><a href=https://mel10c.github.io/mel.zhu/>MEL.ZHU</a></h1><div class=spacer></div><div id=search-icon><p>Search</p><svg tabindex="0" aria-labelledby="title desc" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title id="title">Search Icon</title><desc id="desc">Icon to open search</desc><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"/><circle cx="8" cy="8" r="7"/></g></svg></div><div class=darkmode><input class=toggle id=darkmode-toggle type=checkbox tabindex=-1>
+<label id=toggle-label-light for=darkmode-toggle tabindex=-1><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="dayIcon" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35"><title>Light Mode</title><path d="M6 17.5C6 16.672 5.328 16 4.5 16h-3C.672 16 0 16.672.0 17.5S.672 19 1.5 19h3C5.328 19 6 18.328 6 17.5zM7.5 26c-.414.0-.789.168-1.061.439l-2 2C4.168 28.711 4 29.086 4 29.5 4 30.328 4.671 31 5.5 31c.414.0.789-.168 1.06-.44l2-2C8.832 28.289 9 27.914 9 27.5 9 26.672 8.329 26 7.5 26zm10-20C18.329 6 19 5.328 19 4.5v-3C19 .672 18.329.0 17.5.0S16 .672 16 1.5v3C16 5.328 16.671 6 17.5 6zm10 3c.414.0.789-.168 1.06-.439l2-2C30.832 6.289 31 5.914 31 5.5 31 4.672 30.329 4 29.5 4c-.414.0-.789.168-1.061.44l-2 2C26.168 6.711 26 7.086 26 7.5 26 8.328 26.671 9 27.5 9zM6.439 8.561C6.711 8.832 7.086 9 7.5 9 8.328 9 9 8.328 9 7.5c0-.414-.168-.789-.439-1.061l-2-2C6.289 4.168 5.914 4 5.5 4 4.672 4 4 4.672 4 5.5c0 .414.168.789.439 1.06l2 2.001zM33.5 16h-3c-.828.0-1.5.672-1.5 1.5s.672 1.5 1.5 1.5h3c.828.0 1.5-.672 1.5-1.5S34.328 16 33.5 16zM28.561 26.439C28.289 26.168 27.914 26 27.5 26c-.828.0-1.5.672-1.5 1.5.0.414.168.789.439 1.06l2 2C28.711 30.832 29.086 31 29.5 31c.828.0 1.5-.672 1.5-1.5.0-.414-.168-.789-.439-1.061l-2-2zM17.5 29c-.829.0-1.5.672-1.5 1.5v3c0 .828.671 1.5 1.5 1.5s1.5-.672 1.5-1.5v-3C19 29.672 18.329 29 17.5 29zm0-22C11.71 7 7 11.71 7 17.5S11.71 28 17.5 28 28 23.29 28 17.5 23.29 7 17.5 7zm0 18c-4.136.0-7.5-3.364-7.5-7.5s3.364-7.5 7.5-7.5 7.5 3.364 7.5 7.5S21.636 25 17.5 25z"/></svg></label><label id=toggle-label-dark for=darkmode-toggle tabindex=-1><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="nightIcon" viewBox="0 0 100 100" style="enable-background='new 0 0 100 100'"><title>Dark Mode</title><path d="M96.76 66.458c-.853-.852-2.15-1.064-3.23-.534-6.063 2.991-12.858 4.571-19.655 4.571C62.022 70.495 50.88 65.88 42.5 57.5 29.043 44.043 25.658 23.536 34.076 6.47c.532-1.08.318-2.379-.534-3.23-.851-.852-2.15-1.064-3.23-.534-4.918 2.427-9.375 5.619-13.246 9.491-9.447 9.447-14.65 22.008-14.65 35.369.0 13.36 5.203 25.921 14.65 35.368s22.008 14.65 35.368 14.65c13.361.0 25.921-5.203 35.369-14.65 3.872-3.871 7.064-8.328 9.491-13.246C97.826 68.608 97.611 67.309 96.76 66.458z"/></svg></label></div></header><article><h1>CSC111: 2_Induction and Recursion</h1><p class=meta>Last updated
+Unknown</p><ul class=tags><li><a href=https://mel10c.github.io/mel.zhu/tags/note/>Note</a></li></ul><aside class=mainTOC><details><summary>Table of Contents</summary><nav id=TableOfContents><ol><li><a href=#proof-by-induction>Proof by Induction</a><ol><li></li></ol></li><li><a href=#recursively-defined-functions>Recursively-Defined Functions</a><ol><li></li></ol></li><li><a href=#nested-lists>Nested Lists</a><ol><li><a href=#recursive-function-design-recipe-for-nested-lists>Recursive function design recipe for nested lists</a></li></ol></li><li><a href=#recursive-list>Recursive List</a><ol><li></li></ol></li><li><a href=#application-fractals>Application: Fractals</a><ol><li><a href=#pygame><code>pygame</code></a></li><li><a href=#implication>Implication</a></li></ol></li></ol></nav></details></aside><a href=#induction-and-recursion><h1 id=induction-and-recursion><span class=hanchor arialabel=Anchor># </span>Induction and Recursion</h1></a><a href=#proof-by-induction><h2 id=proof-by-induction><span class=hanchor arialabel=Anchor># </span>Proof by Induction</h2></a><img src=https://tva1.sinaimg.cn/large/008eGmZEly1gnq194pfj6j318e0omwhy.jpg alt="Screen Shot 2021-02-16 at 15.27.01" style=zoom:35%><ul><li><p>The induction principle applies to <strong>universal</strong> statements over the <strong>natural</strong> numbers</p><ul><li>Using chain of implications</li></ul></li><li><p>The <u>base case</u> is a poof that the stamens is <em>True</em> for the first natural number $n=0$, i.e. prove that $P(n)$ holds</p></li><li><p>The <u>inductive step</u> is a poof that for all $k \in \mathbb{N}$ if $P(k)$ is <em>True</em> then $P(k+1)$ is also <em>True</em>
+$$
+\forall k \in \mathbb{N},~ P(k) \quad \Rightarrow \quad P(k+1)
+$$</p><blockquote><a href=#prove-that-forall-n-in-mathbbn-fn--fracnn12><h5 id=prove-that-forall-n-in-mathbbn-fn--fracnn12><span class=hanchor arialabel=Anchor># </span>Prove that $\forall n \in \mathbb{N},~ f(n) = \frac{n(n+1)}{2}$</h5></a><p><em>Proof</em>. Prove this statement by induction on $n$</p><ul><li><p><u>Base case</u>: Let $n=0$, then
+$f(0) = \sum_{i=0}^0 i =0$ And, $\frac{0(0+1)}{2} = 0$. This proves the two sides of the equation are equal</p></li><li><p><u>Induction step</u>: Let $k \in \N$ and assume that $f(k) = \frac{k(k+1)}{2}$. WTS that $f(k+1)=\frac{(k+1)(k+2)}{2}$<br>$$
+\begin{align*}
+f(k+1) &= \sum^{k+1}<em>{i=0} i \tag{defintion of $f$} \
+&= \left(\sum^k</em>{i=0} i \right) + (k+1) \tag{taking out last term} \
+&= f(k) + (k+1) \tag{definition of $f$} \
+&= \frac{k(k+1)}{2} + (k+1) \tag{by the I.H} \
+&= \frac{(k+1)(k+2)}{2}
+\quad \quad \quad \blacksquare
+\end{align*}
+$$</p></li></ul></blockquote></li></ul><a href=#recursively-defined-functions><h2 id=recursively-defined-functions><span class=hanchor arialabel=Anchor># </span>Recursively-Defined Functions</h2></a><p>$$
+\forall k \in \N,~ f(k+1) = f(k) + (k+1) \quad \Leftrightarrow \quad
+\begin{cases}
+0,&\text{ if } n=0 \
+f(n-1) +n &\text{ if } n>0
+\end{cases}
+$$</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>def</span> <span class=nf>f</span><span class=p>(</span><span class=n>n</span><span class=p>:</span> <span class=nb>int</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=nb>int</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;Return the sum of the numbers between 0 and n, inclusive.
+</span></span></span><span class=line><span class=cl><span class=s2>    
+</span></span></span><span class=line><span class=cl><span class=s2>    Preconditions:
+</span></span></span><span class=line><span class=cl><span class=s2>    	- n &gt;= 0
+</span></span></span><span class=line><span class=cl><span class=s2>    
+</span></span></span><span class=line><span class=cl><span class=s2>    &gt;&gt;&gt; f(4)
+</span></span></span><span class=line><span class=cl><span class=s2>    10
+</span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>n</span> <span class=o>==</span> <span class=mi>0</span><span class=p>:</span>  <span class=c1># base case</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>    <span class=k>else</span><span class=p>:</span>  <span class=c1># recursie step</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>f</span><span class=p>(</span><span class=n>n</span> <span class=o>-</span> <span class=mi>1</span><span class=p>)</span> <span class=o>+</span> <span class=n>n</span>
+</span></span></code></pre></td></tr></table></div></div><ul><li><p><u>Recursive</u> definition (self-referential definition) - $f$ is defined in terms of itself</p><ul><li>The term <u>recursive call</u> is used to describe the inner <code>f(n-1)</code> call</li><li><u>Recursive step</u> is the step that contains the recursive call</li><li>Recursive function are not limited to going &ldquo;from $n$ to $n-1$&rdquo;, its valid as long as it always uses &ldquo;smaller&rdquo; argument values to the function in the recursive call</li></ul><blockquote><a href=#the-euclidean-algorithm-as-recursive-functions><h5 id=the-euclidean-algorithm-as-recursive-functions><span class=hanchor arialabel=Anchor># </span>The Euclidean algorithm as recursive functions</h5></a><p>Use $\gcd(a, b)=\gcd(b, a%b)$ plus the fact that $\gcd(a, 0)=a$ for all $a\in \N$, get
+$$
+\begin{cases}
+a,&\text{ if } b=0 \\ \gcd(b, a%b) &\text{ if } b>0
+\end{cases}
+$$
+Translate the recursive function into python</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>def</span> <span class=nf>euclidean_gcd_rec</span><span class=p>(</span><span class=n>a</span><span class=p>:</span> <span class=nb>int</span><span class=p>,</span> <span class=n>b</span><span class=p>:</span> <span class=nb>int</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=nb>int</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;Return the gcd of and b(using recursion!)
+</span></span></span><span class=line><span class=cl><span class=s2>    
+</span></span></span><span class=line><span class=cl><span class=s2>    Preconditions:
+</span></span></span><span class=line><span class=cl><span class=s2>    	- a &gt;= 0 and b&gt;= 0
+</span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>b</span> <span class=o>==</span> <span class=mi>0</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>a</span>
+</span></span><span class=line><span class=cl>    <span class=k>else</span><span class=p>:</span> 
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>euclidean_gcd_rec</span><span class=p>(</span><span class=n>b</span><span class=p>,</span> <span class=n>a</span> <span class=o>%</span> <span class=n>b</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div></blockquote></li></ul><a href=#nested-lists><h2 id=nested-lists><span class=hanchor arialabel=Anchor># </span>Nested Lists</h2></a><ul><li><p>When performing operation in nested lists, it is hard to write a uniform function using <code>for loops</code> that works for random nested layers of lists</p></li><li><p><u>Nested list of integers</u> as one of two types of values</p><ul><li>For all $n \in \N$, the single integer $n$ is a nested list of integers</li><li>For all $k \in \N$ and nested lists of integers $a_0, a_1 \dots, a_{k-1}$, the list $[a_0, a_1 \dots, a_{k-1}]$ is also a nested list of integers<ul><li>Each of the $a_i$ is called a <u>sublist</u> of the outer list</li></ul></li></ul><p>$$
+nested_sum(x) =
+\begin{cases}
+x,&\text{ if } x \in \Z \\ \sum_{i=0}^{k-1}nested_sum(a_i) &\text{ if } x=[a_0, a_1 \dots, a_{k-1}]
+\end{cases}
+$$</p></li></ul><a href=#recursive-function-design-recipe-for-nested-lists><h3 id=recursive-function-design-recipe-for-nested-lists><span class=hanchor arialabel=Anchor># </span>Recursive function design recipe for nested lists</h3></a><ol><li><p>Write a doctest example for the <em>base case</em> of the function (when function called on <code>int</code> value)</p></li><li><p>Write a doctest example for the <em>recursive step</em> of the function</p><ul><li>Pick a nested list with around 3 sublists AND another sublist is a <code>list</code> that contains other lists</li><li>Show the correct return value of the function for this input nested list</li></ul></li><li><p>Use the following <em>nested list recursion code template</em> to follow the recursive structure of nested list</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>def</span> <span class=nf>f</span><span class=p>(</span><span class=n>nested_list</span><span class=p>:</span> <span class=n>Union</span><span class=p>[</span><span class=nb>int</span><span class=p>,</span> <span class=nb>list</span><span class=p>])</span> <span class=o>-&gt;</span> <span class=o>...</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=nb>isinstance</span><span class=p>(</span><span class=n>nested_list</span><span class=p>,</span> <span class=nb>int</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=p>(</span><span class=o>...</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>accumulator</span> <span class=o>=</span> <span class=p>(</span><span class=o>...</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=n>sublist</span> <span class=ow>in</span> <span class=n>nested_list</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=n>rec_value</span> <span class=o>=</span> <span class=n>f</span><span class=p>(</span><span class=n>sublist</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=n>accumulator</span> <span class=o>=</span> <span class=p>(</span><span class=o>...</span><span class=p>)</span> <span class=n>accumulator</span> <span class=p>(</span><span class=o>...</span><span class=p>)</span> <span class=n>rec_value</span> <span class=p>(</span><span class=o>...</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>accumulator</span>
+</span></span></code></pre></td></tr></table></div></div></li><li><p>Implement the function&rsquo;s base case, using the first doctest example to test</p></li><li><p>Implement the function&rsquo;s recursive step</p><ul><li>Use the second doctest example to write down the relevant sublists and recursive function calls. Fill the recursive call output based on the function specification, not any code you wrote</li><li>Analyse the output of the recursive calls and determine how to combine them to return the correct value of original call</li></ul></li></ol><a href=#recursive-list><h2 id=recursive-list><span class=hanchor arialabel=Anchor># </span>Recursive List</h2></a><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>class</span> <span class=nc>RecursiveList</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;A recursive implementation of the List ADT.
+</span></span></span><span class=line><span class=cl><span class=s2>    
+</span></span></span><span class=line><span class=cl><span class=s2>    Representation Invariants:
+</span></span></span><span class=line><span class=cl><span class=s2>    	- (self._first is None) == (self._rest is None)
+</span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=c1># Private Instance Attributes:</span>
+</span></span><span class=line><span class=cl>    <span class=c1>#	- _first: The first item in the list, or None if this list is empty</span>
+</span></span><span class=line><span class=cl>    <span class=c1>#	- _rest: A list contianing the items that come after the first one, </span>
+</span></span><span class=line><span class=cl>    <span class=c1>#			 or None if this list is empty</span>
+</span></span><span class=line><span class=cl>    <span class=n>_first</span><span class=p>:</span> <span class=n>Optional</span><span class=p>[</span><span class=n>Any</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>    <span class=n>_rest</span><span class=p>:</span> <span class=n>Optional</span><span class=p>[</span><span class=n>RecursiveList</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>        
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>first</span><span class=p>:</span> <span class=n>Optional</span><span class=p>[</span><span class=n>Any</span><span class=p>],</span> <span class=n>rest</span><span class=p>:</span><span class=n>Optional</span><span class=p>[</span><span class=n>RecursiveList</span><span class=p>])</span> <span class=o>-&gt;</span> <span class=kc>None</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34;Initialize a new recursive list.&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>_first</span> <span class=o>=</span> <span class=n>first</span>
+</span></span><span class=line><span class=cl>        <span class=bp>self</span><span class=o>.</span><span class=n>_rest</span> <span class=o>=</span> <span class=n>rest</span>
+</span></span></code></pre></td></tr></table></div></div><ul><li><p>Recursive definition of list</p><ul><li><p>The empty list <code>[]</code> is a list</p></li><li><p>If <code>x</code> is a value and <code>r</code> is a list, then a new list <code>lst</code> whose first element is <code>x</code> and whose other elements are the elements of <code>r</code> can be constructed</p><ul><li><code>x</code> is the <strong>first</strong> element of <code>lst</code> and <code>r</code> the <strong>rest</strong> of <code>lst</code></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=p>[</span><span class=mi>1</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>,</span> <span class=mi>4</span><span class=p>]</span> <span class=o>==</span> <span class=p>([</span><span class=mi>1</span><span class=p>]</span> <span class=o>+</span> <span class=p>([</span><span class=mi>2</span><span class=p>],</span> <span class=p>[</span><span class=mi>3</span><span class=p>],</span> <span class=p>[</span><span class=mi>4</span><span class=p>],</span> <span class=p>[]))</span>
+</span></span></code></pre></td></tr></table></div></div></li></ul><blockquote><a href=#calculating-the-sum-of-a-list-of-integers><h5 id=calculating-the-sum-of-a-list-of-integers><span class=hanchor arialabel=Anchor># </span>Calculating the sum of a list of integers</h5></a><ul><li>Let <code>lst</code> be an empty list, then its sum is $0$</li><li>Let <code>lst</code> be an non-empty list of integers. Decompose: first element $x$ and rest of its element $r$.</li></ul><p>$$
+sum(lst) =
+\begin{cases}
+0, &\text{ if } lst \text{ is empty} \\ (\text{first of }lst) + sum(\text{rest of }lst)
+&\text{ if } lst \text{ is non-empty }
+\end{cases}
+$$</p><p>Translate into python using <code>RecursiveList</code> class</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>class</span> <span class=nc>RecursiveList</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>sum</span><span class=p>(</span><span class=bp>self</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=nb>int</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34;Return the sum of the elements in this list.
+</span></span></span><span class=line><span class=cl><span class=s2>        
+</span></span></span><span class=line><span class=cl><span class=s2>        Preconditions:
+</span></span></span><span class=line><span class=cl><span class=s2>        	- every element in this list is an int
+</span></span></span><span class=line><span class=cl><span class=s2>        &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=bp>self</span><span class=o>.</span><span class=n>_first</span> <span class=ow>is</span> <span class=kc>None</span><span class=p>:</span>  <span class=c1># Base Case</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>        <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=bp>self</span><span class=o>.</span><span class=n>_first</span> <span class=o>+</span> <span class=bp>self</span><span class=o>.</span><span class=n>_rest</span><span class=o>.</span><span class=n>sum</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div></blockquote></li><li><p><code>RecursiveList</code> and <code>_Node</code> classes have the same structure (<code>_Node</code> is a recursive class as well)</p></li></ul><blockquote><a href=#application-fractals><h2 id=application-fractals><span class=hanchor arialabel=Anchor># </span>Application: Fractals</h2></a><ul><li><p><u>Fractal</u> - geometric figure that has been defined recursively (A figure that can be split into parts, each of which is a smaller copy of the original)</p></li><li><p><u>The Sierpinski Triangle</u> - has the shape of an <strong>equilateral triangle,</strong> <strong>subdivided into 4</strong> smaller and congruent equilateral triangles. The smaller triangle in the <strong>centre is &ldquo;empty&rdquo;</strong>, while the <strong>remaining smaller triangles are themselves smaller Sierpinski Triangles</strong></p><p><img src=https://tva1.sinaimg.cn/large/008eGmZEly1gnq47l9zevj30m80m8q3d.jpg alt=step2-og style=zoom:25%><img src=https://tva1.sinaimg.cn/large/008eGmZEly1gnvu0hvcasj30m80m80t3.jpg alt=step3-og style=zoom:25%><img src=https://tva1.sinaimg.cn/large/008eGmZEly1gnq47pjgeij30m80m8q4b.jpg alt=step4-og style=zoom:25%></p></li></ul><a href=#pygame><h3 id=pygame><span class=hanchor arialabel=Anchor># </span><code>pygame</code></h3></a><ul><li><code>pygame.Surface</code> object represents the surface to draw the given object</li><li>The origin of the coordinate system of <code>pygame</code> is located in the top left corner
+<img src=https://tva1.sinaimg.cn/large/008eGmZEly1gnq43aw5kij30ce0camxk.jpg alt="Screen Shot 2021-02-16 at 17.05.29" style=zoom:25%></li></ul><a href=#implication><h3 id=implication><span class=hanchor arialabel=Anchor># </span>Implication</h3></a><img src=https://tva1.sinaimg.cn/large/008eGmZEly1gnq48vdl6cj315d0u0my8.jpg alt=labeled_vertices style=zoom:15%><ul><li>Key insight: the side length of the triangle decreases by a factor of 2 at each call (use <em>midpoints</em>)</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>pygame</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Define some colours using their RGB values</span>
+</span></span><span class=line><span class=cl><span class=n>FOREGROUND</span> <span class=o>=</span> <span class=p>(</span><span class=mi>255</span><span class=p>,</span> <span class=mi>113</span><span class=p>,</span> <span class=mi>41</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>BACKGROUND</span> <span class=o>=</span> <span class=p>(</span><span class=mi>46</span><span class=p>,</span> <span class=mi>47</span><span class=p>,</span> <span class=mi>41</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># The minimum number of pixels in the Sierpinski triangle</span>
+</span></span><span class=line><span class=cl><span class=n>MIN_SIDE</span> <span class=o>=</span> <span class=mi>3</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>sierpinski</span><span class=p>(</span><span class=n>screen</span><span class=p>:</span> <span class=n>pygame</span><span class=o>.</span><span class=n>Surface</span><span class=p>,</span> <span class=n>v0</span><span class=p>:</span> <span class=nb>tuple</span><span class=p>[</span><span class=nb>int</span><span class=p>,</span> <span class=nb>int</span><span class=p>],</span> <span class=n>v1</span><span class=p>:</span> <span class=nb>tuple</span><span class=p>[</span><span class=nb>int</span><span class=p>,</span> <span class=nb>int</span><span class=p>],</span>
+</span></span><span class=line><span class=cl>               <span class=n>v2</span><span class=p>:</span> <span class=nb>tuple</span><span class=p>[</span><span class=nb>int</span><span class=p>,</span> <span class=nb>int</span><span class=p>])</span> <span class=o>-&gt;</span> <span class=kc>None</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;Draw a Sierpinski Triangle on the given screen, with the given vertices.
+</span></span></span><span class=line><span class=cl><span class=s2>
+</span></span></span><span class=line><span class=cl><span class=s2>    Each of v0, v1, and v2 is an (x, y) tuple representing a vertex of the triangle.
+</span></span></span><span class=line><span class=cl><span class=s2>    v0 is the lower-left vertex, v1 is the upper vertex, and v2 is the lower-right vertex.
+</span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>v2</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span> <span class=o>-</span> <span class=n>v0</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span> <span class=o>&lt;</span> <span class=n>MIN_SIDE</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>pygame</span><span class=o>.</span><span class=n>draw</span><span class=o>.</span><span class=n>polygon</span><span class=p>(</span><span class=n>screen</span><span class=p>,</span> <span class=n>FOREGROUND</span><span class=p>,</span> <span class=p>[</span><span class=n>v0</span><span class=p>,</span> <span class=n>v1</span><span class=p>,</span> <span class=n>v2</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>    <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>pygame</span><span class=o>.</span><span class=n>draw</span><span class=o>.</span><span class=n>polygon</span><span class=p>(</span><span class=n>screen</span><span class=p>,</span> <span class=n>FOREGROUND</span><span class=p>,</span> <span class=p>[</span><span class=n>v0</span><span class=p>,</span> <span class=n>v1</span><span class=p>,</span> <span class=n>v2</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=n>mid0</span> <span class=o>=</span> <span class=n>midpoint</span><span class=p>(</span><span class=n>v0</span><span class=p>,</span> <span class=n>v1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>mid1</span> <span class=o>=</span> <span class=n>midpoint</span><span class=p>(</span><span class=n>v0</span><span class=p>,</span> <span class=n>v2</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>mid2</span> <span class=o>=</span> <span class=n>midpoint</span><span class=p>(</span><span class=n>v1</span><span class=p>,</span> <span class=n>v2</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=c1># Draw centre &#34;sub-triangle&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=n>pygame</span><span class=o>.</span><span class=n>draw</span><span class=o>.</span><span class=n>polygon</span><span class=p>(</span><span class=n>screen</span><span class=p>,</span> <span class=n>BACKGROUND</span><span class=p>,</span> <span class=p>[</span><span class=n>mid0</span><span class=p>,</span> <span class=n>mid1</span><span class=p>,</span> <span class=n>mid2</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=c1># Recursively draw other three &#34;sub-triangles&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=n>sierpinski</span><span class=p>(</span><span class=n>screen</span><span class=p>,</span> <span class=n>v0</span><span class=p>,</span> <span class=n>mid0</span><span class=p>,</span> <span class=n>mid1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>sierpinski</span><span class=p>(</span><span class=n>screen</span><span class=p>,</span> <span class=n>mid0</span><span class=p>,</span> <span class=n>v1</span><span class=p>,</span> <span class=n>mid2</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>sierpinski</span><span class=p>(</span><span class=n>screen</span><span class=p>,</span> <span class=n>mid1</span><span class=p>,</span> <span class=n>mid2</span><span class=p>,</span> <span class=n>v2</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>midpoint</span><span class=p>(</span><span class=n>p1</span><span class=p>:</span> <span class=nb>tuple</span><span class=p>[</span><span class=nb>int</span><span class=p>,</span> <span class=nb>int</span><span class=p>],</span> <span class=n>p2</span><span class=p>:</span> <span class=nb>tuple</span><span class=p>[</span><span class=nb>int</span><span class=p>,</span> <span class=nb>int</span><span class=p>])</span> <span class=o>-&gt;</span> <span class=nb>tuple</span><span class=p>[</span><span class=nb>int</span><span class=p>,</span> <span class=nb>int</span><span class=p>]:</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;Return the midpoint of p1 and p2.&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=p>((</span><span class=n>p1</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span> <span class=o>+</span> <span class=n>p2</span><span class=p>[</span><span class=mi>0</span><span class=p>])</span> <span class=o>//</span> <span class=mi>2</span><span class=p>,</span> <span class=p>(</span><span class=n>p1</span><span class=p>[</span><span class=mi>1</span><span class=p>]</span> <span class=o>+</span> <span class=n>p2</span><span class=p>[</span><span class=mi>1</span><span class=p>])</span> <span class=o>//</span> <span class=mi>2</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=vm>__name__</span> <span class=o>==</span> <span class=s1>&#39;__main__&#39;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=c1># Initialize a pygame window</span>
+</span></span><span class=line><span class=cl>    <span class=n>pygame</span><span class=o>.</span><span class=n>init</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=n>window</span> <span class=o>=</span> <span class=n>pygame</span><span class=o>.</span><span class=n>display</span><span class=o>.</span><span class=n>set_mode</span><span class=p>((</span><span class=mi>800</span><span class=p>,</span> <span class=mi>800</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>    <span class=n>window</span><span class=o>.</span><span class=n>fill</span><span class=p>(</span><span class=n>BACKGROUND</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1># Draw the Sierpinski Triangle!</span>
+</span></span><span class=line><span class=cl>    <span class=n>sierpinski</span><span class=p>(</span><span class=n>window</span><span class=p>,</span> <span class=p>(</span><span class=mi>100</span><span class=p>,</span> <span class=mi>670</span><span class=p>),</span> <span class=p>(</span><span class=mi>400</span><span class=p>,</span> <span class=mi>150</span><span class=p>),</span> <span class=p>(</span><span class=mi>700</span><span class=p>,</span> <span class=mi>670</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1># Render the image to our screen</span>
+</span></span><span class=line><span class=cl>    <span class=n>pygame</span><span class=o>.</span><span class=n>display</span><span class=o>.</span><span class=n>flip</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1># Wait until the user closes the Pygame window</span>
+</span></span><span class=line><span class=cl>    <span class=k>while</span> <span class=kc>True</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=nb>any</span><span class=p>(</span><span class=n>event</span><span class=o>.</span><span class=n>type</span> <span class=o>==</span> <span class=n>pygame</span><span class=o>.</span><span class=n>QUIT</span> <span class=k>for</span> <span class=n>event</span> <span class=ow>in</span> <span class=n>pygame</span><span class=o>.</span><span class=n>event</span><span class=o>.</span><span class=n>get</span><span class=p>()):</span>
+</span></span><span class=line><span class=cl>            <span class=k>break</span>
+</span></span><span class=line><span class=cl>    <span class=n>pygame</span><span class=o>.</span><span class=n>display</span><span class=o>.</span><span class=n>quit</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=n>pygame</span><span class=o>.</span><span class=n>quit</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div></blockquote></article><hr><div class=page-end id=footer><div class=backlinks-container><h3>Backlinks</h3><ul class=backlinks><li>No backlinks found</li></ul></div><div><script async src=https://cdn.jsdelivr.net/npm/d3@6.7.0/dist/d3.min.js integrity="sha256-+7jaYCp29O1JusNWHaYtgUn6EhuP0VaFuswhNV06MyI=" crossorigin=anonymous></script><h3>Interactive Graph</h3><div id=graph-container></div><style>:root{--g-node:var(--secondary);--g-node-active:var(--primary);--g-node-inactive:var(--visited);--g-link:var(--outlinegray);--g-link-active:#5a7282}</style><script src=https://mel10c.github.io/mel.zhu/js/graph.2d9e48dbe7ea47c0ef1c58296ce14448.js></script></div></div><div id=contact_buttons><footer><p>Made by Melaney Zhu using <a href=https://github.com/jackyzha0/quartz>Quartz</a>, © 2023</p><ul><li><a href=https://mel10c.github.io/mel.zhu/>Home</a></li><li><a href=https://www.instagram.com/melaney_dxl/>Instagram</a></li><li><a href=https://github.com/mel10c>GitHub</a></li><li><a href=https://linkedin.com/in/melzyy>LinkedIn</a></li><li><a href=https://github.com/mel10c/mel.zhu/blob/hugo/content/documents/Resume.pdf>Resume</a></li></ul></footer></div></div></body></html>

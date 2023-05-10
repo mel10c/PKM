@@ -1,0 +1,132 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=description content="Dot Products & Normal Forms Dot Product Sometimes called as the &ldquo;scaler product&rdquo; because it produces a scaler
+  Let $\vec{a}, \vec{b}$ be vectors rooted at the same point and let $\theta$ denote the smaller of the two angles between them ($0 \le \theta \le \pi$), the geometric definition of dot product is $$ \vec{a} \cdot \vec{b} = \left|\vec{a}\right| \left|\vec{b}\right| \cos \theta $$
+ $\vec{x}= (2,3), \quad \left|\vec{x}\right|=\sqrt{2^2 + 3^2} =\sqrt{13}$"><title>MAT223: 4_Dot Products & Normal</title><meta name=viewport content="width=device-width,initial-scale=1"><link rel="shortcut icon" type=image/png href=https://mel10c.github.io/mel.zhu//icon.png><link href=https://mel10c.github.io/mel.zhu/styles.9a8661985b360a1d97e0e538e164abef.min.css rel=stylesheet><link href=https://mel10c.github.io/mel.zhu/styles/_light_syntax.86a48a52faebeaaf42158b72922b1c90.min.css rel=stylesheet id=theme-link><script src=https://mel10c.github.io/mel.zhu/js/darkmode.905e4d2da56a9111aff695a0a4b69900.min.js></script>
+<script src=https://mel10c.github.io/mel.zhu/js/util.6f22941e242efae60fd84e7c32e874fa.min.js></script>
+<link rel=preload href=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css as=style onload='this.onload=null,this.rel="stylesheet"' integrity=sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js integrity=sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx crossorigin=anonymous></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin=anonymous></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/contrib/copy-tex.min.js integrity=sha384-ww/583aHhxWkz5DEVn6OKtNiIaLi2iBRNZXfJRiY1Ai7tnJ9UXpEsyvOITVpTl4A crossorigin=anonymous></script>
+<script async src=https://unpkg.com/@floating-ui/core@0.7.3></script>
+<script async src=https://unpkg.com/@floating-ui/dom@0.5.4></script>
+<script async src=https://mel10c.github.io/mel.zhu/js/popover.f03552ccb84d99ca615d1cfb9abde59e.min.js></script>
+<script defer src=https://mel10c.github.io/mel.zhu/js/code-title.ce4a43f09239a9efb48fee342e8ef2df.min.js></script>
+<script defer src=https://mel10c.github.io/mel.zhu/js/clipboard.2913da76d3cb21c5deaa4bae7da38c9f.min.js></script>
+<script defer src=https://mel10c.github.io/mel.zhu/js/callouts.7723cac461d613d118ee8bb8216b9838.min.js></script>
+<script>const SEARCH_ENABLED=!1,LATEX_ENABLED=!0,PRODUCTION=!0,BASE_URL="https://mel10c.github.io/mel.zhu/",fetchData=Promise.all([fetch("https://mel10c.github.io/mel.zhu/indices/linkIndex.4ecd462b2a0cc7b8f254e52a69d96e3c.min.json").then(e=>e.json()).then(e=>({index:e.index,links:e.links})),fetch("https://mel10c.github.io/mel.zhu/indices/contentIndex.6acfc2f415caa35851b6b3067c8415cf.min.json").then(e=>e.json())]).then(([{index:e,links:t},n])=>({index:e,links:t,content:n})),render=()=>{const e=new URL(BASE_URL),t=e.pathname,n=window.location.pathname,s=t==n;addCopyButtons(),addTitleToCodeBlocks(),addCollapsibleCallouts(),initPopover("https://mel10c.github.io/mel.zhu",!0);const o=document.getElementById("footer");if(o){const e=document.getElementById("graph-container");if(!e)return requestAnimationFrame(render);e.textContent="";const t=s&&!1;drawGraph("https://mel10c.github.io/mel.zhu",t,[{"/moc":"#4388cc"}],t?{centerForce:1,depth:-1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.5,linkDistance:1,opacityScale:3,repelForce:1,scale:1.4}:{centerForce:1,depth:1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.6,linkDistance:1,opacityScale:3,repelForce:2,scale:1.2})}var i=document.getElementsByClassName("mermaid");i.length>0&&import("https://unpkg.com/mermaid@9/dist/mermaid.esm.min.mjs").then(e=>{e.default.init()})},init=(e=document)=>{addCopyButtons(),addTitleToCodeBlocks(),renderMathInElement(e.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}],macros:{'’':"'"},throwOnError:!1})}</script><script type=module>
+    import { attachSPARouting } from "https:\/\/mel10c.github.io\/mel.zhu\/js\/router.9d4974281069e9ebb189f642ae1e3ca2.min.js"
+    attachSPARouting(init, render)
+  </script></head><body><div id=search-container><div id=search-space><input autocomplete=off id=search-bar name=search type=text aria-label=Search placeholder="Search for something..."><div id=results-container></div></div></div><script src=https://cdn.jsdelivr.net/npm/flexsearch@0.7.21/dist/flexsearch.bundle.js integrity="sha256-i3A0NZGkhsKjVMzFxv3ksk0DZh3aXqu0l49Bbh0MdjE=" crossorigin=anonymous defer></script>
+<script defer src=https://mel10c.github.io/mel.zhu/js/full-text-search.e6e2e0c213187ca0c703d6e2c7a77fcd.min.js></script><div class=singlePage><header><h1 id=page-title><a href=https://mel10c.github.io/mel.zhu/>MEL.ZHU</a></h1><div class=spacer></div><div id=search-icon><p>Search</p><svg tabindex="0" aria-labelledby="title desc" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title id="title">Search Icon</title><desc id="desc">Icon to open search</desc><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"/><circle cx="8" cy="8" r="7"/></g></svg></div><div class=darkmode><input class=toggle id=darkmode-toggle type=checkbox tabindex=-1>
+<label id=toggle-label-light for=darkmode-toggle tabindex=-1><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="dayIcon" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35"><title>Light Mode</title><path d="M6 17.5C6 16.672 5.328 16 4.5 16h-3C.672 16 0 16.672.0 17.5S.672 19 1.5 19h3C5.328 19 6 18.328 6 17.5zM7.5 26c-.414.0-.789.168-1.061.439l-2 2C4.168 28.711 4 29.086 4 29.5 4 30.328 4.671 31 5.5 31c.414.0.789-.168 1.06-.44l2-2C8.832 28.289 9 27.914 9 27.5 9 26.672 8.329 26 7.5 26zm10-20C18.329 6 19 5.328 19 4.5v-3C19 .672 18.329.0 17.5.0S16 .672 16 1.5v3C16 5.328 16.671 6 17.5 6zm10 3c.414.0.789-.168 1.06-.439l2-2C30.832 6.289 31 5.914 31 5.5 31 4.672 30.329 4 29.5 4c-.414.0-.789.168-1.061.44l-2 2C26.168 6.711 26 7.086 26 7.5 26 8.328 26.671 9 27.5 9zM6.439 8.561C6.711 8.832 7.086 9 7.5 9 8.328 9 9 8.328 9 7.5c0-.414-.168-.789-.439-1.061l-2-2C6.289 4.168 5.914 4 5.5 4 4.672 4 4 4.672 4 5.5c0 .414.168.789.439 1.06l2 2.001zM33.5 16h-3c-.828.0-1.5.672-1.5 1.5s.672 1.5 1.5 1.5h3c.828.0 1.5-.672 1.5-1.5S34.328 16 33.5 16zM28.561 26.439C28.289 26.168 27.914 26 27.5 26c-.828.0-1.5.672-1.5 1.5.0.414.168.789.439 1.06l2 2C28.711 30.832 29.086 31 29.5 31c.828.0 1.5-.672 1.5-1.5.0-.414-.168-.789-.439-1.061l-2-2zM17.5 29c-.829.0-1.5.672-1.5 1.5v3c0 .828.671 1.5 1.5 1.5s1.5-.672 1.5-1.5v-3C19 29.672 18.329 29 17.5 29zm0-22C11.71 7 7 11.71 7 17.5S11.71 28 17.5 28 28 23.29 28 17.5 23.29 7 17.5 7zm0 18c-4.136.0-7.5-3.364-7.5-7.5s3.364-7.5 7.5-7.5 7.5 3.364 7.5 7.5S21.636 25 17.5 25z"/></svg></label><label id=toggle-label-dark for=darkmode-toggle tabindex=-1><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="nightIcon" viewBox="0 0 100 100" style="enable-background='new 0 0 100 100'"><title>Dark Mode</title><path d="M96.76 66.458c-.853-.852-2.15-1.064-3.23-.534-6.063 2.991-12.858 4.571-19.655 4.571C62.022 70.495 50.88 65.88 42.5 57.5 29.043 44.043 25.658 23.536 34.076 6.47c.532-1.08.318-2.379-.534-3.23-.851-.852-2.15-1.064-3.23-.534-4.918 2.427-9.375 5.619-13.246 9.491-9.447 9.447-14.65 22.008-14.65 35.369.0 13.36 5.203 25.921 14.65 35.368s22.008 14.65 35.368 14.65c13.361.0 25.921-5.203 35.369-14.65 3.872-3.871 7.064-8.328 9.491-13.246C97.826 68.608 97.611 67.309 96.76 66.458z"/></svg></label></div></header><article><h1>MAT223: 4_Dot Products & Normal</h1><p class=meta>Last updated
+Unknown</p><ul class=tags><li><a href=https://mel10c.github.io/mel.zhu/tags/note/>Note</a></li></ul><aside class=mainTOC><details><summary>Table of Contents</summary><nav id=TableOfContents><ol><li><a href=#dot-product>Dot Product</a><ol><li></li><li><a href=#orthogonality>Orthogonality</a></li></ol></li><li><a href=#normal-vector>Normal Vector</a><ol><li></li></ol></li></ol><ol><li><ol><li><a href=#matrix-multiplication>Matrix multiplication</a></li></ol></li></ol></nav></details></aside><a href=#dot-products--normal-forms><h1 id=dot-products--normal-forms><span class=hanchor arialabel=Anchor># </span>Dot Products & Normal Forms</h1></a><a href=#dot-product><h2 id=dot-product><span class=hanchor arialabel=Anchor># </span>Dot Product</h2></a><p>Sometimes called as the &ldquo;scaler product&rdquo; because it produces a scaler</p><ul><li><p>Let $\vec{a}, \vec{b}$ be vectors rooted at the same point and let $\theta$ denote the <strong>smaller</strong> of the two angles between them ($0 \le \theta \le \pi$), the geometric definition of <strong><u>dot product</u></strong> is
+$$
+\vec{a} \cdot \vec{b} = \left|\vec{a}\right| \left|\vec{b}\right| \cos \theta
+$$</p><blockquote><p>$\vec{x}= (2,3), \quad \left|\vec{x}\right|=\sqrt{2^2 + 3^2} =\sqrt{13}$</p></blockquote></li><li><p>The algebraic definition in terms of coordinates
+$$
+\begin{bmatrix} a_1 \\ a_1 \\ \vdots \\ a_n \end{bmatrix} \cdot
+\begin{bmatrix} b_1 \\ b_2 \\ \vdots \\ b_n \end{bmatrix} =
+a_1 b_1 + a_2 b_2 + &mldr; + a_n b_n
+$$</p></li><li><p>By equating the geometric and algebraic definition of the dot product
+$$
+\cos \theta = \frac{\vec{p} \cdot \vec{q}}
+{\left|\vec{p}\right| \left|\vec{q}\right|}
+\quad \Rightarrow \quad
+\theta = \arccos\big( \frac{\vec{p} \cdot \vec{q}}
+{\left|\vec{p}\right| \left|\vec{q}\right|} \big)
+$$</p><blockquote><a href=#find-the-angle-between-the-vectors-vecv1-2-3-and-vecw--1-1--2><h5 id=find-the-angle-between-the-vectors-vecv1-2-3-and-vecw--1-1--2><span class=hanchor arialabel=Anchor># </span>Find the angle between the vectors $\vec{v}=(1, 2, 3)$ and $\vec{w} = (1, 1, -2)$</h5></a><p>From the algebraic definition of the dot product, get:
+$$
+\vec{v} \cdot \vec{w}=1(1) + 2(1) + 3(-2) = -3
+$$
+From the geometric definition, get:<br>$$
+\vec{v} \cdot \vec{w}=\left|\vec{v}\right| \left|\vec{w}\right| \cos \theta
+= \sqrt{14} \sqrt{6} \cos \theta = 2 \sqrt{21} \cos \theta
+$$
+Equating the two definitions, get:
+$$
+\cos \theta = \frac{-3}{2 \sqrt{21}}
+$$
+Therefore $\theta = \arccos (\frac{-3}{2 \sqrt{21}})$</p></blockquote></li><li><p>Dot products can be used to compute the length of vectors $\vec{a} \cdot \vec{a} =\left|\vec{a}\right| \left|\vec{a}\right| \cos 0= \left|\vec{a}\right|^2$</p></li><li><p>Dot products has the same distributive laws as other variables [ex. $a \cdot (b + c) = ab + ac$ etc.]</p></li><li><p>The <strong><u>distance</u></strong> between two vectors $\vec{u}$ and $\vec{v}$ is $\left|\vec{v} - \vec{u} \right|$</p></li><li><p><u><strong>Unit vector</strong></u> - a vector $\vec{v}$ is called a unit vector if $\left|\vec{v}\right| = 1$
+$$
+\left|\hat{u}\right| = 1 \quad \Rightarrow \quad
+\hat{u} = \frac{\vec{v}}{\left|\vec{v}\right|}
+$$</p></li></ul><a href=#orthogonality><h3 id=orthogonality><span class=hanchor arialabel=Anchor># </span>Orthogonality</h3></a><ul><li><u>Orthogonal</u> - Two vectors $\vec{u}, \vec{v}$ are <strong>orthogonal</strong> (perpendicular) to each other if $\vec{u} \cdot \vec{u} = 0$<ul><li>The definition of orthogonal encapsulates <em>both</em> the idea of two vectors forming a right angle and the idea of one of them being $\vec{0}$</li></ul></li><li><u>Direction</u> - The vector $\vec{u}$ points in the <strong>direction</strong> of the vector $\vec{v}$ if $k\vec{u} = \vec{v}$ for some scalar $k$. The vector $\vec{u}$ points in the <strong>positive direction</strong> of $\vec{v}$ if $k\vec{u} = \vec{v}$ for some <em>positive</em> scalar $k$</li></ul><a href=#normal-vector><h2 id=normal-vector><span class=hanchor arialabel=Anchor># </span>Normal Vector</h2></a><ul><li><p><u>Normal vector</u> to a line (or plane or hyperplane) is a non-zero vector that is orthogonal to all direction vectors for the line (or plane or hyperplane)</p></li><li><p><u>Normal form of a line</u> - a line $\ell \subseteq \R^2$ is expressed in <strong>normal form</strong> if $\ell$ is the solution set to equation:
+$$
+\vec{n} \cdot (\vec{x} - \vec{p}) = 0
+$$
+Where $\vec{n}$ and $\vec{p}$ are fixed vectors</p><blockquote><a href=#find-vector-form-and-normal-form-of-the-plane-mathcalp-passing-through-the-points-a1-0-0-b0-1-0-c0-0-1-><h5 id=find-vector-form-and-normal-form-of-the-plane-mathcalp-passing-through-the-points-a1-0-0-b0-1-0-c0-0-1-><span class=hanchor arialabel=Anchor># </span>Find vector form and normal form of the plane $\mathcal{P}$ passing through the points $A=(1, 0, 0), B=(0, 1, 0), C=(0, 0, 1)$ .</h5></a><p>Get the 2 directional vectors from these 3 points
+$$
+\vec{d}_1 = \overrightarrow{AB} = \begin{bmatrix} -1 \\ 1 \\ 0 \end{bmatrix}
+\quad \quad \quad
+\vec{d}_2 = \overrightarrow{AC} = \begin{bmatrix} -1 \\ 0 \\ 1 \end{bmatrix}
+$$
+Using point $A$ and the directional vectors, get the expression of $\mathcal{P}$
+$$
+\begin{bmatrix} x \\ y \\ x \end{bmatrix} =
+t\begin{bmatrix} -1 \\ 1 \\ 0 \end{bmatrix} +
+s\begin{bmatrix} -1 \\ 0 \\ 1 \end{bmatrix} +
+\begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}
+$$
+Use $\vec{n} \cdot \vec{d}_1 = 0 = \vec{n} \cdot \vec{d}_2$<br>$$
+\vec{n} \cdot (\begin{bmatrix} -1 \\ 1 \\ 0 \end{bmatrix} +
+\begin{bmatrix} -1 \\ 0 \\ 1 \end{bmatrix})
+\quad \Rightarrow \quad
+\vec{n} \cdot \begin{bmatrix} -2 \\ 1 \\ 1 \end{bmatrix} = 0
+\quad \Rightarrow \quad
+-2\vec{x} + \vec{y} + \vec{z} = 0
+$$
+So $\vec{n} = (1, 1, 1)$, therefore the normal form of $\mathcal{P}$ can be expressed as
+$$
+\begin{bmatrix} 1 \\ 1 \\ 1 \end{bmatrix} \cdot \left(
+\begin{bmatrix} x \\ y \\ z \end{bmatrix} -
+\begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix} \right) = 0
+$$</p></blockquote></li><li><p><u>Hyperplane</u> - the set $X \subseteq \R^n$ is called a <strong>hyperplane</strong> if there exists $\vec{n} \neq \vec{0}$ and $\vec{p}$ so that $X$ is the set of solutions to the equation $\vec{n} \cdot (\vec{x} - \vec{p}) = 0$</p><ul><li><p>$\vec{n} \cdot (\vec{x} - \vec{p}) = 0$ If and only if $\vec{n} \cdot \vec{x} = \vec{n} \cdot \vec{p} = \alpha$ Since $\vec{n}$ and $\vec{p}$ are fixed, $\alpha$ is a constant then:
+$$
+\vec{n} \cdot (\vec{x} - \vec{p}) = \vec{n} \cdot \vec{x} -\alpha =
+n_x x + n_y y + n_z z - \alpha = 0
+$$
+Therefore, $\mathcal{P}$ is the set of solutions to $n_x x + n_y y + n_z z = \alpha$ (*)</p></li><li><p>This (*) equation is called the <em>scalar form</em> of a plane.</p></li></ul><blockquote><a href=#let-mathcalq-subseteq-r3-be-the-plane-passing-through-vecp110-and-with-normal-vector-vecn111-write-mathcalq-in-vector-form><h5 id=let-mathcalq-subseteq-r3-be-the-plane-passing-through-vecp110-and-with-normal-vector-vecn111-write-mathcalq-in-vector-form><span class=hanchor arialabel=Anchor># </span>Let $\mathcal{Q} \subseteq \R^3$ be the plane passing through $\vec{p}=(1,1,0)$ and with normal vector $\vec{n}=(1,1,1)$, write $\mathcal{Q}$ in vector form</h5></a><p>$\mathcal{Q}$ Is the set of solutions to $\vec{n} \cdot (\vec{x} - \vec{p}) = 0$ , where $\alpha = 1(1)+1(1)+0(1)=2$, then
+$$
+\vec{n} \cdot (\vec{x} - \vec{p}) = \vec{n} \cdot \vec{x} -\alpha =
+x + y + z - 2= 0
+$$
+Rearranging, get $\mathcal{Q}$ as the set of all solutions to $x + y + z = 2$</p><p>Using row reduction algorithm to write the complete solution, get
+$$
+\begin{bmatrix} x \\ y \\ x \end{bmatrix} =
+t\begin{bmatrix} -1 \\ 1 \\ 0 \end{bmatrix} +
+s\begin{bmatrix} -1 \\ 0 \\ 1 \end{bmatrix} +
+\begin{bmatrix} 2 \\ 0 \\ 0 \end{bmatrix}
+$$</p></blockquote></li></ul><hr><a href=#matrices><h1 id=matrices><span class=hanchor arialabel=Anchor># </span>Matrices</h1></a><ul><li><p><u>Matrix</u> - grid of numbers surrounded by round or square brackets
+$$
+\begin{bmatrix}
+a_{11} & a_{12} & \dots & a_{1n} \\ a_{21} & a_{22} & \dots & a_{2n} \\ \vdots & \vdots & \ddots & \vdots \\ a_{m1} & a_{m2} & \dots & a_{mn}
+\end{bmatrix} =
+\begin{pmatrix}
+a_{11} & a_{12} & \dots & a_{1n} \\ a_{21} & a_{22} & \dots & a_{2n} \\ \vdots & \vdots & \ddots & \vdots \\ a_{m1} & a_{m2} & \dots & a_{mn}
+\end{pmatrix}
+$$</p></li><li><p><u>Dimensions</u> (shape or size) of a matrix is the #rows $\times$ #columns</p></li><li><p><u>Entry</u> - the number in the row and column (ex. $(i, j)$ Is the $i$th row and $j$th column)</p></li><li><p>Use capital letters to name the matrix</p><blockquote><p>$A = \begin{bmatrix} 1 & 2 & -1 \\ 3 & 0 & 7 \end{bmatrix}$ Is a $2 \times 3$ matrix, the $(2, 1)$ entry of $A$ is $a_{21} = 3$</p></blockquote></li><li><p>Matrix terminology</p><ul><li>Square matrix &ndash; #rows = #columns</li><li>Diagonal matrix &ndash; all off-diagonal entries are zero</li><li>Upper triangular &ndash; all below-diagonal entries are zero</li><li>Lower triangular &ndash; all above-diagonal entries are zero</li></ul></li><li><p><u>Identity matrix</u> - a <em>square</em> <em>diagonal</em> matrix
+$$
+I_{n \times n} = \begin{bmatrix}
+1 & 0 & \dots & 0 \\ 0 & 1 & \dots & 0 \\ \vdots & \vdots & \ddots & \vdots \\ 0 & 0 & \dots & 1
+\end{bmatrix}
+$$</p></li><li><p><u>Zero matrix</u> - a matrix with entries all zero
+$$
+0_{n \times m} = \begin{bmatrix}
+0 & 0 & 0 & \dots & 0 \\ 0 & 0 & 0 & \dots & 0 \\ \vdots & \vdots & \vdots & \ddots & \vdots \\ 0 & 0 & 0 & \dots & 0
+\end{bmatrix}
+$$</p></li></ul><a href=#matrix-multiplication><h3 id=matrix-multiplication><span class=hanchor arialabel=Anchor># </span>Matrix multiplication</h3></a><ul><li><p>Column intrepretation<img src=https://tva1.sinaimg.cn/large/008eGmZEly1gnlah6x6hgj30da0akwfv.jpg alt="Screen Shot 2021-02-12 at 12.52.33" style=zoom:30%></p><blockquote><p>$$
+\begin{bmatrix} 1 & 0 & -2 \\ 0 & 3 & -1 \\ 1 & 2 & 1 \end{bmatrix}
+\begin{bmatrix} 3 \\ -1 \\ 4 \end{bmatrix}
+= 3 \begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}</p><ul><li>(-1) \begin{bmatrix} 0 \\ 3 \\ 2 \end{bmatrix}</li><li>4 \begin{bmatrix} -2 \\ -1 \\ 1 \end{bmatrix}
+= \begin{bmatrix} -5 \\ -7 \\ 5 \end{bmatrix}
+$$</li></ul></blockquote></li><li><p>Row Interpretation $\begin{bmatrix}
+\rule[.2ex]{1em}{0.2pt} \vec{r}_1 \rule[.2ex]{1em}{0.2pt} \\ \rule[.2ex]{1em}{0.2pt} \vec{r}_2 \rule[.2ex]{1em}{0.2pt} \\ \vdots \\ \rule[.2ex]{1em}{0.2pt} \vec{r}_n \rule[.2ex]{1em}{0.2pt}
+\end{bmatrix} \cdot \vec{x}$ = $\begin{bmatrix}
+\vec{r}_1 \cdot \vec{x} \\ \vec{r}_2 \cdot \vec{x} \\ \vdots \\ \vec{r}_n \cdot \vec{x}
+\end{bmatrix}$</p><blockquote><p>$$
+\begin{bmatrix} 1 & 0 & -2 \\ 0 & 3 & -1 \\ 1 & 2 & 1 \end{bmatrix}
+\begin{bmatrix} 3 \\ -1 \\ 4 \end{bmatrix} =
+\begin{bmatrix}
+\vec{r}_1 \cdot \vec{x} \\ \vec{r}_2 \cdot \vec{x} \\ \vdots \\ \vec{r}_n \cdot \vec{x}
+\end{bmatrix} =
+\begin{bmatrix} -5 \\ -7 \\ 5 \end{bmatrix}
+$$</p></blockquote></li><li><p>Matrix - matrix multiplication
+<img src=https://tva1.sinaimg.cn/large/008eGmZEly1gnlaplg262j312i0qmwok.jpg alt="Screen Shot 2021-02-12 at 13.06.37" style=zoom:25%></p><ul><li>If C is $m \times n$ A is $n \times k$ then the resulted CA is $m \times k$</li><li>For matrix to multiply: matrix 1 dimension $a \times b$, and matrix 2 dimension $x \times y$, $b=y$</li></ul></li></ul></article><hr><div class=page-end id=footer><div class=backlinks-container><h3>Backlinks</h3><ul class=backlinks><li>No backlinks found</li></ul></div><div><script async src=https://cdn.jsdelivr.net/npm/d3@6.7.0/dist/d3.min.js integrity="sha256-+7jaYCp29O1JusNWHaYtgUn6EhuP0VaFuswhNV06MyI=" crossorigin=anonymous></script><h3>Interactive Graph</h3><div id=graph-container></div><style>:root{--g-node:var(--secondary);--g-node-active:var(--primary);--g-node-inactive:var(--visited);--g-link:var(--outlinegray);--g-link-active:#5a7282}</style><script src=https://mel10c.github.io/mel.zhu/js/graph.2d9e48dbe7ea47c0ef1c58296ce14448.js></script></div></div><div id=contact_buttons><footer><p>Made by Melaney Zhu using <a href=https://github.com/jackyzha0/quartz>Quartz</a>, © 2023</p><ul><li><a href=https://mel10c.github.io/mel.zhu/>Home</a></li><li><a href=https://www.instagram.com/melaney_dxl/>Instagram</a></li><li><a href=https://github.com/mel10c>GitHub</a></li><li><a href=https://linkedin.com/in/melzyy>LinkedIn</a></li><li><a href=https://github.com/mel10c/mel.zhu/blob/hugo/content/documents/Resume.pdf>Resume</a></li></ul></footer></div></div></body></html>
