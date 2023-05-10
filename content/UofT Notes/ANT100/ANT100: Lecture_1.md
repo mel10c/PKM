@@ -1,7 +1,7 @@
 ---
 title: "ANT100: Lecture_1"
 tags: [Note]
-date: [2021-04-28]
+date: 2021-04-28
 ---
 
 #  Lecture 1
