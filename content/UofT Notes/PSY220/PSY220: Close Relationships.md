@@ -1,6 +1,9 @@
-#INFO/Secondary/Lecture
-
 ---
+title: "PSY220: Close Relationships"
+tags: [Note]
+date: [2021-12-21]
+---
+
 
 
 # Close relationships

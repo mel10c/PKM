@@ -4,12 +4,6 @@ tags: [Notes]
 date: [2023-05-10]
 ---
 
-```dataview
-LIST
-FROM "UofT Notes/STA130"
-SORT file.name
-```
-
 # ANT100
 
 - [[ANT100: Lecture_1]]

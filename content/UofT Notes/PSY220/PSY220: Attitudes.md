@@ -1,6 +1,9 @@
-#INFO/Secondary/Lecture #FIELD/Psych/Social
-
 ---
+title: "PSY220: Attitudes"
+tags: [Note]
+date: [2021-12-21]
+---
+
 
 ##### Attitudes
 > ------------------------------------------------------------

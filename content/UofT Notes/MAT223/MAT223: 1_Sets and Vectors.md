@@ -1,3 +1,9 @@
+---
+title: "MAT223: 1_Sets and Vectors"
+tags: [Note]
+date: [2021-01-31]
+---
+
 # Week 1
 
 ## Sets and sets-builder notation

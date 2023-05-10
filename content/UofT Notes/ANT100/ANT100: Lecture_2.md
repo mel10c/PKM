@@ -1,3 +1,9 @@
+---
+title: "ANT100: Lecture_2"
+tags: [Note]
+date: [2021-04-28]
+---
+
 # Culture Difference & Prejudice
 
 #### What is the "difference"

@@ -1,3 +1,9 @@
+---
+title: "ANT100: Lecture_3&4"
+tags: [Note]
+date: [2021-04-28]
+---
+
 # Signifying Reality
 
 > Dive **under the surface**, and ask question about the "obvious" 

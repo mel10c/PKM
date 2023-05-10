@@ -1,3 +1,9 @@
+---
+title: "STA130: Lecture_1"
+tags: [Note]
+date: [2021-01-17]
+---
+
 # Intro to Statistics
 
 - <u>Statistics</u> - arts and science of **learning from data**. Its a way to quantify **uncertainty**

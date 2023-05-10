@@ -1,3 +1,9 @@
+---
+title: "CSC111: 1_Linked Lists"
+tags: [Note]
+date: [2021-02-03]
+---
+
 # Linked Lists
 
 ## Building Blocks of Linked Lists

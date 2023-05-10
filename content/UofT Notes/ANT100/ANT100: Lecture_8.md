@@ -1,3 +1,9 @@
+---
+title: "ANT100: Lecture_8"
+tags: [Note]
+date: [2021-04-28]
+---
+
 # Universal and Particular moral values
 
 ## Universal (absolute) and particular (cultural) moral values

@@ -1,6 +1,9 @@
-#INFO/Secondary/Lecture, #FIELD/Psych/Social
-
 ---
+title: "PSY230: Biological Perspective"
+tags: [Note]
+date: [2022-03-15]
+---
+
 
 # The Biological Basis
 

@@ -1,5 +1,5 @@
 ---
 title: "{{title}}"
-tags: [Blog, Psych, <++>]
-date: [2023-]
+tags: [Note]
+date: [2021-01-17]
 ---

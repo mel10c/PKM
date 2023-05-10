@@ -1,3 +1,9 @@
+---
+title: "ANT100: Lecture_15"
+tags: [Note]
+date: [2021-04-28]
+---
+
 # Intro to Evolutionary Anthropology
 
 `January 14`

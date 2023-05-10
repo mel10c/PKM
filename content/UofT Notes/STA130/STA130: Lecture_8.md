@@ -1,3 +1,9 @@
+---
+title: "STA130: Lecture_8"
+tags: [Note]
+date: [2021-01-17]
+---
+
 # Multiple L.R. and Assessing Prediction models
 
 ### Branches of statistical inference

@@ -1,3 +1,9 @@
+---
+title: "CSC111: 10_Selection and Insertion"
+tags: [Note]
+date: [2021-02-03]
+---
+
 # Selection sort and Insertion Sort
 
 ## Sorted Lists and Binary Search

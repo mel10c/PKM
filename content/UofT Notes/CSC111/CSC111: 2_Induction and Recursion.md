@@ -1,3 +1,9 @@
+---
+title: "CSC111: 2_Induction and Recursion"
+tags: [Note]
+date: [2021-02-03]
+---
+
 # Induction and Recursion
 
 ## Proof by Induction

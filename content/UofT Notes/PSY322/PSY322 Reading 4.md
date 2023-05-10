@@ -1,7 +1,7 @@
-#PKM/Project [Start:: 2023-03-01], [End:: 2023-03-15], 
-%%
-bar:: `$= dv.view('OTHERS/Java Scripts/view', {file: '322 Quiz 4'})`
-%%
+---
+title: "PSY322 Reading 4"
+tags: [Note]
+date: [2023-01-11]
 ---
 
 # Topics

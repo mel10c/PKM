@@ -1,3 +1,9 @@
+---
+title: "ANT100: Lecture_23"
+tags: [Note]
+date: [2021-04-28]
+---
+
 # Europe, Asia, Africa Palaeolithic and Neolithic
 
 `March 18`

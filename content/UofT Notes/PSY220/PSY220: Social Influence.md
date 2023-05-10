@@ -1,5 +1,7 @@
-#INFO/Secondary/Lecture #FIELD/Psych/Social
-
+---
+title: "PSY220: Social Influence"
+tags: [Note]
+date: [2021-12-21]
 ---
 
 ##### Social Influence

@@ -1,3 +1,9 @@
+---
+title: "MAT223: 9&10_Linear Transformations"
+tags: [Note]
+date: [2021-01-31]
+---
+
 # Linear Transformations
 
 - <u>Transformation (map)</u> - another word for a function, used to describe changing vectors

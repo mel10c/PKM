@@ -1,3 +1,9 @@
+---
+title: "CSC111: 11_Divide-and-Conquer"
+tags: [Note]
+date: [2021-02-03]
+---
+
 
 
 # Divide and Conquer Algorithms

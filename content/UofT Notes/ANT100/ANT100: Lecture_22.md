@@ -1,3 +1,9 @@
+---
+title: "ANT100: Lecture_22"
+tags: [Note]
+date: [2021-04-28]
+---
+
 # Archaeological methods and Humanity's African Origins
 
 `March 11`

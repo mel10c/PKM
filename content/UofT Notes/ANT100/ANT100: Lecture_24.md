@@ -1,3 +1,9 @@
+---
+title: "ANT100: Lecture_24"
+tags: [Note]
+date: [2021-04-28]
+---
+
 # Australia and the Americas
 
 `March 25`

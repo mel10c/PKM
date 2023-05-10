@@ -1,3 +1,9 @@
+---
+title: "CSC111: 7_Graphs in Python"
+tags: [Note]
+date: [2021-02-03]
+---
+
 # Graphs in Python
 
 ## Representing Graphs in Python

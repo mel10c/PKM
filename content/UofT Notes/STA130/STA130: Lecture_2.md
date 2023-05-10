@@ -1,3 +1,9 @@
+---
+title: "STA130: Lecture_2"
+tags: [Note]
+date: [2021-01-17]
+---
+
 # Variable types and distributions
 
 ## Variable Types

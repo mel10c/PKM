@@ -1,3 +1,9 @@
+---
+title: "STA130: Lecture_7"
+tags: [Note]
+date: [2021-01-17]
+---
+
 # Linear Regression
 
 ## Visualizing between 2 or more variables

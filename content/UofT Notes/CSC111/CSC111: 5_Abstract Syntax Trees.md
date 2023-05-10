@@ -1,3 +1,9 @@
+---
+title: "CSC111: 5_Abstract Syntax Trees"
+tags: [Note]
+date: [2021-02-03]
+---
+
 # Abstract Syntax Trees
 
 - Strings have a ***linear*** (a sequence of characters)

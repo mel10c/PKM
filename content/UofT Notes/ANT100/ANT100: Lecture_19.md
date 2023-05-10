@@ -1,3 +1,9 @@
+---
+title: "ANT100: Lecture_19"
+tags: [Note]
+date: [2021-04-28]
+---
+
 # Human Evolution
 
 `February 25`

@@ -1,3 +1,9 @@
+---
+title: "ANT100: Lecture_5&6"
+tags: [Note]
+date: [2021-04-28]
+---
+
 # Religion & Identity
 
 > What's really real

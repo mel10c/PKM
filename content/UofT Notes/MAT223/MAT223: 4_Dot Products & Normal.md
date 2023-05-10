@@ -1,3 +1,9 @@
+---
+title: "MAT223: 4_Dot Products & Normal"
+tags: [Note]
+date: [2021-01-31]
+---
+
 # Dot Products & Normal Forms
 
 ## Dot Product

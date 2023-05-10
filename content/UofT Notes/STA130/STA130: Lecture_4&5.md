@@ -1,3 +1,9 @@
+---
+title: "STA130: Lecture_4&5"
+tags: [Note]
+date: [2021-01-17]
+---
+
 # Hypothesis testing
 
 > ### Wheel of Destiny Question

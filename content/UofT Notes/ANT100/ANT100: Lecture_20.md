@@ -1,3 +1,9 @@
+---
+title: "ANT100: Lecture_20"
+tags: [Note]
+date: [2021-04-28]
+---
+
 # Forensic Anthropology & Archaeology
 
 `March 4`

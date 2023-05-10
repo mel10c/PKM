@@ -1,3 +1,9 @@
+---
+title: "STA130: Lecture_9"
+tags: [Note]
+date: [2021-01-17]
+---
+
 # Classification (Decision) Trees
 
 ## Anatomy of a classification tree

@@ -1,3 +1,9 @@
+---
+title: "STA130: Lecture_6"
+tags: [Note]
+date: [2021-01-17]
+---
+
 # Estimation and random selection
 
 - Over-dependence on p-values may cause invalid results in the scientific process

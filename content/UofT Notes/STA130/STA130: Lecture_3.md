@@ -1,3 +1,9 @@
+---
+title: "STA130: Lecture_3"
+tags: [Note]
+date: [2021-01-17]
+---
+
 # Tidy data and data wrangling
 
 > "Write code for humans, write data for computers" -- Vince Buffalo July 20, 2013

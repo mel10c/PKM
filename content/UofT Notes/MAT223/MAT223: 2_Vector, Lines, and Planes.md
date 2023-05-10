@@ -1,3 +1,9 @@
+---
+title: "MAT223: 2_Vector, Lines, and Planes"
+tags: [Note]
+date: [2021-01-31]
+---
+
 # Vectors, Lines, and Planes
 
 ## Row Reduction (Gauss-Jordan Elimination)

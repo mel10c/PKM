@@ -1,5 +1,9 @@
-
 ---
+title: "PSY220: Self"
+tags: [Note]
+date: [2021-12-21]
+---
+
 
 ## Characteristics of Self
 

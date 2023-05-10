@@ -1,3 +1,9 @@
+---
+title: "ANT100: Lecture_26"
+tags: [Note]
+date: [2021-04-28]
+---
+
 # The present past
 
 `April 8`

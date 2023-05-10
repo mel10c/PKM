@@ -1,3 +1,9 @@
+---
+title: "CSC111: 6_Graph Class"
+tags: [Note]
+date: [2021-02-03]
+---
+
 # The Graph Class
 
 ## Terminologies

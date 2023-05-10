@@ -1,5 +1,7 @@
-#INFO/Secondary/Lecture
-
+---
+title: "PSY220: Group and Culture"
+tags: [Note]
+date: [2021-12-21]
 ---
 
 # Groups

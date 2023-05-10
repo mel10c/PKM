@@ -1,3 +1,9 @@
+---
+title: "ANT100: Lecture_14"
+tags: [Note]
+date: [2021-04-28]
+---
+
 # Intro to Evolutionary Anthropology
 
 ## Reading

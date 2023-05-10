@@ -1,3 +1,9 @@
+---
+title: "ANT100: Lecture_9&11"
+tags: [Note]
+date: [2021-04-28]
+---
+
 # The Economy
 
 ### Reading

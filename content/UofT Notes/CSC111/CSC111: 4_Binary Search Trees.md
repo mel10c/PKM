@@ -1,3 +1,9 @@
+---
+title: "CSC111: 4_Binary Search Trees"
+tags: [Note]
+date: [2021-02-03]
+---
+
 # Binary Search Trees
 
 - Define a new abstract data type (ADT) that is an extension of the Set ADT that allows for duplicates

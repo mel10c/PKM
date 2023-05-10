@@ -1,3 +1,9 @@
+---
+title: "CSC111: 12_Average-Case Running Time"
+tags: [Note]
+date: [2021-02-03]
+---
+
 # Average-Case Running Time
 
 - In practice worst-case running time analysis can be misleading, with a variety of algorithms having a poor worst-case performance still yet performing well on the vast majority of inputs. 

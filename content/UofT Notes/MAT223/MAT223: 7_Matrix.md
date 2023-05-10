@@ -1,3 +1,9 @@
+---
+title: "MAT223: 7_Matrix"
+tags: [Note]
+date: [2021-01-31]
+---
+
 # Matrix
 
 ## Coefficient matrix

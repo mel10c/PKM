@@ -1,3 +1,9 @@
+---
+title: "MAT223: 13&14_Change of Basis II and Determinations"
+tags: [Note]
+date: [2021-01-31]
+---
+
 ## Change of Basis II
 
 - <u>Change of Basis matrix</u> - Let $\mathcal{A}, \mathcal{B}$ be basis for $\R^n$. The matrix $M$ is called a *change of basis* matrix (which converts from $\mathcal{A}$ to $\mathcal{B}$) if for all $\vec{x} \in \R^n$

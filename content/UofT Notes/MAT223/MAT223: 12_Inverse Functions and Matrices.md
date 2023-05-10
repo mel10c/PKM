@@ -1,3 +1,9 @@
+---
+title: "MAT223: 12_Inverse Functions and Matrices"
+tags: [Note]
+date: [2021-01-31]
+---
+
 # Inverse Functions and Inverse Matrices
 
 ## Invertible functions

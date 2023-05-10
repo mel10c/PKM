@@ -1,3 +1,9 @@
+---
+title: "CSC111: 3_Trees"
+tags: [Note]
+date: [2021-02-03]
+---
+
 # Trees
 
 ### Definition and Terminology

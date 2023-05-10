@@ -1,5 +1,7 @@
-#INFO/Secondary/Lecture, #FIELD/Psych/Social
-
+---
+title: "PSY230: Developmental Perspective"
+tags: [Note]
+date: [2022-03-15]
 ---
 
 # Early Development

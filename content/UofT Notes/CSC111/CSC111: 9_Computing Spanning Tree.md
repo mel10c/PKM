@@ -1,3 +1,9 @@
+---
+title: "CSC111: 9_Computing Spanning Tree"
+tags: [Note]
+date: [2021-02-03]
+---
+
 # Computing Spanning Trees
 
 ## Spanning trees and the problem specification

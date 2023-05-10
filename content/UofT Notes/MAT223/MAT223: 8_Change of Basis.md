@@ -1,3 +1,9 @@
+---
+title: "MAT223: 8_Change of Basis"
+tags: [Note]
+date: [2021-01-31]
+---
+
 # Coordinates & Change of Basis
 
 - <u>Basis</u> for a subspace $\mathcal{V}$ is a **linearly independent spanning subspace**

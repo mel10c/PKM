@@ -1,3 +1,9 @@
+---
+title: "MAT223: 3_Linear Dependence"
+tags: [Note]
+date: [2021-01-31]
+---
+
 # Spans, Translated Spans, and Linear Independence/Dependence
 
 ## Span defintion

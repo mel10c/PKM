@@ -1,3 +1,9 @@
+---
+title: "ANT100: Lecture_13"
+tags: [Note]
+date: [2021-04-28]
+---
+
 # The Digital Revolution
 
 > Post-industrial society in the digital age
