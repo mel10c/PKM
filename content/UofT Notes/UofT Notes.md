@@ -63,15 +63,15 @@ date: 2023-05-10
 
 # MGT100
 
-- [[UofT Notes/MAT100/MGT100: - L1]]
-- [[UofT Notes/MAT100/MGT100: - L2]]
-- [[UofT Notes/MAT100/MGT100: - L3]]
-- [[UofT Notes/MAT100/MGT100: - L4]]
-- [[UofT Notes/MAT100/MGT100: - L5]]
-- [[UofT Notes/MAT100/MGT100: - L6]]
-- [[UofT Notes/MAT100/MGT100: - L7]]
-- [[UofT Notes/MAT100/MGT100: - L8]]
-- [[UofT Notes/MAT100/MGT100: - L9]]
+- [[UofT Notes/MGT100/MGT100: - L1]]
+- [[UofT Notes/MGT100/MGT100: - L2]]
+- [[UofT Notes/MGT100/MGT100: - L3]]
+- [[UofT Notes/MGT100/MGT100: - L4]]
+- [[UofT Notes/MGT100/MGT100: - L5]]
+- [[UofT Notes/MGT100/MGT100: - L6]]
+- [[UofT Notes/MGT100/MGT100: - L7]]
+- [[UofT Notes/MGT100/MGT100: - L8]]
+- [[UofT Notes/MGT100/MGT100: - L9]]
 
 # PSY220
 
