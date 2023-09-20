@@ -7,7 +7,7 @@ enableRecentNotes: true
 <div style="-webkit-column-count: 2; -moz-column-count: 2; column-count: 2; -webkit-column-rule: 0px dotted #e0e0e0; -moz-column-rule: 0px dotted #e0e0e0; column-rule: 0px dotted #e0e0e0; column-width: 100px">
 <img src="https://raw.githubusercontent.com/mel10c/image/main/obsidian/peep.png"/ style="width: calc(100%/1.5)">
  <br>  <br>  <br>  <br>
- <p style="font-size: x-large; color:var(--secondary); font-family:'fira code'">Hello, I'm Melaney!</p> <p style="font-size: small; color:var(--primary); font-family:'fira code'"> I am a student at University of Toronto. Currently studying cognitive science and psychology.</p>
+ <p style="font-size: x-large; color:var(--secondary); font-family:'fira code'">Hello, I'm Melaney!</p> <p style="font-size: small; color:var(--primary); font-family:'fira code'"> I am a student at University of Toronto. Currently majoring in cognitive science and psychology.</p>
 </div>
 
 - [My Thought Corners](/tags/English) | [我的思维角落](/tags/中文)
