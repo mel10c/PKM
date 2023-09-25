@@ -4,6 +4,11 @@ tags: [Note]
 date: 2023-05-10
 ---
 
+# COG250
+
+- [[250 - L1]]
+- [[250 - L2]]
+
 # ANT100
 
 - [[UofT Notes/ANT100/ANT100: Lecture_1|ANT100: Lecture_1]]
