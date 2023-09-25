@@ -10,7 +10,7 @@ enableRecentNotes: true
  <p style="font-size: x-large; color:var(--secondary); font-family:'fira code'">Hello, I'm Melaney!</p> <p style="font-size: small; color:var(--primary); font-family:'fira code'"> I am a student at University of Toronto. Currently majoring in cognitive science and psychology.</p>
 </div>
 
-- [My Thought Corners](content/tags/English) | [我的思维角落](content/tags/中文)
+- [My Thought Corners](content/tags/English.md) | [我的思维角落](content/tags/中文.md)
 - [[UofT Notes/UofT Notes|UofT Notes]]
 
 <!-- <div style="float: left; width: 30%; min-width: 50px"> -->
